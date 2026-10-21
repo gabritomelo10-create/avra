@@ -151,8 +151,8 @@
       requestAnimationFrame(frame);
       if (!st.visible) return;
       const t = clock.getElapsedTime();
-      pointer.x += (pointer.tx - pointer.x) * 0.06;
-      pointer.y += (pointer.ty - pointer.y) * 0.06;
+      pointer.x += (pointer.tx - pointer.x) * 0.035;
+      pointer.y += (pointer.ty - pointer.y) * 0.035;
 
       if (!spin.dragging) { spin.v *= 0.95; spin.y += spin.v; spin.y *= 0.985; }
 
@@ -171,9 +171,9 @@
       beamGlow.material.opacity = beamMat.opacity * 0.8;
 
       const sc = st.scroll;
-      group.rotation.y = pointer.x * 0.42 + spin.y + Math.sin(t * 0.4) * 0.06 + sc * 0.9;
-      group.rotation.x = pointer.y * 0.28 + Math.sin(t * 0.55) * 0.04 - sc * 0.5;
-      group.position.y = Math.sin(t * 0.8) * 0.08 + 0.55 + sc * 2.6;
+      group.rotation.y = pointer.x * 0.42 + spin.y + Math.sin(t * 0.25) * 0.06 + sc * 0.9;
+      group.rotation.x = pointer.y * 0.28 + Math.sin(t * 0.3) * 0.04 - sc * 0.5;
+      group.position.y = Math.sin(t * 0.45) * 0.08 + 0.55 + sc * 2.6;
       group.position.z = -sc * 6;
       const s = 1 + hover * 0.035;
       tilt.scale.set(s, s, s);
@@ -182,7 +182,7 @@
       gold.position.set(-pointer.x * 6 - 2, 3 - pointer.y * 2, 4.5);
       warm.intensity = 18 + hover * 14;
 
-      dust.rotation.y = t * 0.02 + pointer.x * 0.15;
+      dust.rotation.y = t * 0.006 + pointer.x * 0.1;
       dust.rotation.x = pointer.y * 0.08;
       dust.material.uniforms.uTime.value = t;
 
@@ -221,9 +221,9 @@
         attribute float seed; uniform float uTime; uniform float uFocus; uniform float uSize; varying float vA; varying float vB;
         void main(){
           vec3 p = position;
-          p.x += sin(uTime*0.15 + seed*40.0)*0.8 + uTime*0.12*(0.5+seed);
+          p.x += sin(uTime*0.06 + seed*40.0)*0.8 + uTime*0.035*(0.5+seed);
           p.x = mod(p.x + 15.0, 30.0) - 15.0;
-          p.y += cos(uTime*0.2 + seed*20.0)*0.5;
+          p.y += cos(uTime*0.08 + seed*20.0)*0.5;
           vec4 mv = modelViewMatrix * vec4(p,1.0);
           float d = abs(-mv.z - uFocus);
           vB = clamp(d/10.0, 0.0, 1.0);

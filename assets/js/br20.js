@@ -198,8 +198,8 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       if (state.bg) { ctx.fillStyle = state.bg; ctx.fillRect(0, 0, w, h); } else ctx.clearRect(0, 0, w, h);
       const c = cover(w, h, opts.align);
-      cur.x += (target.x - cur.x) * 0.12; cur.y += (target.y - cur.y) * 0.12;
-      state.force += (target.force - state.force) * 0.08;
+      cur.x += (target.x - cur.x) * 0.05; cur.y += (target.y - cur.y) * 0.05;
+      state.force += (target.force - state.force) * 0.035;
       draw(ctx, field, {
         x: c.x + (opts.offsetX ? opts.offsetX() : 0), y: c.y + (opts.offsetY ? opts.offsetY() : 0), size: c.size,
         color: state.color, width: (opts.width || 1.3) * (c.size / 900 + 0.6), time: state.time, speed: 1, alpha: state.alpha,
@@ -210,7 +210,7 @@
     let last = performance.now();
     function loop(now) {
       const dt = Math.min(50, now - last); last = now;
-      if (state.visible) { state.time += dt * 0.06 * state.speed; render(); }
+      if (state.visible) { state.time += dt * 0.016 * state.speed; render(); }
       raf = requestAnimationFrame(loop);
     }
     let raf;

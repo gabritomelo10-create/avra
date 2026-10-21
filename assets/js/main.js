@@ -158,25 +158,31 @@
     const mouse = { x: 0, y: 0 };
     const hero = $('#hero');
     hero.addEventListener('pointermove', (e) => { mouse.x = e.clientX / innerWidth - 0.5; mouse.y = e.clientY / innerHeight - 0.5; });
-    BR20.animate($('#heroPatternFar'), { color: '#B6A078', alpha: 0.35, seed: 31, speed: 0.6, width: 1.1, align: { ax: 0.2, ay: 0.5, scale: 1.25 }, mirror: true, offsetX: () => mouse.x * -30, offsetY: () => mouse.y * -20 });
-    BR20.animate($('#heroPatternNear'), { color: '#C99073', alpha: 0.55, seed: 20, speed: 1, width: 1.2, interactive: true, host: hero, radius: 110, force: 60, align: { ax: 0.85, ay: 0.4, scale: 1.05 }, offsetX: () => mouse.x * 40, offsetY: () => mouse.y * 30 });
+    const sm2 = { x: 0, y: 0 };
+    gsap.ticker.add(() => { sm2.x += (mouse.x - sm2.x) * 0.03; sm2.y += (mouse.y - sm2.y) * 0.03; });
+    BR20.animate($('#heroPatternFar'), { color: '#B6A078', alpha: 0.24, seed: 31, speed: 0.6, width: 1.1, align: { ax: 0.2, ay: 0.5, scale: 1.25 }, mirror: true, offsetX: () => sm2.x * -24, offsetY: () => sm2.y * -16 });
+    BR20.animate($('#heroPatternNear'), { color: '#C99073', alpha: 0.42, seed: 20, speed: 1, width: 1.1, interactive: true, host: hero, radius: 110, force: 60, align: { ax: 0.85, ay: 0.4, scale: 1.05 }, offsetX: () => sm2.x * 30, offsetY: () => sm2.y * 22 });
+    // luzes acompanham o cursor com atraso suave
+    const sm = { x: 0, y: 0 };
     gsap.ticker.add(() => {
-      gsap.set('.glow--a', { x: mouse.x * 120, y: mouse.y * 80 });
-      gsap.set('.glow--b', { x: mouse.x * -90, y: mouse.y * -60 });
-      gsap.set('.glow--c', { x: mouse.x * 60, y: mouse.y * -90 });
+      sm.x += (mouse.x - sm.x) * 0.025; sm.y += (mouse.y - sm.y) * 0.025;
+      gsap.set('.glow--a', { x: sm.x * 90, y: sm.y * 60 });
+      gsap.set('.glow--b', { x: sm.x * -70, y: sm.y * -45 });
+      gsap.set('.glow--c', { x: sm.x * 45, y: sm.y * -70 });
     });
     if (st) {
       ScrollTrigger.create({ trigger: hero, start: 'top top', end: 'bottom top', scrub: true, onUpdate: (s) => { st.scroll = s.progress; } });
     }
     gsap.to('.hero__descriptor', { opacity: 0, y: -60, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: '40% top', scrub: true } });
-    gsap.to('.hero__content', { y: -120, opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: '60% top', scrub: true } });
+    gsap.to('.hero__content, .credit-box', { y: -120, opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: '60% top', scrub: true } });
     return function intro() {
       const tl = gsap.timeline();
       if (st) tl.to(st, { reveal: 1, duration: 2.4, ease: 'power2.inOut' }, 0.1);
       else tl.to({}, { duration: 0.1 });
       tl.fromTo('.hero__descriptor', { opacity: 0, letterSpacing: '0.2em' }, { opacity: 0.9, letterSpacing: touch ? '0.5em' : '0.9em', duration: 2, ease: 'power3.out' }, 1.6)
         .from('.hero__title .w', { yPercent: 110, duration: 1.4, ease: 'power4.out', stagger: 0.12 }, 1.8)
-        .from('.hero .eyebrow, .hero__foot', { opacity: 0, y: 20, duration: 1, stagger: 0.1 }, 2.1);
+        .from('.hero .eyebrow, .hero__foot', { opacity: 0, y: 20, duration: 1, stagger: 0.1 }, 2.1)
+        .from('.credit-box', { opacity: 0, y: 30, duration: 1.4, ease: 'power3.out' }, 2.4);
     };
   }
 
