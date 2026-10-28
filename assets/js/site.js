@@ -107,32 +107,15 @@
 
   /* ---------- hero ---------- */
   function hero() {
-    const st = window.AVRA3D && window.AVRA3D.initHero();
     const heroEl = $('#hero');
-    const mouse = { x: 0, y: 0 }, sm = { x: 0, y: 0 };
-    heroEl.addEventListener('pointermove', (e) => { mouse.x = e.clientX / innerWidth - 0.5; mouse.y = e.clientY / innerHeight - 0.5; });
-    gsap.ticker.add(() => {
-      sm.x += (mouse.x - sm.x) * 0.025; sm.y += (mouse.y - sm.y) * 0.025;
-      gsap.set('.glow--a', { x: sm.x * 80, y: sm.y * 50 });
-      gsap.set('.glow--b', { x: sm.x * -60, y: sm.y * -40 });
-      gsap.set('.site-hero__photo', { x: sm.x * -24, y: sm.y * -16 });
-    });
-    // pattern fino e texturizado em duas profundidades, com respiro sobre a assinatura
-    BR20.animate($('#heroPatternFar'), { color: '#B6A078', alpha: 0.32, seed: 31, speed: 0.35, width: 0.7, fine: true, textured: true, density: 1.5, mirror: true, align: { ax: 0.1, ay: 0.5, scale: 1.3 }, offsetX: () => sm.x * -14, offsetY: () => sm.y * -10, fade: { x: 0.5, y: 0.3, r: 0.4, soft: 0.5 } });
-    BR20.animate($('#heroPatternNear'), { color: '#D9B49A', alpha: 0.4, seed: 20, speed: 0.45, width: 0.85, fine: true, textured: true, density: 1.3, interactive: true, host: heroEl, radius: 120, force: 34, align: { ax: 0.9, ay: 0.4, scale: 1.08 }, offsetX: () => sm.x * 22, offsetY: () => sm.y * 15, fade: { x: 0.5, y: 0.3, r: 0.34, soft: 0.45 } });
-    // na home a assinatura fica acima do texto
-    const fit = () => { if (!st) return; const narrow = innerWidth < 700; st.lift = narrow ? 6.5 : 1.75; st.size = narrow ? 1 : 0.72; };
-    fit(); window.addEventListener('resize', fit);
-    if (st) ScrollTrigger.create({ trigger: heroEl, start: 'top top', end: 'bottom top', scrub: true, onUpdate: (s) => { st.scroll = s.progress; } });
-    gsap.to('.site-hero__content', { y: -100, opacity: 0, ease: 'none', scrollTrigger: { trigger: heroEl, start: 'top top', end: '60% top', scrub: true } });
-    gsap.to('.hero__descriptor', { opacity: 0, ease: 'none', scrollTrigger: { trigger: heroEl, start: 'top top', end: '35% top', scrub: true } });
-    gsap.to('.site-hero__photo img', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: heroEl, start: 'top top', end: 'bottom top', scrub: true } });
+    // um único movimento: a foto se afasta devagar com a rolagem
+    gsap.to('.site-hero__photo img', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: heroEl, start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.site-hero__content', { y: -60, opacity: 0, ease: 'none', scrollTrigger: { trigger: heroEl, start: '20% top', end: '70% top', scrub: true } });
     return () => {
-      const tl = gsap.timeline();
-      if (st) tl.to(st, { reveal: 1, duration: 2.6, ease: 'power2.inOut' }, 0.1);
-      tl.fromTo('.hero__descriptor', { opacity: 0, letterSpacing: '0.2em' }, { opacity: 0.9, letterSpacing: touch ? '0.5em' : '0.9em', duration: 2, ease: 'power3.out' }, 1.6)
-        .from('.hero__title .w', { yPercent: 110, duration: 1.5, ease: 'power4.out', stagger: 0.12 }, 1.8)
-        .from('.site-hero__content .eyebrow, .site-hero__ctas, .hero__foot', { opacity: 0, y: 20, duration: 1.2, stagger: 0.12 }, 2.1);
+      gsap.timeline()
+        .fromTo('.site-hero__photo img', { scale: 1.08, opacity: 0 }, { scale: 1, opacity: 1, duration: 2.4, ease: 'power2.out' }, 0)
+        .from('.hero__title .w', { yPercent: 110, duration: 1.5, ease: 'power4.out', stagger: 0.12 }, 0.5)
+        .from('.site-hero__content .eyebrow, .site-hero__row', { opacity: 0, y: 16, duration: 1.2, stagger: 0.15 }, 1);
     };
   }
 

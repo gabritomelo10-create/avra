@@ -39,28 +39,18 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero site-hero" id="hero">
-  <div class="hero__bg" aria-hidden="true">
-    <div class="site-hero__photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Branco_Boa_Vista_1.jpg?width=2400" data-fallback="assets/photos/hero.jpg" alt="Rio Branco visto da orla de Boa Vista" referrerpolicy="no-referrer"></div>
-    <div class="site-hero__shade"></div>
-    <div class="glow glow--a"></div><div class="glow glow--b"></div>
-    <canvas class="hero__pattern hero__pattern--far" id="heroPatternFar"></canvas>
-    <canvas class="hero__pattern hero__pattern--near" id="heroPatternNear"></canvas>
-  </div>
-  <canvas class="hero__gl" id="heroGL" aria-label="Assinatura AVRA em 3D — arraste para girar"></canvas>
-  <div class="hero__descriptor" aria-hidden="true">INCORPORADORA</div>
-  <div class="site-hero__content">
-    <p class="eyebrow">Incorporadora de alto padrão · Boa Vista, Roraima</p>
+  <div class="site-hero__photo" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Branco_Boa_Vista_1.jpg?width=2400" data-fallback="assets/photos/hero.jpg" alt="" referrerpolicy="no-referrer"></div>
+  <div class="site-hero__shade" aria-hidden="true"></div>
+  <div class="wrap site-hero__content">
+    <p class="eyebrow">Incorporadora · Boa Vista, Roraima</p>
     <h1 class="hero__title"><span class="split">Criar lugares onde</span> <span class="split">a vida respira.</span></h1>
-    <p class="site-hero__sub">Planejamos cada empreendimento como se fosse para nós: com rigor técnico, respeito ao lugar e espaço de sobra para viver bem.</p>
-    <div class="site-hero__ctas">
-      <a href="#altavista" class="btn btn--solid magnetic"><span>Conheça o Residencial Alta Vista</span><i>→</i></a>
-      <a href="#contato" class="btn magnetic"><span>Agende uma conversa</span></a>
+    <div class="site-hero__row">
+      <p class="site-hero__sub">Planejamos cada empreendimento com rigor técnico, respeito ao lugar e espaço de sobra para viver bem.</p>
+      <div class="site-hero__ctas">
+        <a href="#altavista" class="btn btn--solid"><span>Residencial Alta Vista</span><i>→</i></a>
+        <a href="#contato" class="link-quiet">Agende uma conversa</a>
+      </div>
     </div>
-  </div>
-  <div class="hero__foot">
-    <span>Planejamento criterioso · Qualidade de viver</span>
-    <span class="hero__scroll"><i></i>Role para sentir a brisa</span>
-    <span class="hero__credit">Foto: Rio Branco, Boa Vista · Wikimedia Commons</span>
   </div>
 </section>
 
@@ -397,13 +387,11 @@
 </footer>
 <div class="lightbox" id="lightbox" aria-hidden="true"><button class="lightbox__close" aria-label="Fechar">×</button><div class="lightbox__scroll"><img alt="Planta de implantação ampliada"></div></div>
 
-<script src="assets/vendor/three.min.js"></script>
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
 <script src="assets/js/logo-data.js"></script>
 <script src="assets/js/br20.js"></script>
-<script src="assets/js/hero3d.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>
