@@ -194,7 +194,22 @@
       num.textContent = String(k + 1).padStart(2, '0'); name.textContent = sp[2]; text.textContent = sp[3];
       $$('.spot', box).forEach((b, i) => b.classList.toggle('is-on', i === k));
       $$('li', list).forEach((li, i) => li.classList.toggle('is-on', i === k));
+      if (p3) p3.setActive(k);
     };
+    let p3 = null, p3Loading = null;
+    // abas: planta técnica × maquete 3D
+    const view3d = $('#plan3d'), map2d = $('.av__map');
+    $$('.av__tabs button').forEach((tab) => tab.addEventListener('click', () => {
+      const is3d = tab.dataset.view === '3d';
+      $$('.av__tabs button').forEach((t) => { t.classList.toggle('is-on', t === tab); t.setAttribute('aria-selected', t === tab); });
+      view3d.hidden = !is3d; map2d.hidden = is3d;
+      if (is3d && !p3Loading) {
+        p3Loading = window.AVRAPlan3D.init({ canvas: $('#plan3dCanvas'), host: view3d, labels: $('#plan3dLabels'), image: $('#planImg').getAttribute('src'), spots: SPOTS, onSpot: (k) => set(k) })
+          .then((api) => { p3 = api; $('#plan3dLoading').hidden = true; api.resize(); set(+num.textContent - 1); })
+          .catch(() => { $('#plan3dLoading').textContent = 'Não foi possível carregar a maquete 3D neste navegador.'; });
+      } else if (is3d && p3) p3.resize();
+    }));
+    $('#plan3dTop').addEventListener('click', () => p3 && p3.top());
     SPOTS.forEach((sp, k) => {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'spot'; b.style.left = sp[0] + '%'; b.style.top = sp[1] + '%';

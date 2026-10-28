@@ -42,10 +42,16 @@
   <div class="site-hero__photo" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Branco_Boa_Vista_1.jpg?width=2400" data-fallback="assets/photos/hero.jpg" alt="" referrerpolicy="no-referrer"></div>
   <div class="site-hero__shade" aria-hidden="true"></div>
   <div class="wrap site-hero__content">
-    <p class="eyebrow">Incorporadora · Boa Vista, Roraima</p>
-    <h1 class="hero__title"><span class="split">Criar lugares onde</span> <span class="split">a vida respira.</span></h1>
+    <h1 class="site-hero__brand">
+      <span class="sr-only">AVRA Incorporadora</span>
+      <svg viewBox="30 36 3441 558" class="js-logo" aria-hidden="true"><path/></svg>
+      <span class="site-hero__desc" aria-hidden="true">INCORPORADORA</span>
+    </h1>
     <div class="site-hero__row">
-      <p class="site-hero__sub">Planejamos cada empreendimento com rigor técnico, respeito ao lugar e espaço de sobra para viver bem.</p>
+      <div>
+        <p class="site-hero__claim">Criar lugares onde a vida respira.</p>
+        <p class="site-hero__sub">Empreendimentos planejados com rigor técnico e respeito ao lugar, em Boa Vista e região.</p>
+      </div>
       <div class="site-hero__ctas">
         <a href="#altavista" class="btn btn--solid"><span>Residencial Alta Vista</span><i>→</i></a>
         <a href="#contato" class="link-quiet">Agende uma conversa</a>
@@ -98,7 +104,7 @@
 </section>
 
 <!-- ============ PROPÓSITO ============ -->
-<section class="purpose section--green" id="proposito">
+<section class="purpose section--ivory" id="proposito">
   <div class="wrap">
     <div class="purpose__head">
       <div>
@@ -169,13 +175,25 @@
         <p class="eyebrow">Implantação</p>
         <h3 class="display split-lines">O bairro,<br>quadra a quadra.</h3>
       </div>
-      <p class="reveal-up">Esta é a planta de implantação e paisagismo do condomínio. Toque nos pontos para conhecer cada área, ou abra a planta em tamanho real.</p>
+      <p class="reveal-up">A planta de implantação e paisagismo do condomínio, em duas leituras: a planta técnica, com os pontos de interesse, e uma maquete 3D gerada a partir dela para você ter noção de escala, quadras e áreas verdes.</p>
     </div>
     <div class="wrap av__plan-grid">
+      <div class="av__viewer">
+      <div class="av__tabs" role="tablist" aria-label="Modo de visualização">
+        <button type="button" role="tab" class="is-on" data-view="2d" aria-selected="true">Planta</button>
+        <button type="button" role="tab" data-view="3d" aria-selected="false">Vista 3D</button>
+      </div>
+      <div class="av__3d" id="plan3d" hidden>
+        <canvas id="plan3dCanvas" aria-label="Maquete 3D ilustrativa gerada a partir da planta de implantação"></canvas>
+        <div class="av__3d-labels" id="plan3dLabels"></div>
+        <p class="av__3d-hint">Arraste para girar · <button type="button" id="plan3dTop">vista de cima</button></p>
+        <p class="av__3d-loading" id="plan3dLoading">Montando a maquete…</p>
+      </div>
       <div class="av__map">
         <img src="assets/photos/alta-vista-implantacao.jpg" alt="Planta de implantação e paisagismo do Residencial Alta Vista, com 21 quadras, alamedas, áreas de lazer, lagos e mata nativa" width="2600" height="2298" id="planImg">
         <div class="av__hotspots" id="hotspots"></div>
         <button class="av__zoom" id="planZoom" type="button">Ver planta ampliada ↗</button>
+      </div>
       </div>
       <div class="av__plan-side">
         <div class="av__zone" aria-live="polite">
@@ -278,7 +296,7 @@
 </section>
 
 <!-- ============ DIFERENCIAIS ============ -->
-<section class="values-band section--clay" aria-labelledby="dif-title">
+<section class="values-band section--green" aria-labelledby="dif-title">
   <canvas class="values-band__pattern" id="valuesPattern" aria-hidden="true"></canvas>
   <div class="wrap">
     <p class="eyebrow">Nossos compromissos</p>
@@ -297,7 +315,7 @@
 
 
 <!-- ============ JORNADA ============ -->
-<section class="journey section--green" id="jornada">
+<section class="journey section--paper" id="jornada">
   <div class="wrap">
     <p class="eyebrow">Como trabalhamos</p>
     <h2 class="display split-lines">Do primeiro estudo<br>à chave na mão.</h2>
@@ -392,6 +410,7 @@
 <script src="assets/vendor/lenis.min.js"></script>
 <script src="assets/js/logo-data.js"></script>
 <script src="assets/js/br20.js"></script>
+<script src="assets/js/plan3d.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>
