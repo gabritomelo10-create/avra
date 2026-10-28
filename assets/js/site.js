@@ -299,7 +299,9 @@
       gsap.to(o, { v: end, duration: 2, ease: 'power2.out', scrollTrigger: { trigger: dt, start: 'top 88%' },
         onUpdate: () => { dt.innerHTML = pre + o.v.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + small; } });
     });
-    gsap.from('.amen li', { y: 30, opacity: 0, stagger: 0.05, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.amen', start: 'top 85%' } });
+    gsap.from('.life__card', { y: 40, opacity: 0, stagger: 0.12, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.life__grid', start: 'top 85%' } });
+    $$('.life__bar i').forEach((b) => b.style.transform = 'scaleX(0)');
+    ScrollTrigger.create({ trigger: '.life__bar', start: 'top 90%', once: true, onEnter: () => gsap.to('.life__bar i', { scaleX: 1, duration: 1.4, stagger: 0.12, ease: 'power3.out' }) });
   }
 
   /* ---------- formulário → WhatsApp ---------- */

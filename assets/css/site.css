@@ -522,3 +522,79 @@ img.is-fallback { filter: saturate(.85); }
 .av__model-head p:last-child { opacity: .8; font-size: 15px; max-width: 34ch; }
 .av__model .av__3d { aspect-ratio: 16 / 10; }
 @media (max-width: 1000px) { .av__model { grid-template-columns: 1fr; } .av__model .av__3d { aspect-ratio: 4 / 5; } }
+
+/* =========================================================
+   LAZER + PAISAGISMO (bloco único)
+   ========================================================= */
+.life { background: var(--paper); color: var(--verde); padding: var(--pad) 0; }
+.life__head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; align-items: end; margin-bottom: 56px; }
+.life__head .display { margin-bottom: 0; }
+.life__intro { margin: 0; max-width: 52ch; opacity: .85; }
+.life__grid { display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: 20px; }
+.life__card { background: var(--marfim); border-radius: 12px; padding: clamp(24px, 2.4vw, 36px); box-shadow: 0 30px 60px -45px rgba(38,59,50,.45); min-width: 0; }
+.life__card h4 { font-family: var(--f-text); font-weight: 600; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--terracota); margin: 0 0 18px; }
+.life__card ul { list-style: none; margin: 0; padding: 0; }
+.life__card li { display: grid; grid-template-columns: 52px 1fr; align-items: baseline; gap: 10px; padding: 13px 0; border-top: 1px solid var(--line-dark); font-size: 15px; }
+.life__card li b { font-family: var(--f-title); font-weight: 400; font-size: 30px; line-height: 1; color: var(--verde); font-variant-numeric: tabular-nums; }
+.life__card--green { background: var(--verde); color: var(--marfim); }
+.life__card--green h4 { color: var(--dourado); }
+.life__big { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 0 0 18px; }
+.life__big b { font-family: var(--f-title); font-weight: 400; font-size: clamp(56px, 6vw, 92px); line-height: .9; color: var(--dourado); }
+.life__big span { font-size: 15px; opacity: .85; max-width: 16ch; }
+.life__bar { display: flex; height: 10px; border-radius: 99px; overflow: hidden; gap: 3px; margin-bottom: 18px; }
+.life__bar i { display: block; width: var(--w); transform-origin: left; }
+.life__bar i:nth-child(1), .life__legend li:nth-child(1) i { background: var(--dourado); }
+.life__bar i:nth-child(2), .life__legend li:nth-child(2) i { background: var(--argila); }
+.life__bar i:nth-child(3), .life__legend li:nth-child(3) i { background: var(--oliva); }
+.life__bar i:nth-child(4), .life__legend li:nth-child(4) i { background: var(--marfim); }
+.life__card--green .life__legend li { grid-template-columns: 12px 48px 1fr; border-top-color: var(--line-light); }
+.life__legend li i { width: 10px; height: 10px; border-radius: 3px; align-self: center; }
+.life__card--green li b { color: var(--marfim); font-size: 24px; }
+.life__note { margin: 18px 0 0; font-family: var(--f-title); font-size: 18px; line-height: 1.35; opacity: .9; }
+
+/* =========================================================
+   RESPONSIVIDADE — revisão geral
+   ========================================================= */
+@media (max-width: 1100px) {
+  .life__grid { grid-template-columns: 1fr 1fr; }
+  .life__card--green { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  :root { --pad: 80px; }
+  .life__head, .city__grid, .av__concept, .av__plan-head, .av__plan-grid, .av__model, .av__where, .av__guide, .contact__grid, .purpose__head { grid-template-columns: 1fr; gap: 32px; }
+  .facts { grid-template-columns: 1fr 1fr; margin-top: 56px; }
+  .av__numbers { grid-template-columns: 1fr 1fr; }
+  .av__numbers div:last-child { grid-column: 1 / -1; }
+  .av__plan-side { position: static; padding-top: 0; }
+  .av__guide-head { position: static; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .manifesto__text { font-size: clamp(24px, 6vw, 34px); }
+  .site-footer__top { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  :root { --pad: 64px; }
+  .display { font-size: clamp(30px, 8.4vw, 40px); }
+  .life__grid { grid-template-columns: 1fr; }
+  .life__card--green { grid-column: auto; }
+  .facts, .av__numbers { grid-template-columns: 1fr 1fr; }
+  .facts dt, .av__numbers dt { font-size: 36px; }
+  .facts dd, .av__numbers dd { font-size: 13px; }
+  .steps { grid-template-columns: 1fr; }
+  .tl { grid-template-columns: 1fr; }
+  .av__intro { height: 72vh; min-height: 460px; }
+  .av__title { font-size: clamp(48px, 15vw, 72px); }
+  .av__status { font-size: 11px; letter-spacing: .06em; }
+  .av__map .spot { width: 22px; height: 22px; margin: -11px 0 0 -11px; font-size: 10px; }
+  .av__zoom { font-size: 11px; padding: 8px 12px; }
+  .av__checks summary { font-size: 20px; gap: 12px; padding: 20px 0; }
+  .statement__text { font-size: clamp(28px, 8vw, 40px); }
+  .form { padding: 22px; }
+  .locmap__info { min-height: 0; }
+  .lm-pin text { font-size: calc(34px / var(--z)); }
+  .site-hero__row { flex-direction: column; align-items: flex-start; }
+  .site-footer__nav { grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+  .site-footer__bottom { flex-direction: column; }
+  .site-footer__credit img { width: 100px; }
+}
+img, svg, canvas { max-width: 100%; }
+html, body { overflow-x: clip; }
