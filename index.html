@@ -19,6 +19,14 @@
   <div class="loader__bar"><span id="loaderBar"></span></div>
 </div>
 
+<script>
+  /* segurança: se algum script falhar ou demorar, a página abre mesmo assim */
+  (function () {
+    function open() { var l = document.getElementById('loader'); if (l) l.style.display = 'none'; document.body.classList.remove('is-loading'); if (window.__avraLenis) window.__avraLenis.start(); }
+    window.addEventListener('error', function () { setTimeout(open, 600); });
+    setTimeout(open, 7000);
+  })();
+</script>
 <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><em id="cursorLabel"></em></span></div>
 <div class="grain" aria-hidden="true"></div>
 <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>

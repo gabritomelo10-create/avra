@@ -46,6 +46,7 @@
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
     lenis.stop();
+    window.__avraLenis = lenis;
   }
   const go = (target) => { if (lenis) lenis.scrollTo(target, { duration: 1.8 }); else target.scrollIntoView({ behavior: 'smooth' }); };
   $$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
@@ -314,22 +315,28 @@
   });
 
   /* ---------- loader e início ---------- */
-  function start() {
-    const intro = hero();
-    scrollFx(); patterns();
-    ScrollTrigger.refresh();
+  // cada parte roda isolada: se uma falhar num navegador, o resto do site continua
+  const safe = (name, fn) => { try { return fn(); } catch (e) { console.error('[AVRA] ' + name, e); return null; } };
+  let opened = false;
+  function openPage(intro) {
+    if (opened) return; opened = true;
     const loader = $('#loader');
-    gsap.timeline({ onComplete: () => {
-      loader.classList.add('is-done'); document.body.classList.remove('is-loading');
-      if (lenis) lenis.start();
-      setTimeout(() => { loader.style.display = 'none'; }, 1300);
-      intro();
-    } })
+    loader.classList.add('is-done'); document.body.classList.remove('is-loading');
+    if (lenis) lenis.start();
+    setTimeout(() => { loader.style.display = 'none'; }, 1300);
+    if (intro) safe('intro', intro);
+  }
+  function start() {
+    const intro = safe('hero', hero);
+    safe('scroll', scrollFx); safe('patterns', patterns);
+    safe('refresh', () => ScrollTrigger.refresh());
+    safe('loader', () => gsap.timeline({ onComplete: () => openPage(intro) })
       .to('#loaderPath', { strokeDashoffset: 0, duration: reduce ? 0.1 : 1.6, ease: 'power2.inOut' })
       .to('#loaderBar', { scaleX: 1, duration: reduce ? 0.1 : 1.8, ease: 'power1.inOut' }, 0)
       .to('#loaderPath', { fill: '#F2EBDD', strokeOpacity: 0, duration: 0.5 }, '-=0.3')
-      .to('.loader__desc', { opacity: 0.85, letterSpacing: '0.62em', duration: 0.7 }, '-=0.35');
+      .to('.loader__desc', { opacity: 0.85, letterSpacing: '0.62em', duration: 0.7 }, '-=0.35'));
+    setTimeout(() => openPage(intro), 3500);   // nunca fica preso no carregamento
   }
   const fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-  Promise.race([fonts, new Promise((r) => setTimeout(r, 2500))]).then(start);
+  Promise.race([fonts, new Promise((r) => setTimeout(r, 2500))]).then(start, start);
 })();
