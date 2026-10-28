@@ -139,50 +139,53 @@
     };
   }
 
-  /* ---------- mapa de localização ---------- */
+  /* ---------- mapa de localização (vetorial, traçado a partir da planta de localização) ---------- */
   function locmap() {
-    const view = $('#locView'), stage = $('#locStage'), route = $('#locRoute');
+    const svg = $('#locSvg'), view = $('#locView'), road = $('#lmRoad');
     const INFO = [
       ['Centro de Boa Vista', 'A capital, na margem oeste do Rio Branco. O ponto de partida do caminho até o Alta Vista.'],
-      ['Rio Branco', 'O principal rio de Roraima. O Alta Vista fica na margem oposta à cidade.'],
       ['Ponte dos Macuxis', 'A travessia do Rio Branco pela BR-401, ligando Boa Vista ao município do Cantá.'],
-      ['BR-401', 'Rodovia federal que segue para o leste. O acesso ao condomínio fica no km 5.'],
+      ['BR-401, km 5', 'Do km 5 da rodovia sai a via de acesso ao condomínio.'],
       ['Igarapé Santa Cecília', 'Curso d’água ao norte do terreno. A mata ciliar fica preservada como área comum.'],
       ['Residencial Alta Vista', '47 hectares na BR-401, km 5, Cantá – RR. Logo depois da ponte, do outro lado do Rio Branco.']
     ];
-    const pins = $$('.lp', stage), name = $('#locName'), text = $('#locText');
-    const z = { s: 1, x: 0, y: 0 };
-    const apply = (anim) => gsap.to(stage, { scale: z.s, x: z.x, y: z.y, duration: anim ? 1.2 : 0, ease: 'power3.inOut', transformOrigin: '0 0' });
-    const clamp = () => {
-      const w = view.clientWidth, h = view.clientHeight;
-      z.x = Math.min(0, Math.max(w - w * z.s, z.x)); z.y = Math.min(0, Math.max(h - h * z.s, z.y));
+    const FULL = { x: 0, y: 0, w: 1503, h: 1107 };
+    const vb = Object.assign({}, FULL);
+    const setVB = () => { svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); svg.style.setProperty('--z', (FULL.w / vb.w).toFixed(3)); };
+    const clamp = () => { vb.x = Math.max(0, Math.min(FULL.w - vb.w, vb.x)); vb.y = Math.max(0, Math.min(FULL.h - vb.h, vb.y)); };
+    const zoomTo = (cx, cy, z, dur) => {
+      const w = FULL.w / z, h = FULL.h / z;
+      const t = { x: cx - w / 2, y: cy - h / 2, w, h };
+      t.x = Math.max(0, Math.min(FULL.w - w, t.x)); t.y = Math.max(0, Math.min(FULL.h - h, t.y));
+      gsap.to(vb, Object.assign(t, { duration: dur == null ? 1.2 : dur, ease: 'power3.inOut', onUpdate: setVB }));
     };
-    const focus = (px, py, s) => {         // px/py em %
-      const w = view.clientWidth, h = view.clientHeight;
-      z.s = s; z.x = w / 2 - (px / 100) * w * s; z.y = h / 2 - (py / 100) * h * s; clamp(); apply(true);
-    };
+    const pins = $$('.lm-pin', svg), name = $('#locName'), text = $('#locText');
+    const posOf = (g) => { const m = /translate\(([\d.]+) ([\d.]+)\)/.exec(g.getAttribute('transform')); return [+m[1], +m[2]]; };
     const select = (k, zoom) => {
       pins.forEach((p, i) => p.classList.toggle('is-on', i === k));
       name.textContent = INFO[k][0]; text.textContent = INFO[k][1];
-      if (zoom) focus(parseFloat(pins[k].style.left), parseFloat(pins[k].style.top), 1.9);
+      if (zoom) { const [x, y] = posOf(pins[k]); zoomTo(x, y, 2); }
     };
     pins.forEach((p, k) => { p.addEventListener('click', () => select(k, true)); p.addEventListener('pointerenter', () => select(k, false)); });
-    select(5, false);
-    $('#locIn').addEventListener('click', () => { const w = view.clientWidth, h = view.clientHeight; const cx = (w / 2 - z.x) / z.s / w * 100, cy = (h / 2 - z.y) / z.s / h * 100; focus(cx, cy, Math.min(3, z.s * 1.4)); });
-    $('#locOut').addEventListener('click', () => { const w = view.clientWidth, h = view.clientHeight; const cx = (w / 2 - z.x) / z.s / w * 100, cy = (h / 2 - z.y) / z.s / h * 100; focus(cx, cy, Math.max(1, z.s / 1.4)); });
-    $('#locReset').addEventListener('click', () => { z.s = 1; z.x = 0; z.y = 0; apply(true); });
-    // arrastar para mover
+    select(4, false); setVB();
+    const center = () => [vb.x + vb.w / 2, vb.y + vb.h / 2];
+    $('#locIn').addEventListener('click', () => { const [x, y] = center(); zoomTo(x, y, Math.min(3.2, FULL.w / vb.w * 1.4)); });
+    $('#locOut').addEventListener('click', () => { const [x, y] = center(); zoomTo(x, y, Math.max(1, FULL.w / vb.w / 1.4)); });
+    $('#locReset').addEventListener('click', () => zoomTo(FULL.w / 2, FULL.h / 2, 1));
     let d = null;
-    view.addEventListener('pointerdown', (e) => { if (e.target.closest('.lp')) return; d = { x: e.clientX, y: e.clientY, ox: z.x, oy: z.y }; view.setPointerCapture(e.pointerId); });
-    view.addEventListener('pointermove', (e) => { if (!d) return; z.x = d.ox + e.clientX - d.x; z.y = d.oy + e.clientY - d.y; clamp(); apply(false); });
+    view.addEventListener('pointerdown', (e) => { if (e.target.closest('.lm-pin')) return; d = { x: e.clientX, y: e.clientY, vx: vb.x, vy: vb.y }; view.setPointerCapture(e.pointerId); });
+    view.addEventListener('pointermove', (e) => {
+      if (!d) return;
+      const k = vb.w / view.clientWidth;
+      vb.x = d.vx - (e.clientX - d.x) * k; vb.y = d.vy - (e.clientY - d.y) * k; clamp(); setVB();
+    });
     view.addEventListener('pointerup', () => { d = null; });
-    // o caminho se desenha ao entrar na tela e pelo link do texto
-    const L = route.getTotalLength();
-    route.style.strokeDasharray = L; route.style.strokeDashoffset = L;
-    const draw = () => gsap.fromTo(route, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 3, ease: 'power2.inOut' });
-    ScrollTrigger.create({ trigger: view, start: 'top 70%', once: true, onEnter: () => { draw(); setTimeout(() => select(5, true), 2600); } });
-    $('#locPlay').addEventListener('click', (e) => { e.preventDefault(); go(view); setTimeout(() => { z.s = 1; z.x = 0; z.y = 0; apply(true); draw(); setTimeout(() => select(5, true), 2600); }, 900); });
-    window.addEventListener('resize', () => { clamp(); apply(false); });
+    // o caminho de Boa Vista ao Alta Vista se desenha pela rodovia
+    const L = road.getTotalLength();
+    road.style.strokeDasharray = L; road.style.strokeDashoffset = L;
+    const draw = () => gsap.fromTo(road, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 3, ease: 'power2.inOut' });
+    ScrollTrigger.create({ trigger: view, start: 'top 75%', once: true, onEnter: draw });
+    $('#locPlay').addEventListener('click', (e) => { e.preventDefault(); go(view); setTimeout(() => { zoomTo(FULL.w / 2, FULL.h / 2, 1, 0.6); draw(); setTimeout(() => select(4, true), 2700); }, 900); });
   }
 
   /* ---------- animações de rolagem ---------- */

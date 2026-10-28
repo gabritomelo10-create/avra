@@ -480,26 +480,35 @@ img.is-fallback { filter: saturate(.85); }
 @media (prefers-reduced-motion: reduce) { .hb { animation: none; } }
 
 /* =========================================================
-   MAPA DE LOCALIZAÇÃO
+   MAPA DE LOCALIZAÇÃO — vetorial, só o essencial
    ========================================================= */
 .city__route { margin: 0 0 22px; }
-.locmap { position: relative; border-radius: 10px; overflow: hidden; background: #1b2b24; box-shadow: 0 50px 100px -40px rgba(0,0,0,.7), inset 0 0 0 1px var(--line-light); }
-.locmap__view { position: relative; aspect-ratio: 1503 / 1107; overflow: hidden; cursor: grab; touch-action: pan-y; }
+.locmap { position: relative; border-radius: 10px; overflow: hidden; background: #18271F; box-shadow: 0 50px 100px -40px rgba(0,0,0,.7), inset 0 0 0 1px var(--line-light); }
+.locmap__view { position: relative; aspect-ratio: 1503 / 1107; cursor: grab; touch-action: pan-y; }
 .locmap__view:active { cursor: grabbing; }
-.locmap__stage { position: absolute; inset: 0; transform-origin: 0 0; }
-.locmap__stage img { width: 100%; height: 100%; display: block; filter: saturate(.75) brightness(.85); user-select: none; }
-.locmap__svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.locmap__route { fill: none; stroke: var(--marfim); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 4px rgba(0,0,0,.6)); }
-.locmap__area { fill: rgba(166,83,60,.55); stroke: var(--marfim); stroke-width: 2; vector-effect: non-scaling-stroke; }
-.lp { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; }
-.lp i { width: 12px; height: 12px; border-radius: 50%; background: var(--marfim); box-shadow: 0 0 0 3px rgba(18,32,26,.65); flex: none; }
-.lp span { font-size: 12px; white-space: nowrap; background: rgba(18,32,26,.8); color: var(--marfim); padding: 5px 10px; border-radius: 99px; opacity: 0; transform: translateX(-4px); transition: opacity .3s, transform .3s; pointer-events: none; }
-.lp:hover span, .lp.is-on span { opacity: 1; transform: none; }
-.lp--main i { width: 18px; height: 18px; background: var(--terracota); box-shadow: 0 0 0 4px var(--marfim); animation: pin 2.6s ease-out infinite; }
-.lp--main span { background: var(--terracota); font-weight: 600; opacity: 1; transform: none; }
-.lp.is-on:not(.lp--main) i { background: var(--dourado); }
+.locmap__svg { display: block; width: 100%; height: 100%; --z: 1; user-select: none; }
+.lm-city-edge { fill: none; stroke: rgba(242,235,221,.25); stroke-width: calc(1.5px / var(--z)); }
+.lm-river { stroke: rgba(242,235,221,.18); stroke-width: calc(1.5px / var(--z)); }
+.lm-creek { fill: rgba(116,120,90,.85); }
+.lm-road-bg { fill: none; stroke: rgba(182,160,120,.25); stroke-width: calc(7px / var(--z)); stroke-linecap: round; stroke-linejoin: round; }
+.lm-road { fill: none; stroke: var(--dourado); stroke-width: calc(5px / var(--z)); stroke-linecap: round; stroke-linejoin: round; }
+.lm-bridge { fill: none; stroke: var(--marfim); stroke-width: calc(7px / var(--z)); stroke-linecap: butt; }
+.lm-via { fill: none; stroke: var(--dourado); stroke-width: calc(3px / var(--z)); stroke-dasharray: calc(6px / var(--z)) calc(5px / var(--z)); }
+.lm-site { fill: rgba(166,83,60,.85); stroke: var(--marfim); stroke-width: calc(2.5px / var(--z)); stroke-linejoin: round; }
+.lm-name { fill: rgba(242,235,221,.55); font-family: var(--f-title); font-size: calc(30px / var(--z)); letter-spacing: .14em; text-transform: uppercase; pointer-events: none; }
+.lm-name--river { fill: rgba(242,235,221,.4); font-size: calc(22px / var(--z)); }
+.lm-pin { cursor: pointer; }
+.lm-pin circle { fill: var(--marfim); stroke: rgba(18,32,26,.7); stroke-width: calc(4px / var(--z)); transform: scale(calc(1 / var(--z))); transition: fill .3s; }
+.lm-pin text { fill: var(--marfim); font-family: var(--f-text); font-size: calc(24px / var(--z)); font-weight: 500; paint-order: stroke; stroke: rgba(18,32,26,.85); stroke-width: calc(6px / var(--z)); stroke-linejoin: round; opacity: 0; transition: opacity .3s; }
+.lm-pin:hover text, .lm-pin.is-on text { opacity: 1; }
+.lm-pin.is-on circle { fill: var(--dourado); }
+.lm-pin--main circle { fill: var(--terracota); stroke: var(--marfim); }
+.lm-pin--main text { opacity: 1; font-family: var(--f-title); font-size: calc(38px / var(--z)); }
+.lm-pin--main.is-on circle { fill: var(--terracota); }
+.lm-pin--main .lm-pulse { fill: none; stroke: var(--terracota); stroke-width: calc(3px / var(--z)); transform-box: fill-box; transform-origin: center; animation: lmPulse 2.6s ease-out infinite; }
+@keyframes lmPulse { 0% { opacity: .9; transform: scale(.6); } 100% { opacity: 0; transform: scale(2.4); } }
 .locmap__ui { position: absolute; right: 12px; top: 12px; display: flex; gap: 6px; }
-.locmap__ui button { min-width: 36px; height: 36px; padding: 0 12px; border-radius: 99px; background: rgba(18,32,26,.82); color: var(--marfim); font-size: 15px; backdrop-filter: blur(6px); }
+.locmap__ui button { min-width: 36px; height: 36px; padding: 0 12px; border-radius: 99px; background: rgba(18,32,26,.82); color: var(--marfim); font-size: 15px; border: 1px solid var(--line-light); }
 .locmap__ui button:hover { background: var(--terracota); }
 .locmap__info { padding: 18px 22px 20px; border-top: 1px solid var(--line-light); min-height: 104px; }
 .locmap__info b { font-family: var(--f-title); font-weight: 400; font-size: 22px; color: var(--marfim); }
