@@ -169,7 +169,6 @@
 
     // Alta Vista
     gsap.fromTo('.av__intro-bg img', { scale: 1.2, yPercent: -6 }, { scale: 1, yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.av__intro', start: 'top bottom', end: 'bottom top', scrub: true } });
-    gsap.from('.av__pillars article', { y: 50, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.av__pillars', start: 'top 85%' } });
     gsap.from('.av__checks li', { x: 40, opacity: 0, stagger: 0.08, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.av__checks', start: 'top 85%' } });
     gsap.from('.tl li', { y: 30, opacity: 0, stagger: 0.1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.tl', start: 'top 88%' } });
 
@@ -192,56 +191,60 @@
     masterplan();
   }
 
-  /* ---------- Alta Vista: implantação ilustrativa ---------- */
+  /* ---------- Alta Vista: planta real com pontos interativos ---------- */
   function masterplan() {
-    const svg = $('#masterplan'), NS = 'http://www.w3.org/2000/svg';
-    const el = (t, a, parent) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); (parent || svg).appendChild(e); return e; };
-    const ZONES = {
-      lotes: ['Lotes residenciais', 'Terrenos voltados para ruas internas tranquilas, com espaço para jardim e recuos generosos.'],
-      verde: ['Áreas verdes', 'Faixas de vegetação preservada e arborização que sombreiam as ruas e mantêm o microclima mais fresco.'],
-      lazer: ['Lazer e convivência', 'Espaço central de encontro, a poucos passos de qualquer lote, para crianças, esporte e convivência.'],
-      avenida: ['Avenida principal', 'Eixo arborizado que organiza o bairro e distribui o trânsito, deixando as ruas internas mais calmas.'],
-      portaria: ['Portaria', 'Acesso único e controlado, para a segurança e a tranquilidade de quem mora.']
+    // posições em % sobre a planta de implantação
+    const SPOTS = [
+      [13, 86, 'Portaria e acesso', 'Portaria social, portaria de serviço e administração com vestiário, na entrada pela Avenida de Acesso Social. Acesso controlado e estacionamento para visitantes.'],
+      [25, 89, 'Espaço gourmet e lago', 'Espaço gourmet à beira de um dos dois lagos, com playground e estacionamento próprio, logo na chegada ao condomínio.'],
+      [21, 34, 'Avenida das Flores', 'O eixo de entrada: uma avenida com canteiro central arborizado que distribui o trânsito e deixa as alamedas internas mais tranquilas.'],
+      [15, 61, 'Clube oeste', 'Três quadras de tênis, espaço fitness, churrasqueira com vestiário, playground e estação de ginástica, numa faixa verde ao longo da avenida.'],
+      [50, 14, 'Clube norte', 'Dois campos de futebol, quadra poliesportiva, churrasqueira com vestiário e playground, junto à mata do igarapé.'],
+      [80, 6, 'Mata nativa e Igarapé Santa Cecília', 'Ao norte, a mata nativa às margens do igarapé fica preservada como área comum do condomínio.'],
+      [52, 50, '21 quadras, 471 lotes', 'Lotes organizados em quadras curvas, voltados para alamedas arborizadas com nomes de flores. Área média em torno de 490 m² por lote.'],
+      [84, 49, 'Pista de cooper e estares', 'Uma pista de cooper contorna o bairro, com 21 espaços de estar e estações de ginástica ao longo do caminho.']
+    ];
+    const box = $('#hotspots'), list = $('#zoneLegend');
+    const num = $('#zoneNum'), name = $('#zoneName'), text = $('#zoneText');
+    const set = (k) => {
+      const sp = SPOTS[k];
+      num.textContent = String(k + 1).padStart(2, '0'); name.textContent = sp[2]; text.textContent = sp[3];
+      $$('.spot', box).forEach((b, i) => b.classList.toggle('is-on', i === k));
+      $$('li', list).forEach((li, i) => li.classList.toggle('is-on', i === k));
     };
-    const g = { verde: el('g', { 'data-zone': 'verde' }), avenida: el('g', { 'data-zone': 'avenida' }), lotes: el('g', { 'data-zone': 'lotes' }), lazer: el('g', { 'data-zone': 'lazer' }), portaria: el('g', { 'data-zone': 'portaria' }) };
-    // perímetro e áreas verdes
-    el('path', { d: 'M40 120 C120 40 300 30 420 50 C560 70 700 40 770 110 L760 560 C600 600 300 600 60 570 Z', class: 'mp-site' }, g.verde);
-    el('path', { d: 'M40 120 C90 220 70 380 60 570 L130 572 C150 420 150 260 120 140 Z', class: 'mp-green' }, g.verde);
-    el('path', { d: 'M640 60 C700 50 760 80 770 110 L765 260 C720 230 680 160 640 60 Z', class: 'mp-green' }, g.verde);
-    for (let i = 0; i < 46; i++) { const x = 150 + Math.random() * 600, y = 70 + Math.random() * 500; if (Math.hypot(x - 430, y - 330) < 90) continue; el('circle', { cx: x, cy: y, r: 3 + Math.random() * 4, class: 'mp-tree' }, g.verde); }
-    // avenida central em curva (até a portaria, embaixo)
-    el('path', { d: 'M430 600 C430 520 430 460 430 420 C430 330 330 250 260 120', class: 'mp-road mp-road--main' }, g.avenida);
-    el('path', { d: 'M430 420 C520 360 620 300 740 300', class: 'mp-road mp-road--main' }, g.avenida);
-    // ruas internas
-    ['M160 200 C260 190 360 200 470 180 C560 170 640 160 720 170', 'M160 300 C230 290 300 300 350 310', 'M520 400 C600 390 680 400 740 410', 'M160 420 C230 420 300 430 360 450', 'M160 510 C250 510 330 520 400 540', 'M480 520 C560 500 650 500 740 500'].forEach((d) => el('path', { d, class: 'mp-road' }, g.avenida));
-    // lotes ao longo das ruas
-    const rows = [[165, 150, 14], [165, 225, 10], [165, 255, 5], [165, 335, 5], [520, 330, 6], [165, 375, 5], [165, 450, 6], [520, 430, 6], [165, 470, 6], [490, 455, 7], [490, 530, 7], [165, 540, 6], [510, 190, 6], [500, 115, 6]];
-    rows.forEach(([x, y, n]) => { for (let k = 0; k < n; k++) el('rect', { x: x + k * 32, y, width: 28, height: 34, rx: 2, class: 'mp-lot' }, g.lotes); });
-    // lazer
-    el('circle', { cx: 430, cy: 330, r: 62, class: 'mp-leisure' }, g.lazer);
-    el('circle', { cx: 430, cy: 330, r: 26, class: 'mp-leisure-core' }, g.lazer);
-    // portaria
-    el('rect', { x: 400, y: 572, width: 60, height: 22, rx: 3, class: 'mp-gate' }, g.portaria);
-    el('text', { x: 430, y: 614, class: 'mp-label', 'text-anchor': 'middle' }, g.portaria).textContent = 'ACESSO';
-    el('text', { x: 780, y: 40, class: 'mp-label', 'text-anchor': 'end' }, svg).textContent = 'N ↑';
+    SPOTS.forEach((sp, k) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'spot'; b.style.left = sp[0] + '%'; b.style.top = sp[1] + '%';
+      b.setAttribute('aria-label', sp[2]); b.innerHTML = `<span>${k + 1}</span>`;
+      b.addEventListener('click', () => set(k)); b.addEventListener('pointerenter', () => set(k));
+      box.appendChild(b);
+      const li = document.createElement('li');
+      li.innerHTML = `<b>${String(k + 1).padStart(2, '0')}</b>${sp[2]}`;
+      li.addEventListener('click', () => set(k)); li.addEventListener('pointerenter', () => set(k));
+      list.appendChild(li);
+    });
+    set(0);
+    $$('.spot', box).forEach((b, i) => b.style.setProperty('--d', (i * 0.08) + 's'));
+    const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { box.classList.add('is-in'); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(box);
+    gsap.fromTo('#planImg', { scale: 1.08, filter: 'saturate(.6)' }, { scale: 1, filter: 'saturate(1)', ease: 'none', scrollTrigger: { trigger: '.av__map', start: 'top bottom', end: 'center center', scrub: true } });
 
-    const name = $('#zoneName'), text = $('#zoneText');
-    const set = (z) => {
-      svg.dataset.active = z;
-      name.textContent = ZONES[z][0]; text.textContent = ZONES[z][1];
-      $$('#zoneLegend li').forEach((li) => li.classList.toggle('is-on', li.dataset.zone === z));
-    };
-    Object.keys(g).forEach((z) => { g[z].addEventListener('pointerenter', () => set(z)); });
-    $$('#zoneLegend li').forEach((li) => { li.addEventListener('pointerenter', () => set(li.dataset.zone)); li.addEventListener('click', () => set(li.dataset.zone)); });
-    set('lotes');
-    // desenho de entrada
-    const paths = $$('.mp-road', svg);
-    paths.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
-    const tl = gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 80%' } });
-    tl.to(paths, { strokeDashoffset: 0, duration: 1.6, stagger: 0.08, ease: 'power2.inOut' })
-      .from($$('.mp-lot', svg), { opacity: 0, scale: 0.6, transformOrigin: '50% 50%', duration: 0.5, stagger: 0.004 }, 0.6)
-      .from($$('.mp-tree, .mp-green', svg), { opacity: 0, duration: 0.8, stagger: 0.01 }, 0.4)
-      .from($$('.mp-leisure, .mp-leisure-core, .mp-gate', svg), { scale: 0, transformOrigin: '50% 50%', duration: 0.8, ease: 'back.out(1.6)' }, 1.2);
+    // planta ampliada
+    const lb = $('#lightbox');
+    $('#planZoom').addEventListener('click', () => { $('img', lb).src = $('#planImg').src; lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false'); if (lenis) lenis.stop(); });
+    const close = () => { lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true'); if (lenis) lenis.start(); };
+    $('.lightbox__close', lb).addEventListener('click', close);
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+    // números contam ao aparecer
+    $$('.av__numbers dt').forEach((dt) => {
+      const end = parseFloat(dt.dataset.count), dec = +(dt.dataset.dec || 0), pre = dt.dataset.prefix || '';
+      const small = $('small', dt) ? $('small', dt).outerHTML : '';
+      const o = { v: 0 };
+      gsap.to(o, { v: end, duration: 2, ease: 'power2.out', scrollTrigger: { trigger: dt, start: 'top 88%' },
+        onUpdate: () => { dt.innerHTML = pre + o.v.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + small; } });
+    });
+    gsap.from('.amen li', { y: 30, opacity: 0, stagger: 0.05, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.amen', start: 'top 85%' } });
   }
 
   /* ---------- formulário → WhatsApp ---------- */

@@ -148,47 +148,108 @@
     <div class="wrap av__intro-inner">
       <p class="eyebrow">Primeiro empreendimento AVRA</p>
       <h2 class="av__title split-lines">Residencial<br>Alta Vista</h2>
-      <p class="av__status"><i></i>Em desenvolvimento · lista de interesse aberta</p>
+      <p class="av__status"><i></i>471 lotes · 47 hectares · lista de interesse aberta</p>
     </div>
   </div>
 
   <div class="wrap av__concept">
     <div>
       <p class="eyebrow">O conceito</p>
-      <h3 class="display split-lines">Um terreno para<br>a casa que é sua.</h3>
+      <h3 class="display split-lines">Metade do terreno<br>é para viver junto.</h3>
     </div>
     <div class="av__concept-text">
-      <p class="lead reveal-up">O Residencial Alta Vista é um condomínio fechado de lotes em Boa Vista. Em vez de um imóvel pronto, você escolhe o terreno e constrói a casa do seu jeito, dentro de um bairro planejado do primeiro traço à última árvore.</p>
-      <p class="reveal-up">O nome diz a intenção: vista aberta, horizonte livre e espaço entre as casas. É o mesmo princípio do traçado de Boa Vista, aplicado na escala de uma rua.</p>
+      <p class="lead reveal-up">O Residencial Alta Vista é um condomínio fechado de lotes em uma área de 47 hectares no km 5 da BR-401, do outro lado do Rio Branco, vizinho a Boa Vista. Mais da metade da área, 50,7%, é de uso comum: ruas arborizadas, lazer, lagos, mata nativa e uma pista de cooper que contorna o bairro.</p>
+      <p class="reveal-up">O terreno, conhecido como Terras Altas, fica às margens do Igarapé Santa Cecília. Por isso o nome: lotes em cota alta, horizonte aberto e uma faixa de mata preservada ao longo da água. Você escolhe o lote e constrói a casa do seu jeito, dentro de um bairro planejado do primeiro traço à última árvore.</p>
     </div>
   </div>
 
-  <div class="wrap av__pillars">
-    <article><b>01</b><h4>Liberdade para construir</h4><p>Projete a casa no seu tempo, com o seu arquiteto, seguindo diretrizes que preservam a qualidade do conjunto.</p></article>
-    <article><b>02</b><h4>Vida em condomínio fechado</h4><p>Acesso controlado, ruas tranquilas e áreas comuns pensadas para a convivência entre vizinhos.</p></article>
-    <article><b>03</b><h4>Planejamento AVRA</h4><p>Infraestrutura, aprovações e documentação tratadas com o mesmo rigor que a gente defende em cada decisão.</p></article>
+  <div class="wrap">
+    <dl class="av__numbers">
+      <div><dt data-count="47">47</dt><dd>hectares de área total</dd></div>
+      <div><dt data-count="471">471</dt><dd>lotes residenciais em 21 quadras</dd></div>
+      <div><dt data-count="50.7" data-dec="1">50,7<small>%</small></dt><dd>da área é de uso comum</dd></div>
+      <div><dt data-count="490" data-prefix="~">~490<small>m²</small></dt><dd>área média por lote</dd></div>
+      <div><dt data-count="841">841</dt><dd>árvores e palmeiras no paisagismo</dd></div>
+    </dl>
   </div>
 
-  <div class="av__plan">
-    <div class="wrap av__plan-grid">
-      <div class="av__plan-text">
+  <div class="av__plan" id="implantacao">
+    <div class="wrap av__plan-head">
+      <div>
         <p class="eyebrow">Implantação</p>
-        <h3 class="display split-lines">Como o bairro<br>se organiza.</h3>
-        <p class="reveal-up">Passe o cursor pelo mapa para ver cada parte do conceito urbanístico.</p>
-        <div class="av__zone" id="zoneInfo" aria-live="polite">
-          <b id="zoneName">Lotes residenciais</b>
-          <p id="zoneText">Terrenos voltados para ruas internas tranquilas, com espaço para jardim e recuos generosos.</p>
-        </div>
-        <ul class="av__legend" id="zoneLegend">
-          <li data-zone="lotes" class="is-on"><i style="--c:#F2EBDD"></i>Lotes residenciais</li>
-          <li data-zone="verde"><i style="--c:#74785A"></i>Áreas verdes</li>
-          <li data-zone="lazer"><i style="--c:#C99073"></i>Lazer e convivência</li>
-          <li data-zone="avenida"><i style="--c:#B6A078"></i>Avenida principal</li>
-          <li data-zone="portaria"><i style="--c:#A6533C"></i>Portaria</li>
-        </ul>
-        <p class="note">Estudo ilustrativo de conceito. Quantidade, dimensões e localização dos lotes serão definidas no projeto aprovado e apresentadas no lançamento.</p>
+        <h3 class="display split-lines">O bairro,<br>quadra a quadra.</h3>
       </div>
-      <div class="av__map"><svg id="masterplan" viewBox="0 0 800 620" role="img" aria-label="Estudo ilustrativo de implantação do Residencial Alta Vista"></svg></div>
+      <p class="reveal-up">Esta é a planta de implantação e paisagismo do condomínio. Toque nos pontos para conhecer cada área, ou abra a planta em tamanho real.</p>
+    </div>
+    <div class="wrap av__plan-grid">
+      <div class="av__map">
+        <img src="assets/photos/alta-vista-implantacao.jpg" alt="Planta de implantação e paisagismo do Residencial Alta Vista, com 21 quadras, alamedas, áreas de lazer, lagos e mata nativa" width="2600" height="2298" id="planImg">
+        <div class="av__hotspots" id="hotspots"></div>
+        <button class="av__zoom" id="planZoom" type="button">Ver planta ampliada ↗</button>
+      </div>
+      <div class="av__plan-side">
+        <div class="av__zone" aria-live="polite">
+          <span class="av__zone-n" id="zoneNum">01</span>
+          <b id="zoneName">Portaria e acesso</b>
+          <p id="zoneText"></p>
+        </div>
+        <ol class="av__legend" id="zoneLegend"></ol>
+      </div>
+    </div>
+    <p class="wrap note av__plan-note">Fonte: projeto básico de implantação e paisagismo do condomínio. Números, lotes e equipamentos podem ser ajustados no projeto aprovado e serão confirmados no lançamento.</p>
+  </div>
+
+  <div class="wrap av__leisure">
+    <div class="av__leisure-head">
+      <p class="eyebrow">Lazer e convivência</p>
+      <h3 class="display split-lines">Tudo o que um dia<br>precisa, sem sair de casa.</h3>
+    </div>
+    <ul class="amen">
+      <li><b>3</b><span>Quadras de tênis</span></li>
+      <li><b>2</b><span>Campos de futebol</span></li>
+      <li><b>1</b><span>Quadra poliesportiva</span></li>
+      <li><b>1</b><span>Espaço gourmet</span></li>
+      <li><b>2</b><span>Churrasqueiras com vestiário</span></li>
+      <li><b>1</b><span>Espaço fitness</span></li>
+      <li><b>4</b><span>Estações de ginástica ao ar livre</span></li>
+      <li><b>3</b><span>Playgrounds</span></li>
+      <li><b>2</b><span>Lagos</span></li>
+      <li><b>21</b><span>Espaços de estar ao longo das alamedas</span></li>
+      <li><b>1</b><span>Pista de cooper contornando o bairro</span></li>
+      <li><b>2</b><span>Portarias: social e de serviço</span></li>
+    </ul>
+  </div>
+
+  <div class="av__green">
+    <div class="wrap av__green-grid">
+      <div>
+        <p class="eyebrow">Paisagismo</p>
+        <h3 class="display split-lines">Ruas com nome<br>de flor. E sombra.</h3>
+        <p class="reveal-up">O projeto de paisagismo prevê 645 árvores de pequeno e médio porte, 53 árvores de médio porte, 42 palmeiras nativas de grande porte e 101 palmeiras menores. Em um lugar de sol forte o ano inteiro, sombra é infraestrutura.</p>
+        <p class="reveal-up">As ruas internas são alamedas: das Camélias, das Tulipas, dos Ipês, das Orquídeas, dos Girassóis. Ao norte, a mata nativa do Igarapé Santa Cecília fica preservada como área comum.</p>
+      </div>
+      <dl class="trees">
+        <div><dt>645</dt><dd>Árvores de pequeno e médio porte</dd></div>
+        <div><dt>101</dt><dd>Palmeiras de pequeno porte</dd></div>
+        <div><dt>53</dt><dd>Árvores de médio porte</dd></div>
+        <div><dt>42</dt><dd>Palmeiras nativas de grande porte</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="wrap av__where">
+    <figure class="av__where-map">
+      <img src="assets/photos/alta-vista-localizacao.jpg" alt="Planta de localização: área do condomínio às margens do Igarapé Santa Cecília, junto à BR-401, do outro lado do Rio Branco em relação a Boa Vista" loading="lazy">
+      <figcaption>Planta de localização do projeto. Área do condomínio em vermelho.</figcaption>
+    </figure>
+    <div>
+      <p class="eyebrow">Localização</p>
+      <h3 class="display split-lines">Do outro lado<br>do Rio Branco.</h3>
+      <dl class="where">
+        <div><dt>Endereço</dt><dd>BR-401, km 5 · Terras Altas · Cantá, RR</dd></div>
+        <div><dt>Acesso</dt><dd>Pela BR-401, saindo de Boa Vista pela ponte sobre o Rio Branco</dd></div>
+        <div><dt>Entorno</dt><dd>Igarapé Santa Cecília e área de preservação ao norte; via planejada ao sul</dd></div>
+      </dl>
     </div>
   </div>
 
@@ -334,6 +395,7 @@
     <a href="#hero">Voltar ao topo ↑</a>
   </div>
 </footer>
+<div class="lightbox" id="lightbox" aria-hidden="true"><button class="lightbox__close" aria-label="Fechar">×</button><div class="lightbox__scroll"><img alt="Planta de implantação ampliada"></div></div>
 
 <script src="assets/vendor/three.min.js"></script>
 <script src="assets/vendor/gsap.min.js"></script>
