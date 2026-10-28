@@ -235,61 +235,77 @@
 
   /* ---------- Alta Vista: planta real com pontos interativos ---------- */
   function masterplan() {
-    // posições em % sobre a planta de implantação
-    const SPOTS = [
-      [13, 86, 'Portaria e acesso', 'Portaria social, portaria de serviço e administração com vestiário, na entrada pela Avenida de Acesso Social. Acesso controlado e estacionamento para visitantes.'],
-      [25, 89, 'Espaço gourmet e lago', 'Espaço gourmet à beira de um dos dois lagos, com playground e estacionamento próprio, logo na chegada ao condomínio.'],
-      [21, 34, 'Avenida das Flores', 'O eixo de entrada: uma avenida com canteiro central arborizado que distribui o trânsito e deixa as alamedas internas mais tranquilas.'],
-      [15, 61, 'Clube oeste', 'Três quadras de tênis, espaço fitness, churrasqueira com vestiário, playground e estação de ginástica, numa faixa verde ao longo da avenida.'],
-      [50, 14, 'Clube norte', 'Dois campos de futebol, quadra poliesportiva, churrasqueira com vestiário e playground, junto à mata do igarapé.'],
-      [80, 6, 'Mata nativa e Igarapé Santa Cecília', 'Ao norte, a mata nativa às margens do igarapé fica preservada como área comum do condomínio.'],
-      [52, 50, '21 quadras, 471 lotes', 'Lotes organizados em quadras curvas, voltados para alamedas arborizadas com nomes de flores. Área média em torno de 490 m² por lote.'],
-      [84, 49, 'Pista de cooper e estares', 'Uma pista de cooper contorna o bairro, com 21 espaços de estar e estações de ginástica ao longo do caminho.']
-    ];
-    const box = $('#hotspots'), list = $('#zoneLegend');
-    const num = $('#zoneNum'), name = $('#zoneName'), text = $('#zoneText');
-    const set = (k) => {
-      const sp = SPOTS[k];
-      num.textContent = String(k + 1).padStart(2, '0'); name.textContent = sp[2]; text.textContent = sp[3];
-      $$('.spot', box).forEach((b, i) => b.classList.toggle('is-on', i === k));
-      $$('li', list).forEach((li, i) => li.classList.toggle('is-on', i === k));
-      if (p3) p3.setActive(k);
-    };
-    let p3 = null, p3Loading = null;
-    // maquete 3D em bloco próprio, carregada quando chega perto da tela
+    const ST = { disponivel: 'Disponível', reservado: 'Reservado', vendido: 'Vendido' };
+    let p3 = null, status = {}, current = null;
+    const fmt = (n) => n.toLocaleString('pt-BR');
+    const tip = $('#lotTip');
+
+    // situação dos lotes: mantida pelo painel /admin em data/lotes.json
+    const load = fetch('data/lotes.json?v=' + Date.now(), { cache: 'no-store' }).then((r) => r.ok ? r.json() : {}).catch(() => ({}));
+    function counts() {
+      const c = { disponivel: 0, reservado: 0, vendido: 0 };
+      (window.AVRA_LOTES || []).forEach((l) => { c[status[l[0]] || 'disponivel']++; });
+      $('#cntDisp').textContent = c.disponivel; $('#cntRes').textContent = c.reservado; $('#cntVen').textContent = c.vendido;
+    }
+    function show(u) {
+      current = u;
+      $('#lotEmpty').hidden = !!u; $('#lotInfo').hidden = !u;
+      if (!u) return;
+      const st = u.status || 'disponivel';
+      $('#lotStatus').textContent = ST[st]; $('#lotStatus').className = 'lx__status is-' + st;
+      $('#lotQ').textContent = String(u.q).padStart(2, '0'); $('#lotN').textContent = String(u.n).padStart(2, '0');
+      $('#lotArea').textContent = '≈ ' + fmt(u.m2) + ' m²'; $('#lotId').textContent = u.id;
+      const cta = $('#lotCta');
+      cta.hidden = st === 'vendido';
+      $('span', cta).textContent = st === 'reservado' ? 'Avise-me se for liberado' : 'Tenho interesse neste lote';
+    }
+    $('#lotCta').addEventListener('click', () => {
+      if (!current) return;
+      const sel = $('#fInterest'), label = `Lote ${current.id} (Quadra ${current.q}, Lote ${current.n}) – Residencial Alta Vista`;
+      let opt = $$('option', sel).find((o) => o.dataset.lot);
+      if (!opt) { opt = document.createElement('option'); opt.dataset.lot = '1'; sel.prepend(opt); }
+      opt.textContent = label; sel.value = label;
+      const msg = $('#fMsg'); if (msg && !msg.value) msg.value = `Gostaria de saber mais sobre o lote ${current.id}.`;
+    });
     const view3d = $('#plan3d');
     const io3 = new IntersectionObserver((en) => {
-      if (!en[0].isIntersecting || p3Loading) return;
+      if (!en[0].isIntersecting || p3) return;
       io3.disconnect();
-      p3Loading = window.AVRAPlan3D.init({ canvas: $('#plan3dCanvas'), host: view3d, labels: $('#plan3dLabels'), image: $('#planImg').getAttribute('src'), spots: SPOTS, onSpot: (k) => set(k) })
-        .then((api) => { p3 = api; $('#plan3dLoading').hidden = true; api.resize(); set(+num.textContent - 1); })
-        .catch(() => { $('#plan3dLoading').textContent = 'Não foi possível carregar a maquete 3D neste navegador.'; });
+      p3 = 'loading';
+      window.AVRAPlan3D.init({
+        canvas: $('#plan3dCanvas'), host: view3d, image: $('#planImg').getAttribute('src'),
+        onSelect: (u) => { if (u) u.status = status[u.id] || 'disponivel'; show(u); },
+        onHover: (u, e) => {
+          if (!u || !e) { tip.hidden = true; return; }
+          const r = view3d.getBoundingClientRect();
+          tip.hidden = false; tip.innerHTML = `<b>${u.id}</b> · ${ST[status[u.id] || 'disponivel']}`;
+          tip.style.transform = `translate(${e.clientX - r.left + 14}px, ${e.clientY - r.top + 14}px)`;
+        }
+      }).then((api) => {
+        p3 = api; $('#plan3dLoading').hidden = true; api.resize();
+        load.then((d) => {
+          status = (d && d.status) || {}; api.setStatus(status); counts();
+          if (d && d.atualizado) $('#lotUpdated').textContent = 'Disponibilidade atualizada em ' + new Date(d.atualizado).toLocaleDateString('pt-BR');
+        });
+      }).catch(() => { $('#plan3dLoading').textContent = 'Não foi possível carregar a maquete 3D neste navegador.'; });
     }, { rootMargin: '400px' });
     io3.observe(view3d);
-    $('#plan3dTop').addEventListener('click', () => p3 && p3.top());
-    SPOTS.forEach((sp, k) => {
-      const b = document.createElement('button');
-      b.type = 'button'; b.className = 'spot'; b.style.left = sp[0] + '%'; b.style.top = sp[1] + '%';
-      b.setAttribute('aria-label', sp[2]); b.innerHTML = `<span>${k + 1}</span>`;
-      b.addEventListener('click', () => set(k)); b.addEventListener('pointerenter', () => set(k));
-      box.appendChild(b);
-      const li = document.createElement('li');
-      li.innerHTML = `<b>${String(k + 1).padStart(2, '0')}</b>${sp[2]}`;
-      li.addEventListener('click', () => set(k)); li.addEventListener('pointerenter', () => set(k));
-      list.appendChild(li);
-    });
-    set(0);
-    $$('.spot', box).forEach((b, i) => b.style.setProperty('--d', (i * 0.08) + 's'));
-    const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { box.classList.add('is-in'); io.disconnect(); } }, { threshold: 0.3 });
-    io.observe(box);
-    gsap.fromTo('#planImg', { scale: 1.08, filter: 'saturate(.6)' }, { scale: 1, filter: 'saturate(1)', ease: 'none', scrollTrigger: { trigger: '.av__map', start: 'top bottom', end: 'center center', scrub: true } });
-
-    // planta ampliada
-    const lb = $('#lightbox');
-    $('#planZoom').addEventListener('click', () => { $('img', lb).src = $('#planImg').src; lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false'); if (lenis) lenis.stop(); });
-    const close = () => { lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true'); if (lenis) lenis.start(); };
-    $('.lightbox__close', lb).addEventListener('click', close);
-    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    load.then((d) => { status = (d && d.status) || {}; counts(); });
+    const api = () => (p3 && p3 !== 'loading' ? p3 : null);
+    $('#plan3dTop').addEventListener('click', () => api() && api().top());
+    $('#p3In').addEventListener('click', () => api() && api().zoom(0.75));
+    $('#p3Out').addEventListener('click', () => api() && api().zoom(1.33));
+    $('#p3Reset').addEventListener('click', () => { if (api()) { api().reset(); api().select(null); } });
+    $('#onlyAvail').addEventListener('change', (e) => api() && api().setOnlyAvailable(e.target.checked));
+    $('.lx__stat[data-filter]').addEventListener('click', () => { const c = $('#onlyAvail'); c.checked = !c.checked; c.dispatchEvent(new Event('change')); });
+    const find = () => {
+      const v = $('#lotSearch').value.replace(/[^0-9]+/g, ' ').trim().split(' ');
+      if (v.length < 2 || !api()) return;
+      const id = String(+v[0]).padStart(2, '0') + '-' + String(+v[1]).padStart(2, '0');
+      api().select(id, true);
+    };
+    $('#lotGo').addEventListener('click', find);
+    $('#lotSearch').addEventListener('keydown', (e) => { if (e.key === 'Enter') find(); });
 
     // números contam ao aparecer
     $$('.av__numbers dt').forEach((dt) => {

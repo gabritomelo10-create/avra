@@ -180,42 +180,52 @@
   <div class="av__plan" id="implantacao">
     <div class="wrap av__plan-head">
       <div>
-        <p class="eyebrow">Implantação</p>
-        <h3 class="display split-lines">O bairro,<br>quadra a quadra.</h3>
+        <p class="eyebrow">Escolha seu lote</p>
+        <h3 class="display split-lines">O bairro,<br>lote a lote.</h3>
       </div>
-      <p class="reveal-up">A planta de implantação e paisagismo do condomínio. Toque nos pontos para conhecer cada área. Logo abaixo, a mesma planta em uma maquete 3D.</p>
+      <p class="reveal-up">Maquete interativa dos 471 lotes, montada a partir da planta de implantação. Toque em um lote para ver quadra, número, área aproximada e situação de venda.</p>
     </div>
-    <div class="wrap av__plan-grid">
-      <div class="av__viewer">
-      <div class="av__map">
-        <img src="assets/photos/alta-vista-implantacao.jpg" alt="Planta de implantação e paisagismo do Residencial Alta Vista, com 21 quadras, alamedas, áreas de lazer, lagos e mata nativa" width="2600" height="2298" id="planImg">
-        <div class="av__hotspots" id="hotspots"></div>
-        <button class="av__zoom" id="planZoom" type="button">Ver planta ampliada ↗</button>
-      </div>
-      </div>
-      <div class="av__plan-side">
-        <div class="av__zone" aria-live="polite">
-          <span class="av__zone-n" id="zoneNum">01</span>
-          <b id="zoneName">Portaria e acesso</b>
-          <p id="zoneText"></p>
+    <img src="assets/photos/alta-vista-implantacao.jpg" id="planImg" alt="" hidden>
+    <div class="wrap lx">
+      <div class="lx__stage" id="plan3d">
+        <canvas id="plan3dCanvas" aria-label="Maquete 3D interativa dos lotes do Residencial Alta Vista"></canvas>
+        <div class="lx__tip" id="lotTip" hidden></div>
+        <div class="lx__tools">
+          <button type="button" id="p3In" aria-label="Aproximar">+</button>
+          <button type="button" id="p3Out" aria-label="Afastar">−</button>
+          <button type="button" id="plan3dTop">Vista de cima</button>
+          <button type="button" id="p3Reset">Ver tudo</button>
         </div>
-        <ol class="av__legend" id="zoneLegend"></ol>
-      </div>
-    </div>
-    <div class="wrap av__model">
-      <div class="av__model-head">
-        <p class="eyebrow">Maquete 3D</p>
-        <h3 class="title-md">O mesmo bairro, em volume.</h3>
-        <p>Maquete gerada a partir da planta para dar noção de escala, quadras e áreas verdes. Arraste para girar.</p>
-      </div>
-      <div class="av__3d" id="plan3d">
-        <canvas id="plan3dCanvas" aria-label="Maquete 3D ilustrativa gerada a partir da planta de implantação"></canvas>
-        <div class="av__3d-labels" id="plan3dLabels"></div>
-        <p class="av__3d-hint">Arraste para girar · <button type="button" id="plan3dTop">vista de cima</button></p>
+        <p class="lx__hint">Arraste para girar · Shift + arrastar para mover · pinça ou Ctrl + rolar para aproximar</p>
         <p class="av__3d-loading" id="plan3dLoading">Montando a maquete…</p>
       </div>
+      <aside class="lx__side">
+        <div class="lx__stats" id="lotStats">
+          <button type="button" class="lx__stat" data-filter="disponivel"><i class="dot dot--disponivel"></i><b id="cntDisp">–</b><span>Disponíveis</span></button>
+          <div class="lx__stat"><i class="dot dot--reservado"></i><b id="cntRes">–</b><span>Reservados</span></div>
+          <div class="lx__stat"><i class="dot dot--vendido"></i><b id="cntVen">–</b><span>Vendidos</span></div>
+        </div>
+        <label class="switch lx__only"><input type="checkbox" id="onlyAvail"><span></span>Destacar só os disponíveis</label>
+        <div class="lx__find">
+          <label for="lotSearch">Buscar lote</label>
+          <div><input id="lotSearch" type="text" inputmode="numeric" placeholder="Ex.: 12-08" autocomplete="off"><button type="button" id="lotGo">Ir</button></div>
+        </div>
+        <div class="lx__card" id="lotCard" aria-live="polite">
+          <p class="lx__empty" id="lotEmpty">Selecione um lote na maquete.</p>
+          <div id="lotInfo" hidden>
+            <p class="lx__status" id="lotStatus"></p>
+            <h4><span>Quadra <b id="lotQ"></b></span><span>Lote <b id="lotN"></b></span></h4>
+            <dl>
+              <div><dt>Área aproximada</dt><dd id="lotArea"></dd></div>
+              <div><dt>Código</dt><dd id="lotId"></dd></div>
+            </dl>
+            <a href="#contato" class="btn btn--solid" id="lotCta"><span>Tenho interesse neste lote</span><i>→</i></a>
+          </div>
+        </div>
+        <p class="lx__updated" id="lotUpdated"></p>
+      </aside>
     </div>
-    <p class="wrap note av__plan-note">Fonte: projeto básico de implantação e paisagismo do condomínio. Números, lotes e equipamentos podem ser ajustados no projeto aprovado e serão confirmados no lançamento.</p>
+    <p class="wrap note av__plan-note">Maquete ilustrativa a partir do projeto básico de implantação. Numeração dos lotes por quadra, áreas aproximadas calculadas sobre a planta. Disponibilidade sujeita a confirmação pela equipe AVRA.</p>
   </div>
 
   <div class="life">
@@ -419,6 +429,7 @@
 <script src="assets/vendor/lenis.min.js"></script>
 <script src="assets/js/logo-data.js"></script>
 <script src="assets/js/br20.js"></script>
+<script src="assets/js/lotes-geo.js"></script>
 <script src="assets/js/plan3d.js"></script>
 <script src="assets/js/site.js"></script>
 </body>

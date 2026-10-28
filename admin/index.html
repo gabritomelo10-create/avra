@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · Lotes Alta Vista</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  :root { --bg: #EAE2D2; --card: #F7F2E8; --ink: #263B32; --line: rgba(38,59,50,.16); --disp: #E9DCC0; --res: #C99073; --ven: #4E6B5B; --sel: #A6533C; }
+  body.admin { background: var(--bg); color: var(--ink); font-family: var(--f-text); margin: 0; overflow-x: hidden; }
+  .admin * { box-sizing: border-box; }
+  .a-top { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 18px; padding: 14px max(16px, 3vw); background: var(--ink); color: var(--marfim); flex-wrap: wrap; }
+  .a-top svg { width: 84px; fill: var(--marfim); }
+  .a-top h1 { font-family: var(--f-title); font-weight: 400; font-size: 18px; margin: 0; letter-spacing: .04em; }
+  .a-top .sp { flex: 1; }
+  .a-top a { font-size: 13px; opacity: .8; text-decoration: underline; text-underline-offset: 3px; }
+  .a-btn { border: 1px solid currentColor; border-radius: 99px; padding: 10px 18px; font: inherit; font-size: 14px; cursor: pointer; background: transparent; color: inherit; }
+  .a-btn--solid { background: var(--sel); border-color: var(--sel); color: var(--marfim); }
+  .a-btn--solid:disabled { opacity: .45; cursor: not-allowed; }
+  .a-btn--ink { background: var(--ink); color: var(--marfim); border-color: var(--ink); }
+  .a-wrap { padding: 24px max(16px, 3vw) 60px; max-width: 1600px; margin: 0 auto; display: grid; gap: 20px; }
+  .a-card { background: var(--card); border-radius: 12px; padding: 20px; box-shadow: 0 20px 40px -30px rgba(38,59,50,.4); min-width: 0; }
+  .a-card h2 { font-family: var(--f-title); font-weight: 400; font-size: 22px; margin: 0 0 10px; }
+  .a-card p { margin: 0 0 10px; font-size: 14px; line-height: 1.5; }
+  .a-grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 20px; align-items: start; }
+  .a-field { display: grid; gap: 6px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; opacity: .9; }
+  .a-field input, .a-field select { font: inherit; font-size: 15px; letter-spacing: 0; text-transform: none; font-weight: 400; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: #fff; color: var(--ink); width: 100%; }
+  .a-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: end; }
+  .a-row > * { flex: 1 1 180px; }
+  .a-small { font-size: 12px; opacity: .7; }
+  .a-msg { font-size: 14px; min-height: 1.4em; margin: 8px 0 0; }
+  .a-msg.is-ok { color: #2f6b45; } .a-msg.is-err { color: #a33; }
+  .a-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .a-stat { padding: 14px; border-radius: 10px; background: #fff; border: 1px solid var(--line); }
+  .a-stat b { display: block; font-family: var(--f-title); font-weight: 400; font-size: 30px; line-height: 1; }
+  .a-stat span { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; opacity: .7; }
+  .brush { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .brush button { display: grid; gap: 6px; justify-items: center; padding: 12px 8px; border-radius: 10px; border: 2px solid var(--line); background: #fff; font: inherit; font-size: 13px; cursor: pointer; color: var(--ink); }
+  .brush button i { width: 26px; height: 18px; border-radius: 4px; border: 1px solid rgba(0,0,0,.12); }
+  .brush button.is-on { border-color: var(--sel); box-shadow: 0 0 0 3px rgba(166,83,60,.15); }
+  .map { position: relative; border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid var(--line); touch-action: none; }
+  .map svg { display: block; width: 100%; height: auto; user-select: none; }
+  .map image { opacity: .55; }
+  .lot { stroke: rgba(38,59,50,.55); stroke-width: 1.2; vector-effect: non-scaling-stroke; cursor: crosshair; transition: fill .15s; }
+  .lot.s-disponivel { fill: var(--disp); } .lot.s-reservado { fill: var(--res); } .lot.s-vendido { fill: var(--ven); }
+  .lot.is-pick { stroke: var(--sel); stroke-width: 3; }
+  .lot:hover { filter: brightness(1.08); stroke: var(--sel); stroke-width: 2; }
+  .lbl { font-size: 9px; fill: rgba(38,59,50,.8); pointer-events: none; font-family: var(--f-text); }
+  .lbl--v { fill: rgba(242,235,221,.85); }
+  .map-tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+  .map-tools label { font-size: 13px; display: flex; gap: 6px; align-items: center; }
+  .q-list { max-height: 520px; overflow: auto; border-top: 1px solid var(--line); }
+  .q-item { border-bottom: 1px solid var(--line); }
+  .q-item summary { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 2px; cursor: pointer; font-size: 14px; list-style: none; }
+  .q-item summary::-webkit-details-marker { display: none; }
+  .q-item summary small { font-size: 12px; opacity: .7; }
+  .q-bulk { display: flex; gap: 6px; padding: 0 0 8px; flex-wrap: wrap; }
+  .q-bulk button { font: inherit; font-size: 12px; padding: 6px 10px; border-radius: 99px; border: 1px solid var(--line); background: #fff; cursor: pointer; color: var(--ink); }
+  .q-lots { display: grid; grid-template-columns: repeat(auto-fill, minmax(54px, 1fr)); gap: 4px; padding-bottom: 12px; }
+  .q-lots button { font: inherit; font-size: 12px; padding: 6px 0; border-radius: 6px; border: 1px solid rgba(0,0,0,.08); cursor: pointer; color: var(--ink); }
+  .q-lots button.s-disponivel { background: var(--disp); } .q-lots button.s-reservado { background: var(--res); } .q-lots button.s-vendido { background: var(--ven); color: var(--marfim); }
+  .dirty { display: none; font-size: 13px; background: #f6e3c8; color: #7a4a1a; padding: 6px 12px; border-radius: 99px; }
+  .is-dirty .dirty { display: inline-block; }
+  .login[hidden] { display: none; }
+  details.help summary { cursor: pointer; font-size: 14px; font-weight: 600; }
+  details.help ol { font-size: 14px; line-height: 1.6; padding-left: 20px; }
+  code { background: #fff; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+  @media (max-width: 1000px) { .a-grid { grid-template-columns: 1fr; } .a-stats { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body class="admin">
+<header class="a-top">
+  <svg viewBox="30 36 3441 558" class="js-logo" aria-hidden="true"><path/></svg>
+  <h1>Disponibilidade de lotes · Residencial Alta Vista</h1>
+  <span class="sp"></span>
+  <span class="dirty">Alterações não publicadas</span>
+  <button class="a-btn a-btn--solid" id="publish" disabled>Publicar no site</button>
+  <a href="../#altavista" target="_blank" rel="noopener">Ver no site ↗</a>
+</header>
+
+<main class="a-wrap">
+  <section class="a-card login" id="login">
+    <h2>Conectar ao site</h2>
+    <p>As alterações são gravadas no arquivo <code>data/lotes.json</code> do repositório do site no GitHub. Para publicar, cole um token de acesso do GitHub com permissão de escrita neste repositório. O token fica só neste navegador.</p>
+    <div class="a-row">
+      <label class="a-field">Token do GitHub<input id="token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
+      <label class="a-field">Repositório<input id="repo" type="text" value="gabritomelo10-create/avra"></label>
+      <label class="a-field" style="flex:0 1 140px">Branch<input id="branch" type="text" value="main"></label>
+    </div>
+    <div class="a-row" style="margin-top:12px; align-items:center">
+      <label style="flex:0 0 auto; font-size:14px; display:flex; gap:8px; align-items:center"><input type="checkbox" id="remember" checked> Lembrar neste navegador</label>
+      <button class="a-btn a-btn--ink" id="connect" style="flex:0 0 auto">Conectar</button>
+      <button class="a-btn" id="viewOnly" style="flex:0 0 auto">Só visualizar</button>
+    </div>
+    <p class="a-msg" id="loginMsg"></p>
+    <details class="help">
+      <summary>Como criar o token (uma vez só)</summary>
+      <ol>
+        <li>No GitHub, abra <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens</b> e clique em <b>Generate new token</b>.</li>
+        <li>Em <b>Repository access</b>, escolha <b>Only select repositories</b> e marque <code>gabritomelo10-create/avra</code>.</li>
+        <li>Em <b>Permissions → Repository permissions</b>, defina <b>Contents</b> como <b>Read and write</b>.</li>
+        <li>Gere o token, copie e cole acima. Quem não tiver o token não consegue alterar nada.</li>
+      </ol>
+    </details>
+  </section>
+
+  <section class="a-stats" aria-label="Resumo">
+    <div class="a-stat"><b id="sTot">471</b><span>Lotes</span></div>
+    <div class="a-stat"><b id="sDisp">–</b><span>Disponíveis</span></div>
+    <div class="a-stat"><b id="sRes">–</b><span>Reservados</span></div>
+    <div class="a-stat"><b id="sVen">–</b><span>Vendidos</span></div>
+  </section>
+
+  <div class="a-grid">
+    <section class="a-card">
+      <h2>Planta</h2>
+      <p>Escolha a situação ao lado e clique nos lotes. Segure e arraste para marcar vários de uma vez.</p>
+      <div class="map-tools">
+        <label><input type="checkbox" id="showNums" checked> Mostrar números</label>
+        <label><input type="checkbox" id="showPlan" checked> Mostrar planta ao fundo</label>
+        <span class="a-small" id="hoverInfo"></span>
+      </div>
+      <div class="map" id="map"></div>
+    </section>
+
+    <aside class="a-card" style="display:grid; gap:16px">
+      <div>
+        <h2>Marcar como</h2>
+        <div class="brush" id="brush">
+          <button data-s="disponivel" class="is-on"><i style="background:var(--disp)"></i>Disponível</button>
+          <button data-s="reservado"><i style="background:var(--res)"></i>Reservado</button>
+          <button data-s="vendido"><i style="background:var(--ven)"></i>Vendido</button>
+        </div>
+      </div>
+      <div>
+        <h2>Por quadra</h2>
+        <div class="q-list" id="qList"></div>
+      </div>
+      <div>
+        <h2>Backup</h2>
+        <div class="a-row">
+          <button class="a-btn" id="export" style="flex:1 1 auto">Exportar JSON</button>
+          <label class="a-btn" style="flex:1 1 auto; text-align:center">Importar JSON<input type="file" id="import" accept="application/json" hidden></label>
+        </div>
+        <p class="a-msg" id="pubMsg"></p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script src="../assets/js/logo-data.js"></script>
+<script src="../assets/js/lotes-geo.js"></script>
+<script src="../assets/js/admin.js"></script>
+</body>
+</html>

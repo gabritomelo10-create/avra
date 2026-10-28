@@ -598,3 +598,50 @@ img.is-fallback { filter: saturate(.85); }
 }
 img, svg, canvas { max-width: 100%; }
 html, body { overflow-x: clip; }
+
+/* =========================================================
+   EXPLORADOR DE LOTES (maquete 3D)
+   ========================================================= */
+.lx { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; align-items: stretch; }
+.lx__stage { position: relative; min-height: 560px; height: 76vh; max-height: 820px; border-radius: 12px; overflow: hidden; background: radial-gradient(90% 90% at 50% 40%, #33503f, #1d3028 75%); box-shadow: inset 0 0 0 1px var(--line-light), 0 60px 120px -50px rgba(0,0,0,.8); }
+.lx__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
+.lx__tip { position: absolute; left: 0; top: 0; pointer-events: none; background: rgba(18,32,26,.88); color: var(--marfim); font-size: 12px; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 2; }
+.lx__tip b { font-weight: 600; }
+.lx__tools { position: absolute; right: 12px; top: 12px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.lx__tools button { min-width: 36px; height: 36px; padding: 0 14px; border-radius: 99px; background: rgba(18,32,26,.82); color: var(--marfim); font-size: 13px; border: 1px solid var(--line-light); backdrop-filter: blur(6px); }
+.lx__tools button:hover { background: var(--terracota); }
+.lx__hint { position: absolute; left: 14px; bottom: 10px; margin: 0; font-size: 11px; opacity: .7; pointer-events: none; }
+.lx__side { display: grid; align-content: start; gap: 16px; min-width: 0; }
+.lx__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.lx__stat { display: grid; justify-items: start; gap: 2px; padding: 14px; border-radius: 10px; background: rgba(242,235,221,.06); border: 1px solid var(--line-light); text-align: left; }
+button.lx__stat:hover { border-color: var(--dourado); }
+.lx__stat b { font-family: var(--f-title); font-weight: 400; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.lx__stat span { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .75; }
+.dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.dot--disponivel { background: #F2EBDD; } .dot--reservado { background: #C99073; } .dot--vendido { background: #4E6B5B; box-shadow: inset 0 0 0 1px rgba(242,235,221,.3); }
+.lx__only { font-size: 14px; color: var(--marfim); }
+.lx__only span { background: rgba(242,235,221,.18); }
+.lx__only span::after { background: var(--marfim); }
+.lx__find label { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; margin-bottom: 6px; }
+.lx__find div { display: flex; gap: 6px; }
+.lx__find input { flex: 1; min-width: 0; font: inherit; font-size: 15px; color: var(--marfim); background: rgba(242,235,221,.06); border: 1px solid var(--line-light); border-radius: 8px; padding: 10px 12px; outline: none; }
+.lx__find input:focus { border-color: var(--dourado); }
+.lx__find button { padding: 0 16px; border-radius: 8px; background: var(--marfim); color: var(--verde); font-size: 14px; }
+.lx__card { padding: 22px; border-radius: 12px; background: var(--marfim); color: var(--verde); min-height: 230px; }
+.lx__empty { margin: 0; opacity: .7; font-size: 15px; }
+.lx__status { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
+.lx__status::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.lx__status.is-disponivel { color: #3E6B4F; } .lx__status.is-reservado { color: var(--terracota); } .lx__status.is-vendido { color: #6b6b6b; }
+.lx__card h4 { display: flex; gap: 22px; margin: 0 0 14px; font-family: var(--f-title); font-weight: 400; font-size: 18px; }
+.lx__card h4 b { display: block; font-weight: 400; font-size: 46px; line-height: 1; }
+.lx__card dl { margin: 0 0 18px; border-top: 1px solid var(--line-dark); }
+.lx__card dl div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line-dark); font-size: 14px; }
+.lx__card dt { opacity: .7; } .lx__card dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.lx__card .btn--solid { background: var(--verde); color: var(--marfim); border-color: var(--verde); width: 100%; justify-content: center; }
+.lx__card .btn--solid:hover { background: var(--terracota); border-color: var(--terracota); color: var(--marfim); }
+.lx__updated { margin: 0; font-size: 12px; opacity: .6; }
+@media (max-width: 1000px) {
+  .lx { grid-template-columns: 1fr; }
+  .lx__stage { height: 64vh; min-height: 420px; }
+  .lx__hint { display: none; }
+}
