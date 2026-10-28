@@ -267,6 +267,7 @@
       p3 = 'loading';
       window.AVRAPlan3D.init({
         canvas: $('#plan3dCanvas'), host: view3d, image: $('#planImg').getAttribute('src'),
+        shift: (w) => (w > 1000 ? Math.round(w * 0.06) : 0),
         onSelect: (u) => { if (u) u.status = status[u.id] || 'disponivel'; show(u); },
         onHover: (u, e) => {
           if (!u || !e) { tip.hidden = true; return; }
@@ -301,7 +302,7 @@
     $('#lotSearch').addEventListener('keydown', (e) => { if (e.key === 'Enter') find(); });
 
     // números contam ao aparecer
-    $$('.av__numbers dt').forEach((dt) => {
+    $$('.avx__numbers dt, .av__numbers dt').forEach((dt) => {
       const end = parseFloat(dt.dataset.count), dec = +(dt.dataset.dec || 0), pre = dt.dataset.prefix || '';
       const small = $('small', dt) ? $('small', dt).outerHTML : '';
       const o = { v: 0 };

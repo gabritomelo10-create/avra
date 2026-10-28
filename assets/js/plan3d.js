@@ -167,11 +167,11 @@
     function setOnlyAvailable(v) { onlyAvail = !!v; lots.forEach(paint); }
 
     // ---------- câmera ----------
-    const orb = { th: -0.5, ph: 0.85, d: 19, tth: -0.5, tph: 0.85, td: 19, tx: 0, tz: 0, ttx: 0, ttz: 0 };
-    const DMIN = 3, DMAX = 26;
+    const orb = { th: -0.5, ph: 0.85, d: 23, tth: -0.5, tph: 0.85, td: 23, tx: 0, tz: 0, ttx: 0, ttz: 0 };
+    const DMIN = 3, DMAX = 30;
     let drag = null, idle = 0, auto = true;
     function focusOn(m) { orb.ttx = m.position.x; orb.ttz = m.position.z; orb.td = Math.min(orb.td, 7); orb.tph = Math.min(orb.tph, 0.85); auto = false; }
-    function reset() { orb.ttx = 0; orb.ttz = 0; orb.td = camera.aspect < 1 ? 25 : 19; orb.tph = 0.85; orb.tth = -0.5; }
+    function reset() { orb.ttx = 0; orb.ttz = 0; orb.td = camera.aspect < 1 ? 25 : 23; orb.tph = 0.85; orb.tth = -0.5; }
     function zoom(f) { orb.td = Math.max(DMIN, Math.min(DMAX, orb.td * f)); auto = false; }
     function top() { const toTop = orb.tph > 0.3; orb.tph = toTop ? 0.08 : 0.85; if (toTop) orb.tth = 0; auto = false; }
 
@@ -227,8 +227,12 @@
     function resize() {
       const r = host.getBoundingClientRect();
       renderer.setSize(r.width, r.height, false);
-      camera.aspect = r.width / r.height; camera.updateProjectionMatrix();
-      if (auto) orb.td = camera.aspect < 1 ? 25 : 19;
+      camera.aspect = r.width / r.height;
+      // desloca o centro da imagem para a área livre entre os painéis
+      const sh = opts.shift ? opts.shift(r.width) : 0;
+      if (sh) camera.setViewOffset(r.width, r.height, -sh, 0, r.width, r.height); else camera.clearViewOffset();
+      camera.updateProjectionMatrix();
+      if (auto) orb.td = camera.aspect < 1 ? 25 : 23;
     }
     window.addEventListener('resize', resize); resize();
 

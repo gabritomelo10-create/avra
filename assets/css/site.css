@@ -673,3 +673,57 @@ button.lx__stat:hover { border-color: var(--dourado); }
   .avu__numbers { margin-top: 40px; }
   .avu__pick { margin-top: 40px; }
 }
+
+/* =========================================================
+   ALTA VISTA — tela cheia, maquete 3D como fundo
+   ========================================================= */
+.avx { position: relative; height: 100vh; height: 100svh; min-height: 680px; overflow: hidden; background: radial-gradient(80% 80% at 55% 45%, #35523f 0%, #263B32 50%, #172620 100%); color: var(--marfim); }
+.avx__stage { position: absolute; inset: 0; }
+.avx__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
+.avx__vignette { position: absolute; inset: 0; pointer-events: none; background:
+  linear-gradient(90deg, rgba(23,38,32,.92) 0%, rgba(23,38,32,.55) 24%, rgba(23,38,32,0) 40%),
+  linear-gradient(270deg, rgba(23,38,32,.85) 0%, rgba(23,38,32,0) 30%),
+  linear-gradient(0deg, rgba(23,38,32,.6) 0%, rgba(23,38,32,0) 18%); }
+.avx__ui { position: absolute; inset: 0; pointer-events: none; padding: clamp(84px, 11vh, 120px) var(--gutter) 28px; display: grid; grid-template-columns: minmax(280px, 380px) 1fr minmax(300px, 340px); grid-template-rows: auto 1fr auto; gap: 16px 24px; }
+.avx__ui > * { pointer-events: auto; }
+.avx__intro { grid-column: 1; grid-row: 1 / 3; align-self: start; display: grid; gap: 14px; justify-items: start; }
+.avx__intro .eyebrow { margin: 0; color: var(--dourado); }
+.avx__intro .av-logo { width: min(100%, 300px); margin: 4px 0 6px; }
+.avx__title { font-family: var(--f-title); font-weight: 400; font-size: clamp(26px, 2.3vw, 36px); line-height: 1.12; margin: 0; text-wrap: balance; }
+.avx__text { margin: 0; font-size: 14px; line-height: 1.6; opacity: .82; max-width: 44ch; }
+.avx__numbers { display: grid; grid-template-columns: repeat(3, auto); gap: 14px 22px; margin: 6px 0 0; padding-top: 14px; border-top: 1px solid var(--line-light); width: 100%; }
+.avx__numbers div { display: grid; gap: 2px; }
+.avx__numbers dt { font-family: var(--f-title); font-size: 26px; line-height: 1; color: var(--marfim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.avx__numbers dt small { font-size: .5em; margin-left: 2px; color: var(--dourado); }
+.avx__numbers dd { margin: 0; font-size: 11px; line-height: 1.35; opacity: .65; }
+.avx__intro .av__status { color: var(--marfim); margin-top: 4px; }
+.avx__tools { grid-column: 2; grid-row: 1; justify-self: end; align-self: start; display: flex; gap: 6px; flex-wrap: wrap; }
+.avx__tools button { min-width: 36px; height: 36px; padding: 0 14px; border-radius: 99px; background: rgba(18,32,26,.75); color: var(--marfim); font-size: 13px; border: 1px solid var(--line-light); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.avx__tools button:hover { background: var(--terracota); }
+.avx__side { grid-column: 3; grid-row: 1 / 3; align-self: start; padding: 16px; border-radius: 14px; background: rgba(23,38,32,.62); border: 1px solid var(--line-light); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.avx__side .lx__card { min-height: 0; }
+.avx__hint { grid-column: 1 / -1; grid-row: 3; justify-self: center; margin: 0; font-size: 11px; letter-spacing: .04em; opacity: .7; pointer-events: none; text-align: center; }
+.avx .av__3d-loading { position: absolute; inset: 0; display: grid; place-items: center; }
+.avx__note { margin: 16px auto 0; padding-bottom: 12px; font-size: 12px; opacity: .6; }
+.av { background: var(--verde); }
+.av .avx__note { color: var(--marfim); }
+
+/* telas médias: painel de lotes vai para baixo à direita, intro compacta */
+@media (max-width: 1180px) {
+  .avx__ui { grid-template-columns: minmax(260px, 340px) 1fr minmax(280px, 320px); }
+  .avx__text { display: none; }
+}
+/* tablet e celular: maquete em tela cheia no topo, painéis abaixo */
+@media (max-width: 900px) {
+  .avx { height: auto; min-height: 0; overflow: visible; display: flex; flex-direction: column; background: var(--verde); }
+  .avx__stage { position: relative; height: 72svh; min-height: 420px; order: 2; background: radial-gradient(80% 80% at 55% 45%, #35523f 0%, #263B32 55%, #172620 100%); }
+  .avx__vignette { display: none; }
+  .avx__ui { position: static; display: contents; }
+  .avx__intro { order: 1; padding: 88px var(--gutter) 28px; }
+  .avx__text { display: block; }
+  .avx__tools { order: 2; position: relative; margin: -60px var(--gutter) 16px; justify-self: auto; z-index: 2; justify-content: flex-end; }
+  .avx__hint { order: 3; padding: 0 var(--gutter) 12px; }
+  .avx__side { order: 4; margin: 0 var(--gutter); background: rgba(242,235,221,.05); backdrop-filter: none; }
+  .avx__numbers { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) { .avx__hint { font-size: 0; } .avx__hint::after { content: "Toque em um lote para ver os detalhes · arraste para girar · pinça para aproximar"; font-size: 11px; } }

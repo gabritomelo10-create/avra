@@ -146,9 +146,17 @@
 
 <!-- ============ RESIDENCIAL ALTA VISTA ============ -->
 <section class="av" id="altavista">
-  <div class="av__plan av__unified" id="implantacao">
-    <div class="wrap avu__top">
-      <div class="avu__brand">
+  <div class="avx" id="implantacao">
+    <img src="assets/photos/alta-vista-implantacao.jpg" id="planImg" alt="" hidden>
+    <div class="avx__stage" id="plan3d">
+      <canvas id="plan3dCanvas" aria-label="Maquete 3D interativa dos lotes do Residencial Alta Vista"></canvas>
+      <div class="lx__tip" id="lotTip" hidden></div>
+      <p class="av__3d-loading" id="plan3dLoading">Montando a maquete…</p>
+    </div>
+    <div class="avx__vignette" aria-hidden="true"></div>
+
+    <div class="avx__ui">
+      <div class="avx__intro">
         <p class="eyebrow">Primeiro empreendimento AVRA</p>
         <!-- Logo provisória do Residencial Alta Vista: substituir pelo arquivo oficial (SVG) quando disponível -->
         <svg class="av-logo" viewBox="0 0 520 210" role="img" aria-label="Residencial Alta Vista">
@@ -161,39 +169,26 @@
           <text x="260" y="150" text-anchor="middle" class="av-logo__name">ALTA VISTA</text>
           <text x="260" y="192" text-anchor="middle" class="av-logo__desc">R E S I D E N C I A L</text>
         </svg>
-        <p class="av__status"><i></i>471 lotes · 47 hectares · lista de interesse aberta</p>
-      </div>
-      <div class="avu__text">
-        <h2 class="display split-lines">Metade do terreno<br>é para viver junto.</h2>
-        <p class="reveal-up">Condomínio fechado de lotes em 47 hectares no km 5 da BR-401, do outro lado do Rio Branco, vizinho a Boa Vista. Mais da metade da área, 50,7%, é de uso comum: alamedas arborizadas, lazer, lagos, mata nativa e uma pista de cooper que contorna o bairro.</p>
-        <p class="reveal-up">O terreno, conhecido como Terras Altas, fica às margens do Igarapé Santa Cecília. Escolha seu lote na maquete abaixo e construa a casa do seu jeito.</p>
-      </div>
-    </div>
-    <div class="wrap">
-      <dl class="av__numbers avu__numbers">
+        <h2 class="avx__title">Metade do terreno é para viver junto.</h2>
+        <p class="avx__text">Condomínio fechado de lotes em 47 hectares no km 5 da BR-401, do outro lado do Rio Branco, vizinho a Boa Vista. Mais da metade da área é de uso comum: alamedas arborizadas, lazer, lagos, mata nativa e pista de cooper.</p>
+        <dl class="avx__numbers">
         <div><dt data-count="47">47</dt><dd>hectares de área total</dd></div>
         <div><dt data-count="471">471</dt><dd>lotes em 21 quadras</dd></div>
         <div><dt data-count="50.7" data-dec="1">50,7<small>%</small></dt><dd>de área comum</dd></div>
         <div><dt data-count="490" data-prefix="~">~490<small>m²</small></dt><dd>área média por lote</dd></div>
         <div><dt data-count="841">841</dt><dd>árvores e palmeiras</dd></div>
       </dl>
-      <p class="avu__pick"><b>Escolha seu lote.</b> Toque em um lote para ver quadra, número, área aproximada e situação de venda.</p>
-    </div>
-    <img src="assets/photos/alta-vista-implantacao.jpg" id="planImg" alt="" hidden>
-    <div class="wrap lx">
-      <div class="lx__stage" id="plan3d">
-        <canvas id="plan3dCanvas" aria-label="Maquete 3D interativa dos lotes do Residencial Alta Vista"></canvas>
-        <div class="lx__tip" id="lotTip" hidden></div>
-        <div class="lx__tools">
-          <button type="button" id="p3In" aria-label="Aproximar">+</button>
-          <button type="button" id="p3Out" aria-label="Afastar">−</button>
-          <button type="button" id="plan3dTop">Vista de cima</button>
-          <button type="button" id="p3Reset">Ver tudo</button>
-        </div>
-        <p class="lx__hint">Arraste para girar · Shift + arrastar para mover · pinça ou Ctrl + rolar para aproximar</p>
-        <p class="av__3d-loading" id="plan3dLoading">Montando a maquete…</p>
+        <p class="av__status"><i></i>Lista de interesse aberta</p>
       </div>
-      <aside class="lx__side">
+
+      <div class="avx__tools">
+        <button type="button" id="p3In" aria-label="Aproximar">+</button>
+        <button type="button" id="p3Out" aria-label="Afastar">−</button>
+        <button type="button" id="plan3dTop">Vista de cima</button>
+        <button type="button" id="p3Reset">Ver tudo</button>
+      </div>
+
+    <aside class="lx__side avx__side">
         <div class="lx__stats" id="lotStats">
           <button type="button" class="lx__stat" data-filter="disponivel"><i class="dot dot--disponivel"></i><b id="cntDisp">–</b><span>Disponíveis</span></button>
           <div class="lx__stat"><i class="dot dot--reservado"></i><b id="cntRes">–</b><span>Reservados</span></div>
@@ -218,9 +213,11 @@
         </div>
         <p class="lx__updated" id="lotUpdated"></p>
       </aside>
+
+      <p class="avx__hint">Toque em um lote para ver os detalhes · arraste para girar · Shift + arrastar para mover · pinça ou Ctrl + rolar para aproximar</p>
     </div>
-    <p class="wrap note av__plan-note">Maquete ilustrativa a partir do projeto básico de implantação. Numeração dos lotes por quadra, áreas aproximadas calculadas sobre a planta. Disponibilidade sujeita a confirmação pela equipe AVRA.</p>
   </div>
+  <p class="wrap note avx__note">Maquete ilustrativa a partir do projeto básico de implantação. Numeração dos lotes por quadra e áreas aproximadas calculadas sobre a planta. Disponibilidade sujeita a confirmação pela equipe AVRA.</p>
 
   <div class="life">
     <div class="wrap">
