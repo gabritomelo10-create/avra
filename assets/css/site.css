@@ -645,3 +645,31 @@ button.lx__stat:hover { border-color: var(--dourado); }
   .lx__stage { height: 64vh; min-height: 420px; }
   .lx__hint { display: none; }
 }
+
+/* =========================================================
+   ALTA VISTA — bloco único: marca, conceito, números e lotes
+   ========================================================= */
+.av__unified { background: radial-gradient(90% 60% at 15% 0%, #33503f 0%, var(--verde) 45%, #1d3028 100%); }
+.avu__top { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr); gap: 72px; align-items: center; }
+.avu__brand { display: grid; justify-items: start; gap: 18px; }
+.av-logo { width: min(100%, 420px); height: auto; overflow: visible; }
+.av-logo__mark path { stroke: var(--dourado); }
+.av-logo__sun { fill: var(--terracota); stroke: none; }
+.av-logo__name { font-family: var(--f-title); font-size: 58px; letter-spacing: .14em; fill: var(--marfim); }
+.av-logo__desc { font-family: var(--f-title); font-size: 15px; letter-spacing: .1em; fill: var(--dourado); }
+.avu__brand .av__status { margin-top: 4px; color: var(--marfim); }
+.avu__text .display { margin-bottom: 22px; }
+.avu__text p { max-width: 60ch; opacity: .85; margin: 0 0 14px; }
+.avu__numbers { margin-top: 64px; padding-bottom: 0; border-top-color: var(--line-light); }
+.avu__numbers div + div { border-left-color: var(--line-light); }
+.avu__numbers dt { color: var(--marfim); }
+.avu__numbers dt small { color: var(--dourado); }
+.avu__numbers dd { color: var(--marfim); opacity: .7; }
+.avu__pick { margin: 64px 0 20px; font-size: 15px; opacity: .85; }
+.avu__pick b { font-family: var(--f-title); font-weight: 400; font-size: 26px; display: block; margin-bottom: 4px; opacity: 1; }
+@media (max-width: 900px) {
+  .avu__top { grid-template-columns: 1fr; gap: 36px; }
+  .av-logo { width: min(100%, 320px); }
+  .avu__numbers { margin-top: 40px; }
+  .avu__pick { margin-top: 40px; }
+}

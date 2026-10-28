@@ -210,7 +210,6 @@
     gsap.from('.facts > div', { y: 30, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.facts', start: 'top 90%' } });
 
     // Alta Vista
-    gsap.fromTo('.av__intro-bg img', { scale: 1.2, yPercent: -6 }, { scale: 1, yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.av__intro', start: 'top bottom', end: 'bottom top', scrub: true } });
     gsap.from('.av__checks li', { x: 40, opacity: 0, stagger: 0.08, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.av__checks', start: 'top 85%' } });
     gsap.from('.tl li', { y: 30, opacity: 0, stagger: 0.1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.tl', start: 'top 88%' } });
 

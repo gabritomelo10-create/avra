@@ -146,44 +146,38 @@
 
 <!-- ============ RESIDENCIAL ALTA VISTA ============ -->
 <section class="av" id="altavista">
-  <div class="av__intro">
-    <div class="av__intro-bg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trilha_no_lavrado_roraimense.jpg?width=2400" data-fallback="assets/img/capa.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
-    <div class="av__intro-shade"></div>
-    <div class="wrap av__intro-inner">
-      <p class="eyebrow">Primeiro empreendimento AVRA</p>
-      <h2 class="av__title split-lines">Residencial<br>Alta Vista</h2>
-      <p class="av__status"><i></i>471 lotes · 47 hectares · lista de interesse aberta</p>
-    </div>
-  </div>
-
-  <div class="wrap av__concept">
-    <div>
-      <p class="eyebrow">O conceito</p>
-      <h3 class="display split-lines">Metade do terreno<br>é para viver junto.</h3>
-    </div>
-    <div class="av__concept-text">
-      <p class="lead reveal-up">O Residencial Alta Vista é um condomínio fechado de lotes em uma área de 47 hectares no km 5 da BR-401, do outro lado do Rio Branco, vizinho a Boa Vista. Mais da metade da área, 50,7%, é de uso comum: ruas arborizadas, lazer, lagos, mata nativa e uma pista de cooper que contorna o bairro.</p>
-      <p class="reveal-up">O terreno, conhecido como Terras Altas, fica às margens do Igarapé Santa Cecília. Por isso o nome: lotes em cota alta, horizonte aberto e uma faixa de mata preservada ao longo da água. Você escolhe o lote e constrói a casa do seu jeito, dentro de um bairro planejado do primeiro traço à última árvore.</p>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <dl class="av__numbers">
-      <div><dt data-count="47">47</dt><dd>hectares de área total</dd></div>
-      <div><dt data-count="471">471</dt><dd>lotes residenciais em 21 quadras</dd></div>
-      <div><dt data-count="50.7" data-dec="1">50,7<small>%</small></dt><dd>da área é de uso comum</dd></div>
-      <div><dt data-count="490" data-prefix="~">~490<small>m²</small></dt><dd>área média por lote</dd></div>
-      <div><dt data-count="841">841</dt><dd>árvores e palmeiras no paisagismo</dd></div>
-    </dl>
-  </div>
-
-  <div class="av__plan" id="implantacao">
-    <div class="wrap av__plan-head">
-      <div>
-        <p class="eyebrow">Escolha seu lote</p>
-        <h3 class="display split-lines">O bairro,<br>lote a lote.</h3>
+  <div class="av__plan av__unified" id="implantacao">
+    <div class="wrap avu__top">
+      <div class="avu__brand">
+        <p class="eyebrow">Primeiro empreendimento AVRA</p>
+        <!-- Logo provisória do Residencial Alta Vista: substituir pelo arquivo oficial (SVG) quando disponível -->
+        <svg class="av-logo" viewBox="0 0 520 210" role="img" aria-label="Residencial Alta Vista">
+          <g class="av-logo__mark" fill="none" stroke-linecap="round">
+            <path d="M190 62 Q260 6 330 62" stroke-width="3"/>
+            <path d="M172 74 Q260 22 348 74" stroke-width="1.6" opacity=".55"/>
+            <circle cx="260" cy="40" r="5" class="av-logo__sun"/>
+            <path d="M150 82 H370" stroke-width="1.2" opacity=".5"/>
+          </g>
+          <text x="260" y="150" text-anchor="middle" class="av-logo__name">ALTA VISTA</text>
+          <text x="260" y="192" text-anchor="middle" class="av-logo__desc">R E S I D E N C I A L</text>
+        </svg>
+        <p class="av__status"><i></i>471 lotes · 47 hectares · lista de interesse aberta</p>
       </div>
-      <p class="reveal-up">Maquete interativa dos 471 lotes, montada a partir da planta de implantação. Toque em um lote para ver quadra, número, área aproximada e situação de venda.</p>
+      <div class="avu__text">
+        <h2 class="display split-lines">Metade do terreno<br>é para viver junto.</h2>
+        <p class="reveal-up">Condomínio fechado de lotes em 47 hectares no km 5 da BR-401, do outro lado do Rio Branco, vizinho a Boa Vista. Mais da metade da área, 50,7%, é de uso comum: alamedas arborizadas, lazer, lagos, mata nativa e uma pista de cooper que contorna o bairro.</p>
+        <p class="reveal-up">O terreno, conhecido como Terras Altas, fica às margens do Igarapé Santa Cecília. Escolha seu lote na maquete abaixo e construa a casa do seu jeito.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <dl class="av__numbers avu__numbers">
+        <div><dt data-count="47">47</dt><dd>hectares de área total</dd></div>
+        <div><dt data-count="471">471</dt><dd>lotes em 21 quadras</dd></div>
+        <div><dt data-count="50.7" data-dec="1">50,7<small>%</small></dt><dd>de área comum</dd></div>
+        <div><dt data-count="490" data-prefix="~">~490<small>m²</small></dt><dd>área média por lote</dd></div>
+        <div><dt data-count="841">841</dt><dd>árvores e palmeiras</dd></div>
+      </dl>
+      <p class="avu__pick"><b>Escolha seu lote.</b> Toque em um lote para ver quadra, número, área aproximada e situação de venda.</p>
     </div>
     <img src="assets/photos/alta-vista-implantacao.jpg" id="planImg" alt="" hidden>
     <div class="wrap lx">
