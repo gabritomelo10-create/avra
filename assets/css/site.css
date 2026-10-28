@@ -30,15 +30,18 @@
 .note { font-size: 13px; opacity: .65; }
 
 /* ---------- hero ---------- */
+.site-hero .hero__descriptor { top: 41%; }
 .site-hero__photo { position: absolute; inset: -6%; }
 .site-hero__photo img { width: 100%; height: 100%; object-fit: cover; animation: kenburns 40s ease-in-out infinite alternate; }
 @keyframes kenburns { from { transform: scale(1.04) translate(0, 0); } to { transform: scale(1.14) translate(-2%, -1.5%); } }
 .site-hero__shade { position: absolute; inset: 0; background: radial-gradient(80% 70% at 50% 42%, rgba(38,59,50,.55), rgba(18,32,26,.88) 70%), linear-gradient(0deg, rgba(18,32,26,.85), transparent 45%); }
-.site-hero .hero__pattern--near { opacity: .5; }
+.site-hero .hero__pattern--near { opacity: 1; mix-blend-mode: screen; }
+.site-hero .hero__pattern--far { opacity: 1; filter: blur(1.2px); mix-blend-mode: screen; transform: scale(1.06); }
 .site-hero__content { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 13vh; display: grid; gap: 0; pointer-events: none; max-width: 980px; }
 .site-hero__content .eyebrow { margin-bottom: 18px; }
+.site-hero__sub { max-width: 560px; margin: 22px 0 0; font-size: clamp(16px, 1.2vw, 19px); line-height: 1.6; opacity: .82; }
 .site-hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; pointer-events: auto; }
-@media (max-width: 700px) { .site-hero__content { bottom: 10vh; } .site-hero .hero__descriptor { top: 56%; } }
+@media (max-width: 700px) { .site-hero__content { bottom: 8vh; } .site-hero .hero__descriptor { top: 32%; } .site-hero__sub { font-size: 15px; } }
 
 /* ---------- manifesto ---------- */
 .manifesto { padding: 26vh 0 22vh; overflow: hidden; }
@@ -160,3 +163,20 @@
 .site-footer__credit img { width: 120px; height: auto; }
 .site-footer__bottom { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 30px; border-top: 1px solid rgba(242,235,221,.12); font-size: 12px; opacity: .65; position: relative; }
 @media (max-width: 560px) { .site-footer__nav { grid-template-columns: 1fr 1fr; gap: 10px 20px; } .site-footer__credit { flex-direction: column; align-items: flex-start; } }
+
+/* ---------- Boa Vista ---------- */
+.city { padding: 22vh 0; overflow: hidden; background: radial-gradient(70% 90% at 100% 55%, #2e4a3e 0%, var(--verde) 50%, var(--verde-3) 100%); }
+.city__plan { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.city__inner { position: relative; max-width: 1600px; }
+.city__inner > * { max-width: 640px; }
+.city__inner > .display { max-width: 980px; }
+.city__facts { list-style: none; margin: 8vh 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid rgba(242,235,221,.16); max-width: 560px; }
+.city__facts li { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(242,235,221,.12); }
+.city__facts b { font-family: var(--f-title); font-weight: 400; font-size: 20px; color: var(--argila); }
+.city__facts span { opacity: .78; font-size: 15px; padding-top: 3px; }
+@media (max-width: 700px) { .city__facts li { grid-template-columns: 1fr; gap: 2px; } .city__plan { opacity: .5; } }
+
+/* ---------- frase-assinatura ---------- */
+.statement { position: relative; background: var(--terracota); color: var(--marfim); padding: 26vh 0; overflow: hidden; text-align: center; }
+.statement__pattern { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.statement__text { font-family: var(--f-title); font-size: clamp(36px, 6vw, 104px); line-height: 1.08; margin: 0; position: relative; text-wrap: balance; }

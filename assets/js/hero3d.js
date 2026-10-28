@@ -173,9 +173,9 @@
       const sc = st.scroll;
       group.rotation.y = pointer.x * 0.42 + spin.y + Math.sin(t * 0.25) * 0.06 + sc * 0.9;
       group.rotation.x = pointer.y * 0.28 + Math.sin(t * 0.3) * 0.04 - sc * 0.5;
-      group.position.y = Math.sin(t * 0.45) * 0.08 + 0.55 + sc * 2.6;
+      group.position.y = Math.sin(t * 0.45) * 0.08 + (st.lift == null ? 0.55 : st.lift) + sc * 2.6;
       group.position.z = -sc * 6;
-      const s = 1 + hover * 0.035;
+      const s = (st.size || 1) * (1 + hover * 0.035);
       tilt.scale.set(s, s, s);
 
       warm.position.set(pointer.x * 7, -pointer.y * 4 - 1, 5);

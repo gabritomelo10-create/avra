@@ -101,7 +101,12 @@
       gsap.set('.glow--b', { x: sm.x * -60, y: sm.y * -40 });
       gsap.set('.site-hero__photo', { x: sm.x * -24, y: sm.y * -16 });
     });
-    BR20.animate($('#heroPatternNear'), { color: '#C99073', alpha: 0.4, seed: 20, speed: 0.8, width: 1.1, interactive: true, host: heroEl, radius: 110, force: 50, align: { ax: 0.9, ay: 0.4, scale: 1.05 }, offsetX: () => sm.x * 26, offsetY: () => sm.y * 18 });
+    // pattern fino e texturizado em duas profundidades, com respiro sobre a assinatura
+    BR20.animate($('#heroPatternFar'), { color: '#B6A078', alpha: 0.32, seed: 31, speed: 0.35, width: 0.7, fine: true, textured: true, density: 1.5, mirror: true, align: { ax: 0.1, ay: 0.5, scale: 1.3 }, offsetX: () => sm.x * -14, offsetY: () => sm.y * -10, fade: { x: 0.5, y: 0.3, r: 0.4, soft: 0.5 } });
+    BR20.animate($('#heroPatternNear'), { color: '#D9B49A', alpha: 0.4, seed: 20, speed: 0.45, width: 0.85, fine: true, textured: true, density: 1.3, interactive: true, host: heroEl, radius: 120, force: 34, align: { ax: 0.9, ay: 0.4, scale: 1.08 }, offsetX: () => sm.x * 22, offsetY: () => sm.y * 15, fade: { x: 0.5, y: 0.3, r: 0.34, soft: 0.45 } });
+    // na home a assinatura fica acima do texto
+    const fit = () => { if (!st) return; const narrow = innerWidth < 700; st.lift = narrow ? 6.5 : 1.75; st.size = narrow ? 1 : 0.72; };
+    fit(); window.addEventListener('resize', fit);
     if (st) ScrollTrigger.create({ trigger: heroEl, start: 'top top', end: 'bottom top', scrub: true, onUpdate: (s) => { st.scroll = s.progress; } });
     gsap.to('.site-hero__content', { y: -100, opacity: 0, ease: 'none', scrollTrigger: { trigger: heroEl, start: 'top top', end: '60% top', scrub: true } });
     gsap.to('.hero__descriptor', { opacity: 0, ease: 'none', scrollTrigger: { trigger: heroEl, start: 'top top', end: '35% top', scrub: true } });
@@ -146,8 +151,9 @@
       .to('.pavilion__shade', { opacity: 1, duration: 0.25 }, 0.45)
       .to('.pavilion__text', { opacity: 1, duration: 0.25 }, 0.55);
 
-    // momentos: trilho desliza com a rolagem
-    gsap.fromTo('#momentsTrack', { x: 0 }, { x: () => -Math.max(0, $('#momentsTrack').scrollWidth - innerWidth), ease: 'none', scrollTrigger: { trigger: '.moments', start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+    // frase-assinatura
+    gsap.fromTo('.statement__text', { letterSpacing: '0.06em' }, { letterSpacing: '0.01em', ease: 'none', scrollTrigger: { trigger: '.statement', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.from('.city__facts li', { y: 30, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.city__facts', start: 'top 90%' } });
 
     // jornada: linha se desenha e acende as etapas
     const steps = $$('.step');
@@ -160,9 +166,55 @@
 
   /* ---------- padrões BR20 de apoio ---------- */
   function patterns() {
-    BR20.animate($('#manifestoPattern'), { color: '#C99073', alpha: 0.45, seed: 44, speed: 0.5, width: 1, interactive: true, host: $('#sobre'), force: 40, radius: 120, align: { ax: 1, ay: 0.5, scale: 0.9 } });
-    BR20.animate($('#valuesPattern'), { color: '#A6533C', alpha: 0.55, seed: 8, speed: 0.5, width: 1.1, interactive: true, host: $('.values-band'), force: 40, align: { ax: 1, ay: 0.3 } });
-    BR20.animate($('#footerPattern'), { color: '#B6A078', alpha: 0.4, seed: 20, speed: 0.4, width: 1, align: { ax: 1, ay: 0.5, scale: 1.1 } });
+    const fine = { fine: true, textured: true, density: 1.4 };
+    BR20.animate($('#manifestoPattern'), Object.assign({ color: '#C99073', alpha: 0.42, seed: 44, speed: 0.3, width: 0.7, interactive: true, host: $('#sobre'), force: 28, radius: 120, align: { ax: 1, ay: 0.5, scale: 0.95 } }, fine));
+    BR20.animate($('#valuesPattern'), Object.assign({ color: '#A6533C', alpha: 0.5, seed: 8, speed: 0.3, width: 0.7, interactive: true, host: $('.values-band'), force: 28, align: { ax: 1, ay: 0.3 } }, fine));
+    BR20.animate($('#statementPattern'), Object.assign({ color: '#F2EBDD', alpha: 0.38, seed: 12, speed: 0.3, width: 0.7, interactive: true, host: $('.statement'), force: 30, align: { ax: 0.5, ay: 0.5, scale: 1.1 }, fade: { x: 0.5, y: 0.5, r: 0.38, soft: 0.5 } }, fine));
+    BR20.animate($('#footerPattern'), Object.assign({ color: '#B6A078', alpha: 0.32, seed: 20, speed: 0.25, width: 0.7, align: { ax: 1, ay: 0.5, scale: 1.1 } }, fine));
+    cityPlan();
+  }
+
+  /* ---------- Boa Vista: traçado radial desenhado com a rolagem ---------- */
+  function cityPlan() {
+    const c = $('#cityPlan'), g = c.getContext('2d');
+    const st = { p: 0 };
+    let w = 0, h = 0, dpr = 1;
+    function size() {
+      const r = c.getBoundingClientRect(); dpr = Math.min(devicePixelRatio || 1, 2);
+      w = r.width; h = r.height; c.width = w * dpr; c.height = h * dpr; draw();
+    }
+    function draw() {
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+      // centro do leque junto à margem do rio, à direita da seção
+      const cx = w * 0.98, cy = h * 0.55, R = Math.max(w, h) * 0.95, p = st.p;
+      g.lineCap = 'round';
+      // rio
+      g.strokeStyle = 'rgba(201,144,115,.55)'; g.lineWidth = 1.2;
+      g.beginPath();
+      for (let i = 0; i <= 60 * p; i++) { const t = i / 60, y = h * (t * 1.1 - 0.05); const x = cx + 26 + Math.sin(t * 5) * 18; i ? g.lineTo(x, y) : g.moveTo(x, y); }
+      g.stroke();
+      // avenidas radiais (leque para oeste)
+      g.strokeStyle = 'rgba(182,160,120,.42)'; g.lineWidth = 0.8;
+      const rays = 15, a0 = Math.PI * 0.62, a1 = Math.PI * 1.38;
+      for (let i = 0; i < rays; i++) {
+        const a = a0 + (a1 - a0) * (i / (rays - 1));
+        const len = R * Math.min(1, Math.max(0, p * 1.4 - i * 0.02));
+        g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(a) * len, cy + Math.sin(a) * len); g.stroke();
+      }
+      // anéis concêntricos
+      g.setLineDash([2, 5]);
+      for (let k = 1; k <= 9; k++) {
+        const rr = (R / 9) * k, e = Math.min(1, Math.max(0, p * 1.6 - k * 0.08));
+        if (!e) continue;
+        g.strokeStyle = `rgba(242,235,221,${0.1 + (k % 3 === 0 ? 0.12 : 0)})`;
+        g.beginPath(); g.arc(cx, cy, rr, a0, a0 + (a1 - a0) * e); g.stroke();
+      }
+      g.setLineDash([]);
+      // centro cívico
+      g.fillStyle = 'rgba(201,144,115,.9)'; g.beginPath(); g.arc(cx, cy, 4 * Math.min(1, p * 3), 0, Math.PI * 2); g.fill();
+    }
+    window.addEventListener('resize', size); size();
+    gsap.to(st, { p: 1, ease: 'none', onUpdate: draw, scrollTrigger: { trigger: '#boavista', start: 'top 75%', end: 'bottom 40%', scrub: 1 } });
   }
 
   /* ---------- formulário → WhatsApp ---------- */

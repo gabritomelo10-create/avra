@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AVRA Incorporadora</title>
-<meta name="description" content="AVRA Incorporadora — empreendimentos de alto padrão em Boa Vista, Roraima. Planejamento criterioso. Qualidade de viver.">
+<meta name="description" content="AVRA Incorporadora: empreendimentos de alto padrão em Boa Vista, Roraima. Planejamento criterioso, respeito ao lugar e espaço para a vida acontecer.">
 <meta name="theme-color" content="#263B32">
 <link rel="preload" href="assets/fonts/tenor-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -26,13 +26,13 @@
 <header class="topbar site-bar" id="topbar">
   <a href="#hero" class="topbar__logo" aria-label="AVRA Incorporadora — início"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg></a>
   <nav class="topbar__nav" aria-label="Principal">
-    <a href="#sobre">A AVRA</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Empreendimentos</a><a href="#jornada">Como trabalhamos</a><a href="marca/">Marca</a>
+    <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Alta Vista</a><a href="#jornada">Como trabalhamos</a>
   </nav>
   <a href="#contato" class="site-bar__cta">Fale conosco</a>
   <button class="site-bar__menu" id="menuBtn" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i></button>
 </header>
 <nav class="mobile-menu" id="mobileMenu" aria-label="Menu">
-  <a href="#sobre">A AVRA</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Empreendimentos</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a><a href="marca/">Guia da marca</a>
+  <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a>
 </nav>
 
 <main>
@@ -40,24 +40,26 @@
 <!-- ============ HERO ============ -->
 <section class="hero site-hero" id="hero">
   <div class="hero__bg" aria-hidden="true">
-    <div class="site-hero__photo"><img src="assets/img/essencia.jpg" alt=""></div>
+    <div class="site-hero__photo"><img src="assets/photos/hero.jpg" alt=""></div>
     <div class="site-hero__shade"></div>
     <div class="glow glow--a"></div><div class="glow glow--b"></div>
+    <canvas class="hero__pattern hero__pattern--far" id="heroPatternFar"></canvas>
     <canvas class="hero__pattern hero__pattern--near" id="heroPatternNear"></canvas>
   </div>
   <canvas class="hero__gl" id="heroGL" aria-label="Assinatura AVRA em 3D — arraste para girar"></canvas>
   <div class="hero__descriptor" aria-hidden="true">INCORPORADORA</div>
   <div class="site-hero__content">
-    <p class="eyebrow">Incorporadora · Boa Vista, Roraima</p>
+    <p class="eyebrow">Incorporadora de alto padrão · Boa Vista, Roraima</p>
     <h1 class="hero__title"><span class="split">Criar lugares onde</span> <span class="split">a vida respira.</span></h1>
+    <p class="site-hero__sub">Planejamos cada empreendimento como se fosse para nós: com rigor técnico, respeito ao lugar e espaço de sobra para viver bem.</p>
     <div class="site-hero__ctas">
       <a href="#empreendimentos" class="btn btn--solid magnetic"><span>Conheça o Residencial Alta Vista</span><i>→</i></a>
-      <a href="#contato" class="btn magnetic"><span>Fale com a AVRA</span></a>
+      <a href="#contato" class="btn magnetic"><span>Agende uma conversa</span></a>
     </div>
   </div>
   <div class="hero__foot">
     <span>Planejamento criterioso · Qualidade de viver</span>
-    <span class="hero__scroll"><i></i>Role para descobrir</span>
+    <span class="hero__scroll"><i></i>Role para sentir a brisa</span>
   </div>
 </section>
 
@@ -65,12 +67,28 @@
 <section class="manifesto section--ivory" id="sobre">
   <canvas class="manifesto__pattern" id="manifestoPattern" aria-hidden="true"></canvas>
   <div class="wrap manifesto__inner">
-    <p class="eyebrow">A AVRA</p>
-    <p class="manifesto__text" id="manifestoText">AVRA vem do grego <em>αύρα</em>: brisa. Um vento suave e fresco, percebido pelo que move. Planejamos empreendimentos de alto padrão em Boa Vista com essa mesma intenção — estrutura que organiza, natureza que qualifica e leveza para viver.</p>
+    <p class="eyebrow">Manifesto</p>
+    <p class="manifesto__text" id="manifestoText">Toda cidade tem uma brisa. Em grego, ela se chama <em>αύρα</em>. Ninguém a vê, mas ela muda tudo o que toca: o ar de uma varanda, a luz de uma sala, o silêncio de uma rua bem pensada. A AVRA nasceu para construir esse tipo de presença. Lugares que você sente antes de saber explicar.</p>
     <div class="manifesto__sign">
       <svg viewBox="30 36 3441 558" class="js-logo"><path/></svg>
       <span>Planejar com precisão. Criar espaço para a vida.</span>
     </div>
+  </div>
+</section>
+
+<!-- ============ BOA VISTA ============ -->
+<section class="city section--green" id="boavista">
+  <canvas class="city__plan" id="cityPlan" aria-hidden="true"></canvas>
+  <div class="wrap city__inner">
+    <p class="eyebrow">Nosso lugar</p>
+    <h2 class="display split-lines">Boa Vista nasceu planejada.<br>Nós seguimos o traçado.</h2>
+    <p class="lead reveal-up">Boa Vista é uma das capitais brasileiras que nasceram de um plano urbanístico: suas avenidas se abrem em leque a partir da margem do Rio Branco, numa geometria pensada para a vida em comum.</p>
+    <p class="reveal-up">A AVRA continua essa vocação. Cada empreendimento parte do mesmo princípio: entender o lugar antes de construir nele, respeitando o clima, a paisagem e o ritmo de quem vive aqui.</p>
+    <ul class="city__facts">
+      <li><b>Traçado radial</b><span>Avenidas em leque a partir do centro histórico</span></li>
+      <li><b>Rio Branco</b><span>A cidade se organiza a partir das suas margens</span></li>
+      <li><b>Capital de Roraima</b><span>Onde a AVRA nasce e constrói</span></li>
+    </ul>
   </div>
 </section>
 
@@ -79,29 +97,29 @@
   <div class="wrap">
     <div class="purpose__head">
       <div>
-        <p class="eyebrow">Propósito</p>
-        <h2 class="display split-lines">Planejamento criterioso.<br>Qualidade de viver.</h2>
+        <p class="eyebrow">O que nos move</p>
+        <h2 class="display split-lines">Três forças.<br>Um só propósito.</h2>
       </div>
-      <p class="lead reveal-up">Unimos o rigor de uma incorporadora à experiência de quem vai viver em cada empreendimento. Confiança, integridade, cuidado e sofisticação em cada decisão.</p>
+      <p class="lead reveal-up">Cada decisão na AVRA passa por três perguntas. Está bem estruturado? Respeita a natureza? Deixa a vida mais leve? Só seguimos quando a resposta é sim para as três.</p>
     </div>
     <div class="purpose__grid">
       <article class="pcard">
-        <div class="pcard__img"><img src="assets/img/essencia.jpg" alt="Galeria de pilares abrindo para um jardim" loading="lazy"></div>
+        <div class="pcard__img"><img src="assets/photos/proposito-estrutura.jpg" alt="Galeria de pilares abrindo para um jardim" loading="lazy"></div>
         <span class="pcard__n">Estrutura</span>
         <h3>Estrutura organiza.</h3>
-        <p>Projetos pensados do terreno ao último detalhe, com planejamento técnico e transparência em cada etapa.</p>
+        <p>Do estudo do terreno ao último acabamento, nada é improvisado. Planejamento técnico, documentação completa e transparência em cada etapa.</p>
       </article>
       <article class="pcard">
-        <div class="pcard__img"><img src="assets/img/janela.jpg" alt="Janela com cortina de linho e vegetação" loading="lazy"></div>
+        <div class="pcard__img"><img src="assets/photos/proposito-natureza.jpg" alt="Janela com cortina de linho e vegetação" loading="lazy"></div>
         <span class="pcard__n">Natureza</span>
         <h3>Natureza qualifica.</h3>
-        <p>Verde, luz natural e materiais reais. Espaços que se integram ao entorno e valorizam o lugar.</p>
+        <p>Luz natural, ventilação, sombra e verde não são detalhes do projeto. São o projeto. Espaços integrados ao entorno valorizam o lugar e quem vive nele.</p>
       </article>
       <article class="pcard">
-        <div class="pcard__img"><img src="assets/img/nome.jpg" alt="Cortina de linho movida pela brisa" loading="lazy"></div>
+        <div class="pcard__img"><img src="assets/photos/proposito-brisa.jpg" alt="Cortina de linho movida pela brisa" loading="lazy"></div>
         <span class="pcard__n">Brisa</span>
         <h3>Brisa introduz leveza.</h3>
-        <p>Respiro, fluidez e tranquilidade. Lugares feitos para a vida acontecer com calma.</p>
+        <p>Respiro entre as coisas. Ruas tranquilas, áreas livres, tempo para viver. A sofisticação que importa é a que deixa o dia mais simples.</p>
       </article>
     </div>
   </div>
@@ -110,14 +128,14 @@
 <!-- ============ EMPREENDIMENTO ============ -->
 <section class="project" id="empreendimentos">
   <div class="project__media">
-    <div class="project__frame"><img src="assets/mockups/placa.jpg" alt="Placa de obra AVRA (simulação)" loading="lazy"></div>
-    <div class="project__frame project__frame--b"><img src="assets/mockups/banner.jpg" alt="Banner de obra AVRA (simulação)" loading="lazy"></div>
-    <span class="project__tag">Simulação visual</span>
+    <div class="project__frame"><img src="assets/photos/alta-vista-1.jpg" alt="Residencial Alta Vista" loading="lazy"></div>
+    <div class="project__frame project__frame--b"><img src="assets/photos/alta-vista-2.jpg" alt="Paisagem do Residencial Alta Vista" loading="lazy"></div>
+    <span class="project__tag">Imagem ilustrativa</span>
   </div>
   <div class="project__info">
     <p class="eyebrow">Primeiro empreendimento</p>
     <h2 class="display split-lines">Residencial<br>Alta Vista</h2>
-    <p class="lead reveal-up">Condomínio fechado de lotes em Boa Vista, Roraima. Um endereço planejado para construir com segurança, espaço e qualidade de vida.</p>
+    <p class="lead reveal-up">O começo de uma nova forma de morar em Boa Vista. Um condomínio fechado de lotes para quem quer construir com liberdade, segurança e a tranquilidade de um projeto planejado do início ao fim.</p>
     <ul class="project__list">
       <li><b>Tipologia</b><span>Lotes residenciais em condomínio fechado</span></li>
       <li><b>Localização</b><span>Boa Vista · RR</span></li>
@@ -125,7 +143,7 @@
       <li><b>Status</b><span>Em desenvolvimento<sup>*</sup></span></li>
     </ul>
     <p class="note">* Informações ilustrativas, a confirmar no lançamento oficial.</p>
-    <a href="#contato" class="btn btn--dark magnetic"><span>Quero receber novidades</span><i>→</i></a>
+    <a href="#contato" class="btn btn--dark magnetic"><span>Quero ser avisado do lançamento</span><i>→</i></a>
   </div>
 </section>
 
@@ -133,13 +151,13 @@
 <section class="values-band section--clay" aria-labelledby="dif-title">
   <canvas class="values-band__pattern" id="valuesPattern" aria-hidden="true"></canvas>
   <div class="wrap">
-    <p class="eyebrow">Por que AVRA</p>
-    <h2 class="display split-lines" id="dif-title">Verde para ancorar.<br>Terracota para acolher.</h2>
+    <p class="eyebrow">Nossos compromissos</p>
+    <h2 class="display split-lines" id="dif-title">O que você pode<br>esperar da AVRA.</h2>
     <div class="difs">
-      <div class="dif"><svg viewBox="0 0 48 48"><path d="M6 42 L24 8 L42 42 Z"/><path d="M15 42 V28 H33 V42"/></svg><h3>Planejamento criterioso</h3><p>Estudo de terreno, legislação e viabilidade antes de qualquer lançamento.</p></div>
-      <div class="dif"><svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="2"/><path d="M8 24 H40 M24 8 V40"/></svg><h3>Qualidade construtiva</h3><p>Materiais, fornecedores e processos escolhidos com critério e acompanhamento.</p></div>
-      <div class="dif"><svg viewBox="0 0 48 48"><path d="M24 42 C10 32 10 16 24 6 C38 16 38 32 24 42 Z"/><path d="M24 42 V16"/></svg><h3>Integração ao entorno</h3><p>Projetos que respeitam o clima, a paisagem e a vida de Boa Vista.</p></div>
-      <div class="dif"><svg viewBox="0 0 48 48"><path d="M6 18 C16 10 32 10 42 18"/><path d="M6 28 C16 20 32 20 42 28" stroke-dasharray="4 5"/><path d="M6 38 C16 30 32 30 42 38" stroke-dasharray="2 6"/></svg><h3>Atendimento próximo</h3><p>Uma equipe acessível do primeiro contato à entrega das chaves.</p></div>
+      <div class="dif"><svg viewBox="0 0 48 48"><path d="M6 42 L24 8 L42 42 Z"/><path d="M15 42 V28 H33 V42"/></svg><h3>Planejamento antes do lançamento</h3><p>Terreno, legislação e viabilidade estudados a fundo. Lançamos apenas o que sabemos entregar.</p></div>
+      <div class="dif"><svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="2"/><path d="M8 24 H40 M24 8 V40"/></svg><h3>Qualidade que se vê e que dura</h3><p>Materiais, fornecedores e processos escolhidos com critério e acompanhados de perto.</p></div>
+      <div class="dif"><svg viewBox="0 0 48 48"><path d="M24 42 C10 32 10 16 24 6 C38 16 38 32 24 42 Z"/><path d="M24 42 V16"/></svg><h3>Respeito ao lugar</h3><p>Projetos pensados para o clima, a paisagem e o jeito de viver de Boa Vista.</p></div>
+      <div class="dif"><svg viewBox="0 0 48 48"><path d="M6 18 C16 10 32 10 42 18"/><path d="M6 28 C16 20 32 20 42 28" stroke-dasharray="4 5"/><path d="M6 38 C16 30 32 30 42 38" stroke-dasharray="2 6"/></svg><h3>Transparência do início ao fim</h3><p>Informação clara, contratos objetivos e uma equipe acessível do primeiro contato à entrega das chaves.</p></div>
     </div>
   </div>
 </section>
@@ -147,40 +165,39 @@
 <!-- ============ PAVILHÃO ============ -->
 <section class="pavilion" id="pavilhao">
   <div class="pavilion__pin">
-    <div class="pavilion__img" id="pavImg"><img src="assets/mockups/pavilhao.jpg" alt="Pavilhão de vendas AVRA com fachada em terracota (simulação)"></div>
+    <div class="pavilion__img" id="pavImg"><img src="assets/photos/pavilhao.jpg" alt="Pavilhão de vendas AVRA"></div>
     <div class="pavilion__shade"></div>
     <div class="wrap pavilion__text">
       <p class="eyebrow">Pavilhão de vendas</p>
-      <h2 class="display split-lines">Da marca<br>ao lugar.</h2>
-      <p class="reveal-up">Um espaço para conhecer a AVRA de perto, tirar dúvidas e escolher com calma.</p>
+      <h2 class="display split-lines">Venha sentir<br>de perto.</h2>
+      <p class="reveal-up">Um espaço pensado para você conhecer a AVRA sem pressa: tirar dúvidas, ver os projetos e escolher com segurança.</p>
       <a href="#contato" class="btn magnetic"><span>Agendar visita</span><i>→</i></a>
     </div>
   </div>
 </section>
 
-<section class="moments section--ivory" aria-label="Experiência AVRA">
-  <div class="moments__track" id="momentsTrack">
-    <figure class="moment"><img src="assets/mockups/recepcao.jpg" alt="" loading="lazy"><figcaption>Recepção</figcaption></figure>
-    <figure class="moment"><img src="assets/mockups/kit.jpg" alt="" loading="lazy"><figcaption>Kit de boas-vindas</figcaption></figure>
-    <figure class="moment"><img src="assets/mockups/portfolio.jpg" alt="" loading="lazy"><figcaption>Portfólio</figcaption></figure>
-    <figure class="moment"><img src="assets/mockups/tapume.jpg" alt="" loading="lazy"><figcaption>Canteiro de obras</figcaption></figure>
-    <figure class="moment"><img src="assets/mockups/frota.jpg" alt="" loading="lazy"><figcaption>Equipe em campo</figcaption></figure>
-  </div>
-  <p class="moments__note">Imagens: simulações visuais.</p>
-</section>
+
 
 <!-- ============ JORNADA ============ -->
 <section class="journey section--green" id="jornada">
   <div class="wrap">
     <p class="eyebrow">Como trabalhamos</p>
-    <h2 class="display split-lines">Do planejamento<br>à vida acontecendo.</h2>
+    <h2 class="display split-lines">Do primeiro estudo<br>à chave na mão.</h2>
     <div class="steps" id="steps">
       <div class="steps__line"><span id="stepsLine"></span></div>
-      <div class="step"><b>01</b><h3>Planejar</h3><p>Escolha do terreno, estudos de viabilidade e definição do produto certo para o lugar.</p></div>
-      <div class="step"><b>02</b><h3>Projetar</h3><p>Arquitetura, urbanismo e engenharia integrados, com aprovação e documentação completas.</p></div>
-      <div class="step"><b>03</b><h3>Realizar</h3><p>Obra acompanhada de perto, com qualidade construtiva e transparência no cronograma.</p></div>
-      <div class="step"><b>04</b><h3>Acompanhar</h3><p>Relacionamento contínuo com quem escolheu viver em um empreendimento AVRA.</p></div>
+      <div class="step"><b>01</b><h3>Planejar</h3><p>Escolhemos o terreno certo e definimos o produto certo para ele, com estudos técnicos e de viabilidade.</p></div>
+      <div class="step"><b>02</b><h3>Projetar</h3><p>Arquitetura, urbanismo e engenharia trabalhando juntos, com aprovações e documentação completas.</p></div>
+      <div class="step"><b>03</b><h3>Realizar</h3><p>Obra acompanhada de perto, com cronograma transparente e controle de qualidade em cada fase.</p></div>
+      <div class="step"><b>04</b><h3>Acompanhar</h3><p>Depois da entrega, seguimos presentes. Relacionamento também é parte do que construímos.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ============ ASSINATURA ============ -->
+<section class="statement" aria-label="Assinatura AVRA">
+  <canvas class="statement__pattern" id="statementPattern" aria-hidden="true"></canvas>
+  <div class="wrap statement__inner">
+    <p class="statement__text split-lines">Planejar com precisão.<br>Criar espaço para a vida.</p>
   </div>
 </section>
 
@@ -189,7 +206,8 @@
   <div class="wrap contact__grid">
     <div>
       <p class="eyebrow">Contato</p>
-      <h2 class="display split-lines">Vamos conversar<br>sobre o seu lugar.</h2>
+      <h2 class="display split-lines">Seu próximo lugar<br>começa com uma conversa.</h2>
+      <p class="reveal-up">Conte o que você procura. Nossa equipe responde pelo WhatsApp, no horário de atendimento.</p>
       <dl class="contact__info">
         <div><dt>WhatsApp</dt><dd id="ctWhats">(95) 9 0000-0000</dd></div>
         <div><dt>E-mail</dt><dd id="ctMail">contato@avra.com.br</dd></div>
@@ -228,7 +246,7 @@
       <span>INCORPORADORA</span>
     </div>
     <nav class="site-footer__nav" aria-label="Rodapé">
-      <a href="#sobre">A AVRA</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a><a href="marca/">Guia da marca</a>
+      <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a><a href="marca/">Guia da marca</a>
     </nav>
   </div>
   <div class="wrap site-footer__credit">
@@ -237,7 +255,7 @@
   </div>
   <div class="wrap site-footer__bottom">
     <span>© AVRA Incorporadora · Boa Vista, RR</span>
-    <span>Imagens: simulações visuais, não representam obras realizadas.</span>
+    <span>Imagens ilustrativas.</span>
     <a href="#hero">Voltar ao topo ↑</a>
   </div>
 </footer>

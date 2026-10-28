@@ -143,8 +143,12 @@
     ctx.lineCap = 'round';
     ctx.strokeStyle = o.color || '#C99073';
     ctx.lineWidth = lw;
-    ctx.globalAlpha = o.alpha == null ? 1 : o.alpha;
-    ctx.beginPath();
+    const baseA = o.alpha == null ? 1 : o.alpha;
+    ctx.globalAlpha = baseA;
+    // modo texturizado: três camadas de intensidade e espessura dão matéria ao traço
+    const tex = !!o.textured;
+    const paths = tex ? [new Path2D(), new Path2D(), new Path2D()] : null;
+    if (!tex) ctx.beginPath();
     const ds = field.dashes, ls = field.lines;
     const W = o.clipW || Infinity, H = o.clipH || Infinity;
     for (let i = 0; i < ds.length; i++) {
@@ -166,9 +170,13 @@
           x1 += px; y1 += py; x2 += px * 1.6 - py * 0.4; y2 += py * 1.6 + px * 0.4;
         }
       }
-      ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+      if (tex) { const b = d.a < 0.7 ? 0 : d.a < 0.86 ? 1 : 2; paths[b].moveTo(x1, y1); paths[b].lineTo(x2, y2); }
+      else { ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); }
     }
-    ctx.stroke();
+    if (tex) {
+      const A = [0.28, 0.55, 1], Wm = [0.65, 0.85, 1.05];
+      for (let b = 0; b < 3; b++) { ctx.globalAlpha = baseA * A[b]; ctx.lineWidth = lw * Wm[b]; ctx.stroke(paths[b]); }
+    } else ctx.stroke();
     ctx.restore();
   }
 
@@ -202,10 +210,16 @@
       state.force += (target.force - state.force) * 0.035;
       draw(ctx, field, {
         x: c.x + (opts.offsetX ? opts.offsetX() : 0), y: c.y + (opts.offsetY ? opts.offsetY() : 0), size: c.size,
-        color: state.color, width: (opts.width || 1.3) * (c.size / 900 + 0.6), time: state.time, speed: 1, alpha: state.alpha,
-        mirror: opts.mirror, clipW: w, clipH: h,
+        color: state.color, width: opts.fine ? (opts.width || 0.8) : (opts.width || 1.3) * (c.size / 900 + 0.6), time: state.time, speed: 1, alpha: state.alpha,
+        mirror: opts.mirror, clipW: w, clipH: h, textured: opts.textured,
         pointer: opts.interactive && state.force > 0.5 ? { x: cur.x, y: cur.y, r: opts.radius || 90, force: state.force } : null
       });
+      // abre um respiro no centro (área livre da assinatura / do conteúdo)
+      if (opts.fade) {
+        const f = opts.fade, g = ctx.createRadialGradient(w * f.x, h * f.y, 0, w * f.x, h * f.y, Math.max(w, h) * f.r);
+        g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(f.soft || 0.55, 'rgba(0,0,0,.75)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.restore();
+      }
     }
     let last = performance.now();
     function loop(now) {
