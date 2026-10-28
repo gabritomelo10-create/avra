@@ -26,13 +26,13 @@
 <header class="topbar site-bar" id="topbar">
   <a href="#hero" class="topbar__logo" aria-label="AVRA Incorporadora — início"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg></a>
   <nav class="topbar__nav" aria-label="Principal">
-    <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Alta Vista</a><a href="#jornada">Como trabalhamos</a>
+    <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#altavista">Alta Vista</a><a href="#jornada">Como trabalhamos</a>
   </nav>
   <a href="#contato" class="site-bar__cta">Fale conosco</a>
   <button class="site-bar__menu" id="menuBtn" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i></button>
 </header>
 <nav class="mobile-menu" id="mobileMenu" aria-label="Menu">
-  <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a>
+  <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#altavista">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a>
 </nav>
 
 <main>
@@ -40,7 +40,7 @@
 <!-- ============ HERO ============ -->
 <section class="hero site-hero" id="hero">
   <div class="hero__bg" aria-hidden="true">
-    <div class="site-hero__photo"><img src="assets/photos/hero.jpg" alt=""></div>
+    <div class="site-hero__photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Branco_Boa_Vista_1.jpg?width=2400" data-fallback="assets/photos/hero.jpg" alt="Rio Branco visto da orla de Boa Vista" referrerpolicy="no-referrer"></div>
     <div class="site-hero__shade"></div>
     <div class="glow glow--a"></div><div class="glow glow--b"></div>
     <canvas class="hero__pattern hero__pattern--far" id="heroPatternFar"></canvas>
@@ -53,13 +53,14 @@
     <h1 class="hero__title"><span class="split">Criar lugares onde</span> <span class="split">a vida respira.</span></h1>
     <p class="site-hero__sub">Planejamos cada empreendimento como se fosse para nós: com rigor técnico, respeito ao lugar e espaço de sobra para viver bem.</p>
     <div class="site-hero__ctas">
-      <a href="#empreendimentos" class="btn btn--solid magnetic"><span>Conheça o Residencial Alta Vista</span><i>→</i></a>
+      <a href="#altavista" class="btn btn--solid magnetic"><span>Conheça o Residencial Alta Vista</span><i>→</i></a>
       <a href="#contato" class="btn magnetic"><span>Agende uma conversa</span></a>
     </div>
   </div>
   <div class="hero__foot">
     <span>Planejamento criterioso · Qualidade de viver</span>
     <span class="hero__scroll"><i></i>Role para sentir a brisa</span>
+    <span class="hero__credit">Foto: Rio Branco, Boa Vista · Wikimedia Commons</span>
   </div>
 </section>
 
@@ -78,17 +79,31 @@
 
 <!-- ============ BOA VISTA ============ -->
 <section class="city section--green" id="boavista">
-  <canvas class="city__plan" id="cityPlan" aria-hidden="true"></canvas>
-  <div class="wrap city__inner">
-    <p class="eyebrow">Nosso lugar</p>
-    <h2 class="display split-lines">Boa Vista nasceu planejada.<br>Nós seguimos o traçado.</h2>
-    <p class="lead reveal-up">Boa Vista é uma das capitais brasileiras que nasceram de um plano urbanístico: suas avenidas se abrem em leque a partir da margem do Rio Branco, numa geometria pensada para a vida em comum.</p>
-    <p class="reveal-up">A AVRA continua essa vocação. Cada empreendimento parte do mesmo princípio: entender o lugar antes de construir nele, respeitando o clima, a paisagem e o ritmo de quem vive aqui.</p>
-    <ul class="city__facts">
-      <li><b>Traçado radial</b><span>Avenidas em leque a partir do centro histórico</span></li>
-      <li><b>Rio Branco</b><span>A cidade se organiza a partir das suas margens</span></li>
-      <li><b>Capital de Roraima</b><span>Onde a AVRA nasce e constrói</span></li>
-    </ul>
+  <div class="wrap city__grid">
+    <div class="city__text">
+      <p class="eyebrow">Nosso lugar</p>
+      <h2 class="display split-lines">Boa Vista nasceu planejada.<br>Nós seguimos o traçado.</h2>
+      <p class="lead reveal-up">Em 1944, o engenheiro Darcy Aleixo Derenusson desenhou para Boa Vista um plano em leque: avenidas radiais que partem da praça do Centro Cívico, cruzadas por ruas circulares, junto à margem do Rio Branco.</p>
+      <p class="reveal-up">Oito décadas depois, a capital mais ao norte do Brasil é uma das que mais crescem no país. A AVRA nasce aqui para dar continuidade a essa vocação: crescer com planejamento, respeitando o clima, a paisagem e o jeito de viver de quem mora em Roraima.</p>
+    </div>
+    <figure class="city__map tilt-soft">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Imagem_de_sat%C3%A9lite_de_Boa_Vista%2C_Roraima_em_2017.jpg?width=1600" data-fallback="hide" alt="Imagem de satélite de Boa Vista mostrando o traçado em leque a partir do Centro Cívico" loading="lazy" referrerpolicy="no-referrer">
+      <span class="city__pin" style="--x:63%;--y:47%"><i></i>Centro Cívico</span>
+      <figcaption>Imagem de satélite de Boa Vista, 2017 · CBERS-4 / INPE · Wikimedia Commons</figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <dl class="facts">
+      <div><dt>1890</dt><dd>Boa Vista é elevada a município, em 9 de julho</dd></div>
+      <div><dt>1944</dt><dd>Começa o plano urbanístico em leque, de Darcy Derenusson</dd></div>
+      <div><dt>+45%</dt><dd>Crescimento da população entre 2010 e 2022 (IBGE)</dd></div>
+      <div><dt>2°49′N</dt><dd>A capital mais ao norte do Brasil</dd></div>
+    </dl>
+    <div class="city__photos">
+      <figure><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Centro_c%C3%ADvico_de_Boa_Vista%2C_RR.jpg?width=1200" data-fallback="hide" alt="Praça do Centro Cívico de Boa Vista" loading="lazy" referrerpolicy="no-referrer"><figcaption>Centro Cívico, o ponto de partida do traçado</figcaption></figure>
+      <figure><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Orla_de_Boa_Vista_4.JPG?width=1200" data-fallback="hide" alt="Orla Taumanan, às margens do Rio Branco" loading="lazy" referrerpolicy="no-referrer"><figcaption>Orla Taumanan, às margens do Rio Branco</figcaption></figure>
+      <figure><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trilha_no_lavrado_roraimense.jpg?width=1200" data-fallback="hide" alt="Trilha no lavrado roraimense" loading="lazy" referrerpolicy="no-referrer"><figcaption>O lavrado, a savana de Roraima</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -104,19 +119,19 @@
     </div>
     <div class="purpose__grid">
       <article class="pcard">
-        <div class="pcard__img"><img src="assets/photos/proposito-estrutura.jpg" alt="Galeria de pilares abrindo para um jardim" loading="lazy"></div>
+        <div class="pcard__img"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Centro_c%C3%ADvico_de_Boa_Vista%2C_RR_%28cropped%29.jpg?width=1000" data-fallback="assets/photos/proposito-estrutura.jpg" alt="Centro Cívico de Boa Vista" loading="lazy" referrerpolicy="no-referrer"></div>
         <span class="pcard__n">Estrutura</span>
         <h3>Estrutura organiza.</h3>
         <p>Do estudo do terreno ao último acabamento, nada é improvisado. Planejamento técnico, documentação completa e transparência em cada etapa.</p>
       </article>
       <article class="pcard">
-        <div class="pcard__img"><img src="assets/photos/proposito-natureza.jpg" alt="Janela com cortina de linho e vegetação" loading="lazy"></div>
+        <div class="pcard__img"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trilha_no_lavrado_roraimense.jpg?width=1000" data-fallback="assets/photos/proposito-natureza.jpg" alt="Lavrado roraimense" loading="lazy" referrerpolicy="no-referrer"></div>
         <span class="pcard__n">Natureza</span>
         <h3>Natureza qualifica.</h3>
         <p>Luz natural, ventilação, sombra e verde não são detalhes do projeto. São o projeto. Espaços integrados ao entorno valorizam o lugar e quem vive nele.</p>
       </article>
       <article class="pcard">
-        <div class="pcard__img"><img src="assets/photos/proposito-brisa.jpg" alt="Cortina de linho movida pela brisa" loading="lazy"></div>
+        <div class="pcard__img"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Branco_Boa_Vista_1.jpg?width=1000" data-fallback="assets/photos/proposito-brisa.jpg" alt="Rio Branco em Boa Vista" loading="lazy" referrerpolicy="no-referrer"></div>
         <span class="pcard__n">Brisa</span>
         <h3>Brisa introduz leveza.</h3>
         <p>Respiro entre as coisas. Ruas tranquilas, áreas livres, tempo para viver. A sofisticação que importa é a que deixa o dia mais simples.</p>
@@ -125,25 +140,89 @@
   </div>
 </section>
 
-<!-- ============ EMPREENDIMENTO ============ -->
-<section class="project" id="empreendimentos">
-  <div class="project__media">
-    <div class="project__frame"><img src="assets/photos/alta-vista-1.jpg" alt="Residencial Alta Vista" loading="lazy"></div>
-    <div class="project__frame project__frame--b"><img src="assets/photos/alta-vista-2.jpg" alt="Paisagem do Residencial Alta Vista" loading="lazy"></div>
-    <span class="project__tag">Imagem ilustrativa</span>
+<!-- ============ RESIDENCIAL ALTA VISTA ============ -->
+<section class="av" id="altavista">
+  <div class="av__intro">
+    <div class="av__intro-bg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trilha_no_lavrado_roraimense.jpg?width=2400" data-fallback="assets/img/capa.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
+    <div class="av__intro-shade"></div>
+    <div class="wrap av__intro-inner">
+      <p class="eyebrow">Primeiro empreendimento AVRA</p>
+      <h2 class="av__title split-lines">Residencial<br>Alta Vista</h2>
+      <p class="av__status"><i></i>Em desenvolvimento · lista de interesse aberta</p>
+    </div>
   </div>
-  <div class="project__info">
-    <p class="eyebrow">Primeiro empreendimento</p>
-    <h2 class="display split-lines">Residencial<br>Alta Vista</h2>
-    <p class="lead reveal-up">O começo de uma nova forma de morar em Boa Vista. Um condomínio fechado de lotes para quem quer construir com liberdade, segurança e a tranquilidade de um projeto planejado do início ao fim.</p>
-    <ul class="project__list">
-      <li><b>Tipologia</b><span>Lotes residenciais em condomínio fechado</span></li>
-      <li><b>Localização</b><span>Boa Vista · RR</span></li>
-      <li><b>Infraestrutura</b><span>Saneamento, energia, vias e áreas de lazer<sup>*</sup></span></li>
-      <li><b>Status</b><span>Em desenvolvimento<sup>*</sup></span></li>
-    </ul>
-    <p class="note">* Informações ilustrativas, a confirmar no lançamento oficial.</p>
-    <a href="#contato" class="btn btn--dark magnetic"><span>Quero ser avisado do lançamento</span><i>→</i></a>
+
+  <div class="wrap av__concept">
+    <div>
+      <p class="eyebrow">O conceito</p>
+      <h3 class="display split-lines">Um terreno para<br>a casa que é sua.</h3>
+    </div>
+    <div class="av__concept-text">
+      <p class="lead reveal-up">O Residencial Alta Vista é um condomínio fechado de lotes em Boa Vista. Em vez de um imóvel pronto, você escolhe o terreno e constrói a casa do seu jeito, dentro de um bairro planejado do primeiro traço à última árvore.</p>
+      <p class="reveal-up">O nome diz a intenção: vista aberta, horizonte livre e espaço entre as casas. É o mesmo princípio do traçado de Boa Vista, aplicado na escala de uma rua.</p>
+    </div>
+  </div>
+
+  <div class="wrap av__pillars">
+    <article><b>01</b><h4>Liberdade para construir</h4><p>Projete a casa no seu tempo, com o seu arquiteto, seguindo diretrizes que preservam a qualidade do conjunto.</p></article>
+    <article><b>02</b><h4>Vida em condomínio fechado</h4><p>Acesso controlado, ruas tranquilas e áreas comuns pensadas para a convivência entre vizinhos.</p></article>
+    <article><b>03</b><h4>Planejamento AVRA</h4><p>Infraestrutura, aprovações e documentação tratadas com o mesmo rigor que a gente defende em cada decisão.</p></article>
+  </div>
+
+  <div class="av__plan">
+    <div class="wrap av__plan-grid">
+      <div class="av__plan-text">
+        <p class="eyebrow">Implantação</p>
+        <h3 class="display split-lines">Como o bairro<br>se organiza.</h3>
+        <p class="reveal-up">Passe o cursor pelo mapa para ver cada parte do conceito urbanístico.</p>
+        <div class="av__zone" id="zoneInfo" aria-live="polite">
+          <b id="zoneName">Lotes residenciais</b>
+          <p id="zoneText">Terrenos voltados para ruas internas tranquilas, com espaço para jardim e recuos generosos.</p>
+        </div>
+        <ul class="av__legend" id="zoneLegend">
+          <li data-zone="lotes" class="is-on"><i style="--c:#F2EBDD"></i>Lotes residenciais</li>
+          <li data-zone="verde"><i style="--c:#74785A"></i>Áreas verdes</li>
+          <li data-zone="lazer"><i style="--c:#C99073"></i>Lazer e convivência</li>
+          <li data-zone="avenida"><i style="--c:#B6A078"></i>Avenida principal</li>
+          <li data-zone="portaria"><i style="--c:#A6533C"></i>Portaria</li>
+        </ul>
+        <p class="note">Estudo ilustrativo de conceito. Quantidade, dimensões e localização dos lotes serão definidas no projeto aprovado e apresentadas no lançamento.</p>
+      </div>
+      <div class="av__map"><svg id="masterplan" viewBox="0 0 800 620" role="img" aria-label="Estudo ilustrativo de implantação do Residencial Alta Vista"></svg></div>
+    </div>
+  </div>
+
+  <div class="wrap av__guide">
+    <div class="av__guide-head">
+      <p class="eyebrow">Antes de escolher um lote</p>
+      <h3 class="display split-lines">Cinco pontos<br>para observar.</h3>
+      <p class="reveal-up">Escolher um terreno é a decisão mais duradoura de uma construção. Estes são os critérios que usamos para planejar o Alta Vista, e que recomendamos a qualquer pessoa que esteja comparando opções.</p>
+    </div>
+    <ol class="av__checks">
+      <li><details open><summary><b>01</b>Localização e acesso</summary><p>Observe o caminho até o trabalho, as escolas e os serviços do dia a dia. Acesso por vias asfaltadas e iluminadas faz diferença em todas as estações, especialmente no período de chuvas.</p></details></li>
+      <li><details><summary><b>02</b>Infraestrutura entregue</summary><p>Pergunte exatamente o que estará pronto na entrega: água, esgoto, drenagem, energia, iluminação e pavimentação. Infraestrutura incompleta vira custo para o comprador.</p></details></li>
+      <li><details><summary><b>03</b>Documentação e aprovações</summary><p>Loteamento aprovado na prefeitura e registrado em cartório é garantia de segurança jurídica. Peça o número do registro e confira antes de assinar.</p></details></li>
+      <li><details><summary><b>04</b>Sol, vento e topografia</summary><p>Em Boa Vista o sol é forte o ano inteiro. A orientação do lote em relação ao sol e à ventilação define o conforto da casa e o gasto com energia.</p></details></li>
+      <li><details><summary><b>05</b>Regras do condomínio</summary><p>As diretrizes de construção protegem o valor de todos os lotes. Leia recuos, gabaritos e regras de convivência antes de decidir, e veja se elas combinam com o seu projeto.</p></details></li>
+    </ol>
+  </div>
+
+  <div class="wrap av__timeline">
+    <p class="eyebrow">Etapas do empreendimento</p>
+    <ol class="tl">
+      <li class="is-done"><b>Concepção</b><span>Estudo do terreno e conceito</span></li>
+      <li class="is-now"><b>Projeto e aprovações</b><span>Etapa atual</span></li>
+      <li><b>Lançamento</b><span>Apresentação oficial e tabela</span></li>
+      <li><b>Obras de infraestrutura</b><span>Ruas, redes e áreas comuns</span></li>
+      <li><b>Entrega dos lotes</b><span>Liberação para construir</span></li>
+    </ol>
+    <p class="note">Etapas indicativas. Confirme a etapa atual com a equipe AVRA.</p>
+  </div>
+
+  <div class="wrap av__cta">
+    <h3>Seja o primeiro a conhecer o projeto completo.</h3>
+    <p>Quem está na lista de interesse recebe a apresentação do Alta Vista antes do lançamento público.</p>
+    <a href="#contato" class="btn btn--solid magnetic" data-interest="Residencial Alta Vista"><span>Entrar na lista de interesse</span><i>→</i></a>
   </div>
 </section>
 
@@ -162,19 +241,7 @@
   </div>
 </section>
 
-<!-- ============ PAVILHÃO ============ -->
-<section class="pavilion" id="pavilhao">
-  <div class="pavilion__pin">
-    <div class="pavilion__img" id="pavImg"><img src="assets/photos/pavilhao.jpg" alt="Pavilhão de vendas AVRA"></div>
-    <div class="pavilion__shade"></div>
-    <div class="wrap pavilion__text">
-      <p class="eyebrow">Pavilhão de vendas</p>
-      <h2 class="display split-lines">Venha sentir<br>de perto.</h2>
-      <p class="reveal-up">Um espaço pensado para você conhecer a AVRA sem pressa: tirar dúvidas, ver os projetos e escolher com segurança.</p>
-      <a href="#contato" class="btn magnetic"><span>Agendar visita</span><i>→</i></a>
-    </div>
-  </div>
-</section>
+
 
 
 
@@ -223,7 +290,7 @@
       <div class="field"><label for="fInterest">Interesse</label>
         <select id="fInterest" name="interesse">
           <option>Residencial Alta Vista</option>
-          <option>Agendar visita ao pavilhão</option>
+          <option>Agendar uma conversa</option>
           <option>Futuros empreendimentos</option>
           <option>Outro assunto</option>
         </select>
@@ -246,16 +313,24 @@
       <span>INCORPORADORA</span>
     </div>
     <nav class="site-footer__nav" aria-label="Rodapé">
-      <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#empreendimentos">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a><a href="marca/">Guia da marca</a>
+      <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#altavista">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a><a href="marca/">Guia da marca</a>
     </nav>
   </div>
   <div class="wrap site-footer__credit">
     <span>Site e identidade visual desenvolvidos por</span>
     <img src="assets/img/britto-group.png" alt="BRITTO* GROUP" width="852" height="339" loading="lazy">
   </div>
+  <div class="wrap site-footer__photos" id="creditos-fotos">
+    <span>Créditos das fotografias</span>
+    <a href="https://commons.wikimedia.org/wiki/File:Rio_Branco_Boa_Vista_1.jpg" target="_blank" rel="noopener">Rio Branco, Boa Vista</a>
+    <a href="https://commons.wikimedia.org/wiki/File:Centro_c%C3%ADvico_de_Boa_Vista,_RR.jpg" target="_blank" rel="noopener">Centro Cívico · Dieny Portinanni (CC0)</a>
+    <a href="https://commons.wikimedia.org/wiki/File:Orla_de_Boa_Vista_4.JPG" target="_blank" rel="noopener">Orla de Boa Vista</a>
+    <a href="https://commons.wikimedia.org/wiki/File:Trilha_no_lavrado_roraimense.jpg" target="_blank" rel="noopener">Trilha no lavrado roraimense</a>
+    <a href="https://commons.wikimedia.org/wiki/File:Imagem_de_sat%C3%A9lite_de_Boa_Vista,_Roraima_em_2017.jpg" target="_blank" rel="noopener">Satélite CBERS-4 / INPE</a>
+  </div>
   <div class="wrap site-footer__bottom">
     <span>© AVRA Incorporadora · Boa Vista, RR</span>
-    <span>Imagens ilustrativas.</span>
+    <span>Fotografias de Boa Vista e Roraima: Wikimedia Commons (<a href="#creditos-fotos">créditos</a>).</span>
     <a href="#hero">Voltar ao topo ↑</a>
   </div>
 </footer>

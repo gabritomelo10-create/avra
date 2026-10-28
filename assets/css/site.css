@@ -164,19 +164,124 @@
 .site-footer__bottom { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 30px; border-top: 1px solid rgba(242,235,221,.12); font-size: 12px; opacity: .65; position: relative; }
 @media (max-width: 560px) { .site-footer__nav { grid-template-columns: 1fr 1fr; gap: 10px 20px; } .site-footer__credit { flex-direction: column; align-items: flex-start; } }
 
-/* ---------- Boa Vista ---------- */
-.city { padding: 22vh 0; overflow: hidden; background: radial-gradient(70% 90% at 100% 55%, #2e4a3e 0%, var(--verde) 50%, var(--verde-3) 100%); }
-.city__plan { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.city__inner { position: relative; max-width: 1600px; }
-.city__inner > * { max-width: 640px; }
-.city__inner > .display { max-width: 980px; }
-.city__facts { list-style: none; margin: 8vh 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid rgba(242,235,221,.16); max-width: 560px; }
-.city__facts li { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(242,235,221,.12); }
-.city__facts b { font-family: var(--f-title); font-weight: 400; font-size: 20px; color: var(--argila); }
-.city__facts span { opacity: .78; font-size: 15px; padding-top: 3px; }
-@media (max-width: 700px) { .city__facts li { grid-template-columns: 1fr; gap: 2px; } .city__plan { opacity: .5; } }
-
 /* ---------- frase-assinatura ---------- */
 .statement { position: relative; background: var(--terracota); color: var(--marfim); padding: 26vh 0; overflow: hidden; text-align: center; }
 .statement__pattern { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .statement__text { font-family: var(--f-title); font-size: clamp(36px, 6vw, 104px); line-height: 1.08; margin: 0; position: relative; text-wrap: balance; }
+
+.hero__credit { position: absolute; right: 0; bottom: -18px; font-size: 10px; letter-spacing: .08em; text-transform: none; opacity: .5; }
+.hero__foot { position: absolute; }
+img.is-fallback { filter: saturate(.85); }
+
+/* ---------- Boa Vista ---------- */
+.city { padding: 22vh 0 18vh; overflow: hidden; background: radial-gradient(70% 80% at 85% 30%, #2e4a3e 0%, var(--verde) 50%, var(--verde-3) 100%); }
+.city__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: center; }
+.city__text p { max-width: 58ch; }
+.city__map { position: relative; margin: 0; border-radius: 8px; overflow: hidden; aspect-ratio: 1; background: var(--verde-3); box-shadow: 0 50px 100px -40px rgba(0,0,0,.7); }
+.city__map img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) contrast(1.05); }
+.city__map::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 60% 45%, transparent 40%, rgba(18,32,26,.55)); pointer-events: none; }
+.city__map figcaption { position: absolute; left: 16px; right: 16px; bottom: 12px; font-size: 11px; letter-spacing: .06em; opacity: .75; z-index: 1; }
+.city__pin { position: absolute; left: var(--x); top: var(--y); z-index: 1; display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; transform: translate(-6px, -50%); }
+.city__pin i { width: 12px; height: 12px; border-radius: 50%; background: var(--argila); box-shadow: 0 0 0 0 rgba(201,144,115,.6); animation: pin 3.2s ease-out infinite; }
+@keyframes pin { 0% { box-shadow: 0 0 0 0 rgba(201,144,115,.6); } 100% { box-shadow: 0 0 0 26px rgba(201,144,115,0); } }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 14vh 0 0; border-top: 1px solid rgba(242,235,221,.16); }
+.facts div { padding: 28px 24px 8px 0; border-right: 1px solid rgba(242,235,221,.1); }
+.facts div + div { padding-left: 24px; }
+.facts div:last-child { border-right: 0; }
+.facts dt { font-family: var(--f-title); font-size: clamp(36px, 4vw, 64px); color: var(--argila); line-height: 1; font-variant-numeric: tabular-nums; }
+.facts dd { margin: 12px 0 0; font-size: 15px; opacity: .78; max-width: 26ch; }
+.city__photos { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 20px; margin-top: 12vh; }
+.city__photos figure { margin: 0; }
+.city__photos figure > img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 6px; }
+.city__photos figure:first-child > img { aspect-ratio: 5/5.4; }
+.city__photos figure { overflow: hidden; }
+.city__photos figcaption { font-size: 14px; margin-top: 14px; opacity: .8; }
+@media (max-width: 900px) { .city__grid, .city__photos { grid-template-columns: 1fr; } .facts { grid-template-columns: 1fr 1fr; } .facts div { padding-left: 0 !important; border-right: 0; border-bottom: 1px solid rgba(242,235,221,.1); padding-bottom: 20px; } }
+
+/* ---------- Residencial Alta Vista ---------- */
+.av { background: var(--marfim); color: var(--verde); }
+.av__intro { position: relative; height: 92vh; min-height: 560px; overflow: hidden; display: flex; align-items: flex-end; color: var(--marfim); }
+.av__intro-bg { position: absolute; inset: 0; }
+.av__intro-bg img { width: 100%; height: 100%; object-fit: cover; }
+.av__intro-shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(18,32,26,.9), rgba(18,32,26,.25) 60%, rgba(18,32,26,.35)); }
+.av__intro-inner { position: relative; width: 100%; padding-bottom: 12vh; }
+.av__title { font-family: var(--f-title); font-weight: 400; font-size: clamp(56px, 11vw, 190px); line-height: .95; margin: 0; letter-spacing: .01em; }
+.av__status { display: inline-flex; align-items: center; gap: 12px; margin-top: 34px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; border: 1px solid rgba(242,235,221,.4); padding: 10px 18px; border-radius: 99px; backdrop-filter: blur(8px); }
+.av__status i { width: 8px; height: 8px; border-radius: 50%; background: var(--argila); animation: pin 3.2s ease-out infinite; }
+.av__concept { display: grid; grid-template-columns: 1fr 1.1fr; gap: 6vw; padding-top: 18vh; padding-bottom: 10vh; align-items: start; }
+.av__concept-text p { max-width: 58ch; }
+.av__pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid rgba(38,59,50,.2); padding-bottom: 16vh; }
+.av__pillars article { padding: 30px 28px 0 0; }
+.av__pillars article + article { padding-left: 28px; border-left: 1px solid rgba(38,59,50,.14); }
+.av__pillars b { font-size: 12px; letter-spacing: .14em; color: var(--terracota); }
+.av__pillars h4 { font-family: var(--f-title); font-weight: 400; font-size: clamp(22px, 2vw, 30px); margin: 12px 0 10px; }
+.av__pillars p { margin: 0; opacity: .8; max-width: 40ch; }
+.av__plan { background: var(--verde); color: var(--marfim); padding: 18vh 0; }
+.av__plan-grid { display: grid; grid-template-columns: 0.9fr 1.3fr; gap: 5vw; align-items: center; }
+.av__zone { margin: 34px 0 22px; padding: 22px 24px; border-radius: 8px; background: rgba(242,235,221,.06); border: 1px solid rgba(242,235,221,.12); min-height: 128px; }
+.av__zone b { font-family: var(--f-title); font-weight: 400; font-size: 24px; color: var(--argila); }
+.av__zone p { margin: 8px 0 0; opacity: .85; font-size: 15px; }
+.av__legend { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 4px; }
+.av__legend li { display: flex; align-items: center; gap: 12px; font-size: 14px; padding: 6px 0; opacity: .6; cursor: pointer; transition: opacity .3s; }
+.av__legend li.is-on, .av__legend li:hover { opacity: 1; }
+.av__legend i { width: 14px; height: 14px; border-radius: 3px; background: var(--c); }
+.av__map { background: radial-gradient(80% 80% at 50% 50%, #2d473b, #1d3028); border-radius: 10px; padding: 3%; box-shadow: inset 0 0 0 1px rgba(242,235,221,.08), 0 50px 90px -50px rgba(0,0,0,.7); }
+#masterplan { width: 100%; height: auto; display: block; }
+.mp-site { fill: #22372e; stroke: rgba(242,235,221,.35); stroke-width: 1.5; stroke-dasharray: 6 6; }
+.mp-green { fill: rgba(116,120,90,.55); }
+.mp-tree { fill: rgba(116,120,90,.9); }
+.mp-road { fill: none; stroke: rgba(182,160,120,.55); stroke-width: 7; stroke-linecap: round; }
+.mp-road--main { stroke: var(--dourado); stroke-width: 12; }
+.mp-lot { fill: rgba(242,235,221,.82); }
+.mp-leisure { fill: rgba(201,144,115,.55); stroke: var(--argila); stroke-width: 2; }
+.mp-leisure-core { fill: var(--argila); }
+.mp-gate { fill: var(--terracota); }
+.mp-label { fill: rgba(242,235,221,.7); font-family: var(--f-text); font-size: 13px; letter-spacing: 3px; }
+#masterplan g { transition: opacity .4s; cursor: pointer; }
+#masterplan[data-active] g { opacity: .35; }
+#masterplan[data-active="lotes"] g[data-zone="lotes"], #masterplan[data-active="verde"] g[data-zone="verde"], #masterplan[data-active="lazer"] g[data-zone="lazer"], #masterplan[data-active="avenida"] g[data-zone="avenida"], #masterplan[data-active="portaria"] g[data-zone="portaria"] { opacity: 1; }
+#masterplan[data-active="verde"] g[data-zone="verde"] { filter: brightness(1.3); }
+.av__plan .note { color: var(--marfim); }
+.av__guide { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6vw; padding-top: 18vh; padding-bottom: 12vh; align-items: start; }
+.av__guide-head { position: sticky; top: 120px; }
+.av__guide-head p { max-width: 50ch; }
+.av__checks { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(38,59,50,.2); }
+.av__checks li { border-bottom: 1px solid rgba(38,59,50,.2); }
+.av__checks summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 20px; padding: 26px 0; font-family: var(--f-title); font-size: clamp(22px, 2.2vw, 32px); }
+.av__checks summary::-webkit-details-marker { display: none; }
+.av__checks summary::after { content: "+"; margin-left: auto; font-family: var(--f-text); font-weight: 300; transition: transform .5s var(--ease-out); }
+.av__checks details[open] summary::after { transform: rotate(45deg); }
+.av__checks summary b { font-family: var(--f-text); font-size: 12px; letter-spacing: .14em; color: var(--terracota); font-weight: 600; }
+.av__checks p { margin: 0 0 26px 44px; max-width: 58ch; opacity: .85; }
+.av__timeline { padding-bottom: 14vh; }
+.tl { list-style: none; margin: 30px 0 18px; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+.tl::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: rgba(38,59,50,.2); }
+.tl li { position: relative; padding: 32px 16px 0 0; display: grid; gap: 6px; }
+.tl li::before { content: ""; position: absolute; top: 0; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--marfim); border: 1.5px solid rgba(38,59,50,.35); }
+.tl li.is-done::before { background: var(--verde); border-color: var(--verde); }
+.tl li.is-now::before { background: var(--terracota); border-color: var(--terracota); box-shadow: 0 0 0 6px rgba(166,83,60,.15); }
+.tl b { font-family: var(--f-title); font-weight: 400; font-size: 20px; }
+.tl span { font-size: 14px; opacity: .7; }
+.tl li.is-now span { color: var(--terracota); opacity: 1; font-weight: 600; }
+.av__cta { padding-bottom: 18vh; display: grid; justify-items: start; gap: 10px; }
+.av__cta h3 { font-family: var(--f-title); font-weight: 400; font-size: clamp(28px, 3.4vw, 52px); margin: 0; max-width: 18ch; line-height: 1.12; }
+.av__cta p { margin: 0 0 18px; opacity: .8; }
+.av__cta .btn--solid { background: var(--verde); color: var(--marfim); border-color: var(--verde); }
+.av__cta .btn--solid:hover { background: var(--terracota); border-color: var(--terracota); }
+@media (max-width: 900px) {
+  .av__concept, .av__plan-grid, .av__guide { grid-template-columns: 1fr; }
+  .av__guide-head { position: static; }
+  .av__pillars { grid-template-columns: 1fr; }
+  .av__pillars article + article { padding-left: 0; border-left: 0; }
+  .tl { grid-template-columns: 1fr; gap: 18px; }
+  .tl::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .tl li { padding: 0 0 0 34px; }
+  .av__checks p { margin-left: 0; }
+}
+
+/* ---------- créditos das fotos ---------- */
+.site-footer__photos { display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 20px; padding-bottom: 20px; border-top: 1px solid rgba(242,235,221,.12); font-size: 12px; position: relative; }
+.site-footer__photos span { color: var(--dourado); letter-spacing: .12em; text-transform: uppercase; width: 100%; }
+.site-footer__photos a { opacity: .65; text-decoration: underline; text-underline-offset: 3px; }
+.site-footer__photos a:hover { opacity: 1; }
+.site-footer__bottom a { text-decoration: underline; }

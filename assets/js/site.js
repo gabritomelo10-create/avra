@@ -19,6 +19,22 @@
 
   $$('.js-logo path').forEach((p) => { p.setAttribute('d', AVRA_LOGO.d); p.setAttribute('fill-rule', 'evenodd'); });
   $('#loaderPath').setAttribute('d', AVRA_LOGO.d);
+  // layout mudou (foto removida ou carregada): recalcula os gatilhos de rolagem
+  let rt; const refreshSoon = () => { clearTimeout(rt); rt = setTimeout(() => window.ScrollTrigger && ScrollTrigger.refresh(), 200); };
+  window.addEventListener('load', refreshSoon);
+  // fotos externas (Wikimedia Commons): se não carregarem, usa a imagem local
+  $$('img[data-fallback]').forEach((img) => {
+    const fb = () => {
+      if (img.dataset.fallback === 'hide') { const f = img.closest('figure'); if (f) f.hidden = true; refreshSoon(); return; }
+      if (img.dataset.fallback && img.src.indexOf(img.dataset.fallback) < 0) {
+        img.src = img.dataset.fallback; img.classList.add('is-fallback');
+        if (img.closest('.site-hero')) { const c = $('.hero__credit'); if (c) c.hidden = true; }
+      }
+    };
+    img.addEventListener('error', fb, { once: true });
+    if (img.complete && img.naturalWidth === 0 && img.src) fb();
+  });
+  $$('[data-interest]').forEach((a) => a.addEventListener('click', () => { const sel = $('#fInterest'); if (sel) sel.value = a.dataset.interest; }));
   $('#ctWhats').textContent = CONTATO.whatsappLabel;
   $('#ctMail').textContent = CONTATO.email;
 
@@ -138,22 +154,24 @@
     });
 
     // empreendimento: segunda imagem cobre a primeira ao rolar
-    gsap.to('.project__frame--b', { clipPath: 'inset(0% 0 0 0)', ease: 'none', scrollTrigger: { trigger: '.project', start: 'top top', end: 'bottom bottom', scrub: true } });
-    $$('.project__frame img').forEach((img) => gsap.fromTo(img, { yPercent: -10 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.project', start: 'top bottom', end: 'bottom top', scrub: true } }));
-    gsap.from('.project__list li', { x: 30, opacity: 0, stagger: 0.08, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.project__list', start: 'top 85%' } });
 
     gsap.from('.dif', { y: 50, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.difs', start: 'top 85%' } });
 
-    // pavilhão: a imagem se abre até ocupar a tela
-    const pav = gsap.timeline({ scrollTrigger: { trigger: '.pavilion', start: 'top top', end: 'bottom bottom', scrub: 0.8 } });
-    pav.to('#pavImg', { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', duration: 0.6 }, 0)
-      .to('#pavImg img', { scale: 1, ease: 'none', duration: 0.6 }, 0)
-      .to('.pavilion__shade', { opacity: 1, duration: 0.25 }, 0.45)
-      .to('.pavilion__text', { opacity: 1, duration: 0.25 }, 0.55);
 
     // frase-assinatura
     gsap.fromTo('.statement__text', { letterSpacing: '0.06em' }, { letterSpacing: '0.01em', ease: 'none', scrollTrigger: { trigger: '.statement', start: 'top bottom', end: 'bottom top', scrub: true } });
-    gsap.from('.city__facts li', { y: 30, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.city__facts', start: 'top 90%' } });
+    gsap.from('.facts > div', { y: 30, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.facts', start: 'top 90%' } });
+    $$('.city__photos figure').forEach((f, i) => {
+      gsap.from(f, { y: 60, opacity: 0, duration: 1.4, delay: i * 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.city__photos', start: 'top 88%' } });
+      gsap.fromTo($('img', f), { yPercent: -8 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+    gsap.fromTo('.city__map img', { scale: 1.18 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.city__map', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+    // Alta Vista
+    gsap.fromTo('.av__intro-bg img', { scale: 1.2, yPercent: -6 }, { scale: 1, yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.av__intro', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.from('.av__pillars article', { y: 50, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.av__pillars', start: 'top 85%' } });
+    gsap.from('.av__checks li', { x: 40, opacity: 0, stagger: 0.08, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.av__checks', start: 'top 85%' } });
+    gsap.from('.tl li', { y: 30, opacity: 0, stagger: 0.1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.tl', start: 'top 88%' } });
 
     // jornada: linha se desenha e acende as etapas
     const steps = $$('.step');
@@ -171,50 +189,59 @@
     BR20.animate($('#valuesPattern'), Object.assign({ color: '#A6533C', alpha: 0.5, seed: 8, speed: 0.3, width: 0.7, interactive: true, host: $('.values-band'), force: 28, align: { ax: 1, ay: 0.3 } }, fine));
     BR20.animate($('#statementPattern'), Object.assign({ color: '#F2EBDD', alpha: 0.38, seed: 12, speed: 0.3, width: 0.7, interactive: true, host: $('.statement'), force: 30, align: { ax: 0.5, ay: 0.5, scale: 1.1 }, fade: { x: 0.5, y: 0.5, r: 0.38, soft: 0.5 } }, fine));
     BR20.animate($('#footerPattern'), Object.assign({ color: '#B6A078', alpha: 0.32, seed: 20, speed: 0.25, width: 0.7, align: { ax: 1, ay: 0.5, scale: 1.1 } }, fine));
-    cityPlan();
+    masterplan();
   }
 
-  /* ---------- Boa Vista: traçado radial desenhado com a rolagem ---------- */
-  function cityPlan() {
-    const c = $('#cityPlan'), g = c.getContext('2d');
-    const st = { p: 0 };
-    let w = 0, h = 0, dpr = 1;
-    function size() {
-      const r = c.getBoundingClientRect(); dpr = Math.min(devicePixelRatio || 1, 2);
-      w = r.width; h = r.height; c.width = w * dpr; c.height = h * dpr; draw();
-    }
-    function draw() {
-      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
-      // centro do leque junto à margem do rio, à direita da seção
-      const cx = w * 0.98, cy = h * 0.55, R = Math.max(w, h) * 0.95, p = st.p;
-      g.lineCap = 'round';
-      // rio
-      g.strokeStyle = 'rgba(201,144,115,.55)'; g.lineWidth = 1.2;
-      g.beginPath();
-      for (let i = 0; i <= 60 * p; i++) { const t = i / 60, y = h * (t * 1.1 - 0.05); const x = cx + 26 + Math.sin(t * 5) * 18; i ? g.lineTo(x, y) : g.moveTo(x, y); }
-      g.stroke();
-      // avenidas radiais (leque para oeste)
-      g.strokeStyle = 'rgba(182,160,120,.42)'; g.lineWidth = 0.8;
-      const rays = 15, a0 = Math.PI * 0.62, a1 = Math.PI * 1.38;
-      for (let i = 0; i < rays; i++) {
-        const a = a0 + (a1 - a0) * (i / (rays - 1));
-        const len = R * Math.min(1, Math.max(0, p * 1.4 - i * 0.02));
-        g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(a) * len, cy + Math.sin(a) * len); g.stroke();
-      }
-      // anéis concêntricos
-      g.setLineDash([2, 5]);
-      for (let k = 1; k <= 9; k++) {
-        const rr = (R / 9) * k, e = Math.min(1, Math.max(0, p * 1.6 - k * 0.08));
-        if (!e) continue;
-        g.strokeStyle = `rgba(242,235,221,${0.1 + (k % 3 === 0 ? 0.12 : 0)})`;
-        g.beginPath(); g.arc(cx, cy, rr, a0, a0 + (a1 - a0) * e); g.stroke();
-      }
-      g.setLineDash([]);
-      // centro cívico
-      g.fillStyle = 'rgba(201,144,115,.9)'; g.beginPath(); g.arc(cx, cy, 4 * Math.min(1, p * 3), 0, Math.PI * 2); g.fill();
-    }
-    window.addEventListener('resize', size); size();
-    gsap.to(st, { p: 1, ease: 'none', onUpdate: draw, scrollTrigger: { trigger: '#boavista', start: 'top 75%', end: 'bottom 40%', scrub: 1 } });
+  /* ---------- Alta Vista: implantação ilustrativa ---------- */
+  function masterplan() {
+    const svg = $('#masterplan'), NS = 'http://www.w3.org/2000/svg';
+    const el = (t, a, parent) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); (parent || svg).appendChild(e); return e; };
+    const ZONES = {
+      lotes: ['Lotes residenciais', 'Terrenos voltados para ruas internas tranquilas, com espaço para jardim e recuos generosos.'],
+      verde: ['Áreas verdes', 'Faixas de vegetação preservada e arborização que sombreiam as ruas e mantêm o microclima mais fresco.'],
+      lazer: ['Lazer e convivência', 'Espaço central de encontro, a poucos passos de qualquer lote, para crianças, esporte e convivência.'],
+      avenida: ['Avenida principal', 'Eixo arborizado que organiza o bairro e distribui o trânsito, deixando as ruas internas mais calmas.'],
+      portaria: ['Portaria', 'Acesso único e controlado, para a segurança e a tranquilidade de quem mora.']
+    };
+    const g = { verde: el('g', { 'data-zone': 'verde' }), avenida: el('g', { 'data-zone': 'avenida' }), lotes: el('g', { 'data-zone': 'lotes' }), lazer: el('g', { 'data-zone': 'lazer' }), portaria: el('g', { 'data-zone': 'portaria' }) };
+    // perímetro e áreas verdes
+    el('path', { d: 'M40 120 C120 40 300 30 420 50 C560 70 700 40 770 110 L760 560 C600 600 300 600 60 570 Z', class: 'mp-site' }, g.verde);
+    el('path', { d: 'M40 120 C90 220 70 380 60 570 L130 572 C150 420 150 260 120 140 Z', class: 'mp-green' }, g.verde);
+    el('path', { d: 'M640 60 C700 50 760 80 770 110 L765 260 C720 230 680 160 640 60 Z', class: 'mp-green' }, g.verde);
+    for (let i = 0; i < 46; i++) { const x = 150 + Math.random() * 600, y = 70 + Math.random() * 500; if (Math.hypot(x - 430, y - 330) < 90) continue; el('circle', { cx: x, cy: y, r: 3 + Math.random() * 4, class: 'mp-tree' }, g.verde); }
+    // avenida central em curva (até a portaria, embaixo)
+    el('path', { d: 'M430 600 C430 520 430 460 430 420 C430 330 330 250 260 120', class: 'mp-road mp-road--main' }, g.avenida);
+    el('path', { d: 'M430 420 C520 360 620 300 740 300', class: 'mp-road mp-road--main' }, g.avenida);
+    // ruas internas
+    ['M160 200 C260 190 360 200 470 180 C560 170 640 160 720 170', 'M160 300 C230 290 300 300 350 310', 'M520 400 C600 390 680 400 740 410', 'M160 420 C230 420 300 430 360 450', 'M160 510 C250 510 330 520 400 540', 'M480 520 C560 500 650 500 740 500'].forEach((d) => el('path', { d, class: 'mp-road' }, g.avenida));
+    // lotes ao longo das ruas
+    const rows = [[165, 150, 14], [165, 225, 10], [165, 255, 5], [165, 335, 5], [520, 330, 6], [165, 375, 5], [165, 450, 6], [520, 430, 6], [165, 470, 6], [490, 455, 7], [490, 530, 7], [165, 540, 6], [510, 190, 6], [500, 115, 6]];
+    rows.forEach(([x, y, n]) => { for (let k = 0; k < n; k++) el('rect', { x: x + k * 32, y, width: 28, height: 34, rx: 2, class: 'mp-lot' }, g.lotes); });
+    // lazer
+    el('circle', { cx: 430, cy: 330, r: 62, class: 'mp-leisure' }, g.lazer);
+    el('circle', { cx: 430, cy: 330, r: 26, class: 'mp-leisure-core' }, g.lazer);
+    // portaria
+    el('rect', { x: 400, y: 572, width: 60, height: 22, rx: 3, class: 'mp-gate' }, g.portaria);
+    el('text', { x: 430, y: 614, class: 'mp-label', 'text-anchor': 'middle' }, g.portaria).textContent = 'ACESSO';
+    el('text', { x: 780, y: 40, class: 'mp-label', 'text-anchor': 'end' }, svg).textContent = 'N ↑';
+
+    const name = $('#zoneName'), text = $('#zoneText');
+    const set = (z) => {
+      svg.dataset.active = z;
+      name.textContent = ZONES[z][0]; text.textContent = ZONES[z][1];
+      $$('#zoneLegend li').forEach((li) => li.classList.toggle('is-on', li.dataset.zone === z));
+    };
+    Object.keys(g).forEach((z) => { g[z].addEventListener('pointerenter', () => set(z)); });
+    $$('#zoneLegend li').forEach((li) => { li.addEventListener('pointerenter', () => set(li.dataset.zone)); li.addEventListener('click', () => set(li.dataset.zone)); });
+    set('lotes');
+    // desenho de entrada
+    const paths = $$('.mp-road', svg);
+    paths.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 80%' } });
+    tl.to(paths, { strokeDashoffset: 0, duration: 1.6, stagger: 0.08, ease: 'power2.inOut' })
+      .from($$('.mp-lot', svg), { opacity: 0, scale: 0.6, transformOrigin: '50% 50%', duration: 0.5, stagger: 0.004 }, 0.6)
+      .from($$('.mp-tree, .mp-green', svg), { opacity: 0, duration: 0.8, stagger: 0.01 }, 0.4)
+      .from($$('.mp-leisure, .mp-leisure-core, .mp-gate', svg), { scale: 0, transformOrigin: '50% 50%', duration: 0.8, ease: 'back.out(1.6)' }, 1.2);
   }
 
   /* ---------- formulário → WhatsApp ---------- */
