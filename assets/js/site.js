@@ -266,8 +266,8 @@
       io3.disconnect();
       p3 = 'loading';
       window.AVRAPlan3D.init({
-        canvas: $('#plan3dCanvas'), host: view3d, image: $('#planImg').getAttribute('src'),
-        shift: (w) => (w > 1000 ? Math.round(w * 0.06) : 0),
+        canvas: $('#plan3dCanvas'), host: view3d, image: $('#planImg').getAttribute('src'), cats: 'assets/photos/alta-vista-cat.png', labels: $('#plan3dLabels'),
+        shift: (w) => (w > 1000 ? Math.round(w * 0.05) : 0),
         onSelect: (u) => { if (u) u.status = status[u.id] || 'disponivel'; show(u); },
         onHover: (u, e) => {
           if (!u || !e) { tip.hidden = true; return; }

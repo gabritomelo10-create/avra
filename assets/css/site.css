@@ -727,3 +727,18 @@ button.lx__stat:hover { border-color: var(--dourado); }
   .avx__numbers { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 900px) { .avx__hint { font-size: 0; } .avx__hint::after { content: "Toque em um lote para ver os detalhes · arraste para girar · pinça para aproximar"; font-size: 11px; } }
+
+/* logo oficial e rótulos de contexto da cena */
+.av-logo--official { width: min(100%, 230px) !important; height: auto; fill: var(--marfim); color: var(--marfim); }
+.av-logo--official path { fill: var(--marfim); }
+.p3-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.p3-ctx { position: absolute; left: 0; top: 0; font-family: var(--f-title); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--marfim); text-shadow: 0 1px 6px rgba(0,0,0,.55); white-space: nowrap; transition: opacity .3s; }
+.p3-ctx.is-water { font-style: italic; text-transform: none; letter-spacing: .06em; font-size: 15px; color: #e3efe9; }
+.p3-ctx.is-dir { font-family: var(--f-text); font-size: 12px; letter-spacing: .12em; background: rgba(18,32,26,.55); padding: 5px 10px; border-radius: 99px; }
+.avx { background: #d9d4c2; }
+.avx__vignette { background:
+  linear-gradient(90deg, rgba(23,38,32,.9) 0%, rgba(23,38,32,.55) 24%, rgba(23,38,32,0) 42%),
+  linear-gradient(270deg, rgba(23,38,32,.8) 0%, rgba(23,38,32,0) 28%),
+  linear-gradient(180deg, rgba(23,38,32,.55) 0%, rgba(23,38,32,0) 16%),
+  linear-gradient(0deg, rgba(23,38,32,.55) 0%, rgba(23,38,32,0) 16%); }
+@media (max-width: 900px) { .avx { background: var(--verde); } .avx__stage { background: #d9d4c2; } }
