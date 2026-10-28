@@ -26,25 +26,31 @@
 <header class="topbar site-bar" id="topbar">
   <a href="#hero" class="topbar__logo" aria-label="AVRA Incorporadora — início"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg></a>
   <nav class="topbar__nav" aria-label="Principal">
-    <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#altavista">Alta Vista</a><a href="#jornada">Como trabalhamos</a>
+    <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#altavista">Alta Vista</a><a href="#jornada">Como trabalhamos</a>
   </nav>
   <a href="#contato" class="site-bar__cta">Fale conosco</a>
   <button class="site-bar__menu" id="menuBtn" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i></button>
 </header>
 <nav class="mobile-menu" id="mobileMenu" aria-label="Menu">
-  <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#altavista">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a>
+  <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#altavista">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a>
 </nav>
 
 <main>
 
 <!-- ============ HERO ============ -->
 <section class="hero site-hero" id="hero">
-  <div class="site-hero__photo" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Branco_Boa_Vista_1.jpg?width=2400" data-fallback="assets/photos/hero.jpg" alt="" referrerpolicy="no-referrer"></div>
-  <div class="site-hero__shade" aria-hidden="true"></div>
+  <div class="site-hero__bg" aria-hidden="true"><i class="hb hb--1"></i><i class="hb hb--2"></i><i class="hb hb--3"></i><i class="hb hb--light"></i></div>
   <div class="wrap site-hero__content">
     <h1 class="site-hero__brand">
       <span class="sr-only">AVRA Incorporadora</span>
-      <svg viewBox="30 36 3441 558" class="js-logo" aria-hidden="true"><path/></svg>
+      <svg viewBox="30 36 3441 558" class="site-hero__logo" id="heroLogo" aria-hidden="true">
+        <defs>
+          <radialGradient id="heroSheen" gradientUnits="userSpaceOnUse" cx="1750" cy="300" r="1300">
+            <stop offset="0" stop-color="#FFF8EA"/><stop offset=".35" stop-color="#F2EBDD"/><stop offset=".75" stop-color="#D8C7A6"/><stop offset="1" stop-color="#B6A078"/>
+          </radialGradient>
+        </defs>
+        <path class="js-logo-path" fill="url(#heroSheen)"/>
+      </svg>
       <span class="site-hero__desc" aria-hidden="true">INCORPORADORA</span>
     </h1>
     <div class="site-hero__row">
@@ -79,14 +85,33 @@
     <div class="city__text">
       <p class="eyebrow">Nosso lugar</p>
       <h2 class="display split-lines">Boa Vista nasceu planejada.<br>Nós seguimos o traçado.</h2>
+      <p class="reveal-up city__route"><a href="#locmap" class="link-quiet" id="locPlay">Ver o caminho de Boa Vista até o Alta Vista ↘</a></p>
       <p class="lead reveal-up">Em 1944, o engenheiro Darcy Aleixo Derenusson desenhou para Boa Vista um plano em leque: avenidas radiais que partem da praça do Centro Cívico, cruzadas por ruas circulares, junto à margem do Rio Branco.</p>
       <p class="reveal-up">Oito décadas depois, a capital mais ao norte do Brasil é uma das que mais crescem no país. A AVRA nasce aqui para dar continuidade a essa vocação: crescer com planejamento, respeitando o clima, a paisagem e o jeito de viver de quem mora em Roraima.</p>
     </div>
-    <figure class="city__map tilt-soft">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Imagem_de_sat%C3%A9lite_de_Boa_Vista%2C_Roraima_em_2017.jpg?width=1600" data-fallback="hide" alt="Imagem de satélite de Boa Vista mostrando o traçado em leque a partir do Centro Cívico" loading="lazy" referrerpolicy="no-referrer">
-      <span class="city__pin" style="--x:63%;--y:47%"><i></i>Centro Cívico</span>
-      <figcaption>Imagem de satélite de Boa Vista, 2017 · CBERS-4 / INPE · Wikimedia Commons</figcaption>
-    </figure>
+    <div class="locmap" id="locmap">
+      <div class="locmap__view" id="locView">
+        <div class="locmap__stage" id="locStage">
+          <img src="assets/photos/alta-vista-localizacao.jpg" alt="Imagem de satélite da região: Boa Vista à margem oeste do Rio Branco, a ponte e a BR-401 até a área do Residencial Alta Vista, junto ao Igarapé Santa Cecília" width="1503" height="1107" draggable="false">
+          <svg class="locmap__svg" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+            <path class="locmap__route" id="locRoute" d="M73 842 L107 766 L259 715 L430 646 L488 557 L493 513 L527 506 L557 443"/>
+            <path class="locmap__area" d="M523 398 L590 365 L596 470 L540 512 Z"/>
+          </svg>
+          <button type="button" class="lp lp--bv" style="left:7.3%;top:84.2%" data-k="0"><i></i><span>Centro de Boa Vista</span></button>
+          <button type="button" class="lp lp--river" style="left:14.6%;top:59.5%" data-k="1"><i></i><span>Rio Branco</span></button>
+          <button type="button" class="lp" style="left:18%;top:74%" data-k="2"><i></i><span>Ponte dos Macuxis</span></button>
+          <button type="button" class="lp" style="left:46%;top:60%" data-k="3"><i></i><span>BR-401</span></button>
+          <button type="button" class="lp" style="left:56.2%;top:35.1%" data-k="4"><i></i><span>Igarapé Santa Cecília</span></button>
+          <button type="button" class="lp lp--main is-on" style="left:55.7%;top:44.3%" data-k="5"><i></i><span>Residencial Alta Vista</span></button>
+        </div>
+      </div>
+      <div class="locmap__ui">
+        <button type="button" id="locIn" aria-label="Aproximar">+</button>
+        <button type="button" id="locOut" aria-label="Afastar">−</button>
+        <button type="button" id="locReset">Ver tudo</button>
+      </div>
+      <div class="locmap__info" aria-live="polite"><b id="locName">Residencial Alta Vista</b><p id="locText"></p></div>
+    </div>
   </div>
   <div class="wrap">
     <dl class="facts">
@@ -95,46 +120,10 @@
       <div><dt>+45%</dt><dd>Crescimento da população entre 2010 e 2022 (IBGE)</dd></div>
       <div><dt>2°49′N</dt><dd>A capital mais ao norte do Brasil</dd></div>
     </dl>
-    <div class="city__photos">
-      <figure><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Centro_c%C3%ADvico_de_Boa_Vista%2C_RR.jpg?width=1200" data-fallback="hide" alt="Praça do Centro Cívico de Boa Vista" loading="lazy" referrerpolicy="no-referrer"><figcaption>Centro Cívico, o ponto de partida do traçado</figcaption></figure>
-      <figure><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Orla_de_Boa_Vista_4.JPG?width=1200" data-fallback="hide" alt="Orla Taumanan, às margens do Rio Branco" loading="lazy" referrerpolicy="no-referrer"><figcaption>Orla Taumanan, às margens do Rio Branco</figcaption></figure>
-      <figure><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trilha_no_lavrado_roraimense.jpg?width=1200" data-fallback="hide" alt="Trilha no lavrado roraimense" loading="lazy" referrerpolicy="no-referrer"><figcaption>O lavrado, a savana de Roraima</figcaption></figure>
-    </div>
   </div>
 </section>
 
-<!-- ============ PROPÓSITO ============ -->
-<section class="purpose section--ivory" id="proposito">
-  <div class="wrap">
-    <div class="purpose__head">
-      <div>
-        <p class="eyebrow">O que nos move</p>
-        <h2 class="display split-lines">Três forças.<br>Um só propósito.</h2>
-      </div>
-      <p class="lead reveal-up">Cada decisão na AVRA passa por três perguntas. Está bem estruturado? Respeita a natureza? Deixa a vida mais leve? Só seguimos quando a resposta é sim para as três.</p>
-    </div>
-    <div class="purpose__grid">
-      <article class="pcard">
-        <div class="pcard__img"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Centro_c%C3%ADvico_de_Boa_Vista%2C_RR_%28cropped%29.jpg?width=1000" data-fallback="assets/photos/proposito-estrutura.jpg" alt="Centro Cívico de Boa Vista" loading="lazy" referrerpolicy="no-referrer"></div>
-        <span class="pcard__n">Estrutura</span>
-        <h3>Estrutura organiza.</h3>
-        <p>Do estudo do terreno ao último acabamento, nada é improvisado. Planejamento técnico, documentação completa e transparência em cada etapa.</p>
-      </article>
-      <article class="pcard">
-        <div class="pcard__img"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trilha_no_lavrado_roraimense.jpg?width=1000" data-fallback="assets/photos/proposito-natureza.jpg" alt="Lavrado roraimense" loading="lazy" referrerpolicy="no-referrer"></div>
-        <span class="pcard__n">Natureza</span>
-        <h3>Natureza qualifica.</h3>
-        <p>Luz natural, ventilação, sombra e verde não são detalhes do projeto. São o projeto. Espaços integrados ao entorno valorizam o lugar e quem vive nele.</p>
-      </article>
-      <article class="pcard">
-        <div class="pcard__img"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Branco_Boa_Vista_1.jpg?width=1000" data-fallback="assets/photos/proposito-brisa.jpg" alt="Rio Branco em Boa Vista" loading="lazy" referrerpolicy="no-referrer"></div>
-        <span class="pcard__n">Brisa</span>
-        <h3>Brisa introduz leveza.</h3>
-        <p>Respiro entre as coisas. Ruas tranquilas, áreas livres, tempo para viver. A sofisticação que importa é a que deixa o dia mais simples.</p>
-      </article>
-    </div>
-  </div>
-</section>
+
 
 <!-- ============ RESIDENCIAL ALTA VISTA ============ -->
 <section class="av" id="altavista">
@@ -175,20 +164,10 @@
         <p class="eyebrow">Implantação</p>
         <h3 class="display split-lines">O bairro,<br>quadra a quadra.</h3>
       </div>
-      <p class="reveal-up">A planta de implantação e paisagismo do condomínio, em duas leituras: a planta técnica, com os pontos de interesse, e uma maquete 3D gerada a partir dela para você ter noção de escala, quadras e áreas verdes.</p>
+      <p class="reveal-up">A planta de implantação e paisagismo do condomínio. Toque nos pontos para conhecer cada área. Logo abaixo, a mesma planta em uma maquete 3D.</p>
     </div>
     <div class="wrap av__plan-grid">
       <div class="av__viewer">
-      <div class="av__tabs" role="tablist" aria-label="Modo de visualização">
-        <button type="button" role="tab" class="is-on" data-view="2d" aria-selected="true">Planta</button>
-        <button type="button" role="tab" data-view="3d" aria-selected="false">Vista 3D</button>
-      </div>
-      <div class="av__3d" id="plan3d" hidden>
-        <canvas id="plan3dCanvas" aria-label="Maquete 3D ilustrativa gerada a partir da planta de implantação"></canvas>
-        <div class="av__3d-labels" id="plan3dLabels"></div>
-        <p class="av__3d-hint">Arraste para girar · <button type="button" id="plan3dTop">vista de cima</button></p>
-        <p class="av__3d-loading" id="plan3dLoading">Montando a maquete…</p>
-      </div>
       <div class="av__map">
         <img src="assets/photos/alta-vista-implantacao.jpg" alt="Planta de implantação e paisagismo do Residencial Alta Vista, com 21 quadras, alamedas, áreas de lazer, lagos e mata nativa" width="2600" height="2298" id="planImg">
         <div class="av__hotspots" id="hotspots"></div>
@@ -202,6 +181,19 @@
           <p id="zoneText"></p>
         </div>
         <ol class="av__legend" id="zoneLegend"></ol>
+      </div>
+    </div>
+    <div class="wrap av__model">
+      <div class="av__model-head">
+        <p class="eyebrow">Maquete 3D</p>
+        <h3 class="title-md">O mesmo bairro, em volume.</h3>
+        <p>Maquete gerada a partir da planta para dar noção de escala, quadras e áreas verdes. Arraste para girar.</p>
+      </div>
+      <div class="av__3d" id="plan3d">
+        <canvas id="plan3dCanvas" aria-label="Maquete 3D ilustrativa gerada a partir da planta de implantação"></canvas>
+        <div class="av__3d-labels" id="plan3dLabels"></div>
+        <p class="av__3d-hint">Arraste para girar · <button type="button" id="plan3dTop">vista de cima</button></p>
+        <p class="av__3d-loading" id="plan3dLoading">Montando a maquete…</p>
       </div>
     </div>
     <p class="wrap note av__plan-note">Fonte: projeto básico de implantação e paisagismo do condomínio. Números, lotes e equipamentos podem ser ajustados no projeto aprovado e serão confirmados no lançamento.</p>
@@ -295,20 +287,7 @@
   </div>
 </section>
 
-<!-- ============ DIFERENCIAIS ============ -->
-<section class="values-band section--green" aria-labelledby="dif-title">
-  <canvas class="values-band__pattern" id="valuesPattern" aria-hidden="true"></canvas>
-  <div class="wrap">
-    <p class="eyebrow">Nossos compromissos</p>
-    <h2 class="display split-lines" id="dif-title">O que você pode<br>esperar da AVRA.</h2>
-    <div class="difs">
-      <div class="dif"><svg viewBox="0 0 48 48"><path d="M6 42 L24 8 L42 42 Z"/><path d="M15 42 V28 H33 V42"/></svg><h3>Planejamento antes do lançamento</h3><p>Terreno, legislação e viabilidade estudados a fundo. Lançamos apenas o que sabemos entregar.</p></div>
-      <div class="dif"><svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="2"/><path d="M8 24 H40 M24 8 V40"/></svg><h3>Qualidade que se vê e que dura</h3><p>Materiais, fornecedores e processos escolhidos com critério e acompanhados de perto.</p></div>
-      <div class="dif"><svg viewBox="0 0 48 48"><path d="M24 42 C10 32 10 16 24 6 C38 16 38 32 24 42 Z"/><path d="M24 42 V16"/></svg><h3>Respeito ao lugar</h3><p>Projetos pensados para o clima, a paisagem e o jeito de viver de Boa Vista.</p></div>
-      <div class="dif"><svg viewBox="0 0 48 48"><path d="M6 18 C16 10 32 10 42 18"/><path d="M6 28 C16 20 32 20 42 28" stroke-dasharray="4 5"/><path d="M6 38 C16 30 32 30 42 38" stroke-dasharray="2 6"/></svg><h3>Transparência do início ao fim</h3><p>Informação clara, contratos objetivos e uma equipe acessível do primeiro contato à entrega das chaves.</p></div>
-    </div>
-  </div>
-</section>
+
 
 
 
@@ -382,7 +361,7 @@
       <span>INCORPORADORA</span>
     </div>
     <nav class="site-footer__nav" aria-label="Rodapé">
-      <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#proposito">Propósito</a><a href="#altavista">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a><a href="marca/">Guia da marca</a>
+      <a href="#sobre">A AVRA</a><a href="#boavista">Boa Vista</a><a href="#altavista">Residencial Alta Vista</a><a href="#jornada">Como trabalhamos</a><a href="#contato">Contato</a><a href="marca/">Guia da marca</a>
     </nav>
   </div>
   <div class="wrap site-footer__credit">

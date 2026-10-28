@@ -456,3 +456,60 @@ img.is-fallback { filter: saturate(.85); }
 .av__plan-grid { grid-template-columns: minmax(0, 1.75fr) minmax(260px, .8fr); gap: 40px; }
 .av__plan-side { padding-top: 58px; }
 @media (max-width: 1000px) { .av__plan-side { padding-top: 0; } .p3-label em { display: none; } }
+
+/* =========================================================
+   ABERTURA — degradês de verde e luz que segue o cursor
+   ========================================================= */
+.site-hero { --lx: 50%; --ly: 42%; background: #12201A; }
+.site-hero__photo, .site-hero__shade { display: none; }
+.site-hero__bg { position: absolute; inset: 0; overflow: hidden; background:
+  radial-gradient(120% 90% at 50% 110%, #12201A 0%, transparent 60%),
+  linear-gradient(160deg, #2c4638 0%, #263B32 38%, #1b2b24 72%, #12201A 100%); }
+.hb { position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
+.hb--1 { width: 70vw; height: 70vw; left: -20vw; top: -30vw; background: radial-gradient(circle, rgba(116,120,90,.55), transparent 65%); animation: drift1 38s ease-in-out infinite alternate; }
+.hb--2 { width: 60vw; height: 60vw; right: -18vw; top: 10vh; background: radial-gradient(circle, rgba(52,82,66,.9), transparent 65%); animation: drift2 46s ease-in-out infinite alternate; }
+.hb--3 { width: 55vw; height: 55vw; left: 25vw; bottom: -35vw; background: radial-gradient(circle, rgba(182,160,120,.16), transparent 65%); animation: drift1 52s ease-in-out infinite alternate-reverse; }
+.hb--light { width: 46vw; height: 46vw; left: var(--lx); top: var(--ly); margin: -23vw 0 0 -23vw; background: radial-gradient(circle, rgba(242,235,221,.13), rgba(182,160,120,.06) 40%, transparent 68%); filter: blur(30px); }
+@keyframes drift1 { to { transform: translate(8vw, 6vh) scale(1.08); } }
+@keyframes drift2 { to { transform: translate(-10vw, -4vh) scale(.94); } }
+.site-hero__bg::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(242,235,221,.035) 1px, transparent 1px); background-size: 100% 6px; mask-image: linear-gradient(transparent, #000 60%, transparent); -webkit-mask-image: linear-gradient(transparent, #000 60%, transparent); opacity: .5; }
+.site-hero__brand { justify-self: center; justify-items: center; margin: 0 auto; }
+.site-hero__content { display: grid; align-content: end; min-height: 100%; padding-top: 18vh; }
+.site-hero__logo { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 24px 50px rgba(0,0,0,.35)); transform-origin: 50% 50%; will-change: transform; }
+.site-hero__brand svg { fill: none; }
+@media (prefers-reduced-motion: reduce) { .hb { animation: none; } }
+
+/* =========================================================
+   MAPA DE LOCALIZAÇÃO
+   ========================================================= */
+.city__route { margin: 0 0 22px; }
+.locmap { position: relative; border-radius: 10px; overflow: hidden; background: #1b2b24; box-shadow: 0 50px 100px -40px rgba(0,0,0,.7), inset 0 0 0 1px var(--line-light); }
+.locmap__view { position: relative; aspect-ratio: 1503 / 1107; overflow: hidden; cursor: grab; touch-action: pan-y; }
+.locmap__view:active { cursor: grabbing; }
+.locmap__stage { position: absolute; inset: 0; transform-origin: 0 0; }
+.locmap__stage img { width: 100%; height: 100%; display: block; filter: saturate(.75) brightness(.85); user-select: none; }
+.locmap__svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.locmap__route { fill: none; stroke: var(--marfim); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 4px rgba(0,0,0,.6)); }
+.locmap__area { fill: rgba(166,83,60,.55); stroke: var(--marfim); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.lp { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; }
+.lp i { width: 12px; height: 12px; border-radius: 50%; background: var(--marfim); box-shadow: 0 0 0 3px rgba(18,32,26,.65); flex: none; }
+.lp span { font-size: 12px; white-space: nowrap; background: rgba(18,32,26,.8); color: var(--marfim); padding: 5px 10px; border-radius: 99px; opacity: 0; transform: translateX(-4px); transition: opacity .3s, transform .3s; pointer-events: none; }
+.lp:hover span, .lp.is-on span { opacity: 1; transform: none; }
+.lp--main i { width: 18px; height: 18px; background: var(--terracota); box-shadow: 0 0 0 4px var(--marfim); animation: pin 2.6s ease-out infinite; }
+.lp--main span { background: var(--terracota); font-weight: 600; opacity: 1; transform: none; }
+.lp.is-on:not(.lp--main) i { background: var(--dourado); }
+.locmap__ui { position: absolute; right: 12px; top: 12px; display: flex; gap: 6px; }
+.locmap__ui button { min-width: 36px; height: 36px; padding: 0 12px; border-radius: 99px; background: rgba(18,32,26,.82); color: var(--marfim); font-size: 15px; backdrop-filter: blur(6px); }
+.locmap__ui button:hover { background: var(--terracota); }
+.locmap__info { padding: 18px 22px 20px; border-top: 1px solid var(--line-light); min-height: 104px; }
+.locmap__info b { font-family: var(--f-title); font-weight: 400; font-size: 22px; color: var(--marfim); }
+.locmap__info p { margin: 6px 0 0; font-size: 14px; opacity: .8; }
+.city__grid { align-items: start; }
+
+/* =========================================================
+   MAQUETE 3D em bloco próprio
+   ========================================================= */
+.av__model { display: grid; grid-template-columns: minmax(240px, .6fr) minmax(0, 1.6fr); gap: 40px; align-items: start; margin-top: 80px; padding-top: 56px; border-top: 1px solid var(--line-light); }
+.av__model-head p:last-child { opacity: .8; font-size: 15px; max-width: 34ch; }
+.av__model .av__3d { aspect-ratio: 16 / 10; }
+@media (max-width: 1000px) { .av__model { grid-template-columns: 1fr; } .av__model .av__3d { aspect-ratio: 4 / 5; } }

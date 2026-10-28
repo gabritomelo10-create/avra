@@ -17,7 +17,7 @@
   const touch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
   gsap.registerPlugin(ScrollTrigger);
 
-  $$('.js-logo path').forEach((p) => { p.setAttribute('d', AVRA_LOGO.d); p.setAttribute('fill-rule', 'evenodd'); });
+  $$('.js-logo path, .js-logo-path').forEach((p) => { p.setAttribute('d', AVRA_LOGO.d); p.setAttribute('fill-rule', 'evenodd'); });
   $('#loaderPath').setAttribute('d', AVRA_LOGO.d);
   // layout mudou (foto removida ou carregada): recalcula os gatilhos de rolagem
   let rt; const refreshSoon = () => { clearTimeout(rt); rt = setTimeout(() => window.ScrollTrigger && ScrollTrigger.refresh(), 200); };
@@ -107,16 +107,81 @@
 
   /* ---------- hero ---------- */
   function hero() {
-    const heroEl = $('#hero');
-    // um único movimento: a foto se afasta devagar com a rolagem
-    gsap.to('.site-hero__photo img', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: heroEl, start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('.site-hero__content', { y: -60, opacity: 0, ease: 'none', scrollTrigger: { trigger: heroEl, start: '20% top', end: '70% top', scrub: true } });
+    const heroEl = $('#hero'), logo = $('#heroLogo'), sheen = $('#heroSheen');
+    const m = { x: 0.5, y: 0.45 }, c = { x: 0.5, y: 0.45 };
+    let t0 = performance.now(), moved = false;
+    heroEl.addEventListener('pointermove', (e) => {
+      const r = heroEl.getBoundingClientRect();
+      m.x = (e.clientX - r.left) / r.width; m.y = (e.clientY - r.top) / r.height; moved = true;
+    });
+    heroEl.addEventListener('pointerleave', () => { moved = false; });
+    gsap.ticker.add(() => {
+      const t = (performance.now() - t0) / 1000;
+      // sem cursor, a luz passeia devagar sozinha
+      const tx = moved ? m.x : 0.5 + Math.sin(t * 0.18) * 0.28, ty = moved ? m.y : 0.42 + Math.cos(t * 0.13) * 0.16;
+      c.x += (tx - c.x) * 0.045; c.y += (ty - c.y) * 0.045;
+      heroEl.style.setProperty('--lx', (c.x * 100).toFixed(2) + '%');
+      heroEl.style.setProperty('--ly', (c.y * 100).toFixed(2) + '%');
+      // brilho percorre a assinatura e ela inclina levemente para a luz
+      const lr = logo.getBoundingClientRect(), hr = heroEl.getBoundingClientRect();
+      const px = (c.x * hr.width - (lr.left - hr.left)) / lr.width, py = (c.y * hr.height - (lr.top - hr.top)) / lr.height;
+      sheen.setAttribute('cx', (30 + px * 3441).toFixed(0)); sheen.setAttribute('cy', (36 + py * 558).toFixed(0));
+      logo.style.transform = `perspective(1400px) rotateY(${((c.x - 0.5) * 6).toFixed(2)}deg) rotateX(${((0.5 - c.y) * 4).toFixed(2)}deg)`;
+    });
+    gsap.to('.site-hero__content', { y: -60, opacity: 0, ease: 'none', scrollTrigger: { trigger: heroEl, start: '25% top', end: '75% top', scrub: true } });
     return () => {
       gsap.timeline()
-        .fromTo('.site-hero__photo img', { scale: 1.08, opacity: 0 }, { scale: 1, opacity: 1, duration: 2.4, ease: 'power2.out' }, 0)
-        .from('.hero__title .w', { yPercent: 110, duration: 1.5, ease: 'power4.out', stagger: 0.12 }, 0.5)
-        .from('.site-hero__content .eyebrow, .site-hero__row', { opacity: 0, y: 16, duration: 1.2, stagger: 0.15 }, 1);
+        .from('.site-hero__bg', { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
+        .fromTo('#heroLogo', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.8, ease: 'power3.inOut' }, 0.2)
+        .from('.site-hero__desc', { opacity: 0, letterSpacing: '0.3em', duration: 1.6, ease: 'power3.out' }, 1.2)
+        .from('.site-hero__row', { opacity: 0, y: 16, duration: 1.2 }, 1.5);
     };
+  }
+
+  /* ---------- mapa de localização ---------- */
+  function locmap() {
+    const view = $('#locView'), stage = $('#locStage'), route = $('#locRoute');
+    const INFO = [
+      ['Centro de Boa Vista', 'A capital, na margem oeste do Rio Branco. O ponto de partida do caminho até o Alta Vista.'],
+      ['Rio Branco', 'O principal rio de Roraima. O Alta Vista fica na margem oposta à cidade.'],
+      ['Ponte dos Macuxis', 'A travessia do Rio Branco pela BR-401, ligando Boa Vista ao município do Cantá.'],
+      ['BR-401', 'Rodovia federal que segue para o leste. O acesso ao condomínio fica no km 5.'],
+      ['Igarapé Santa Cecília', 'Curso d’água ao norte do terreno. A mata ciliar fica preservada como área comum.'],
+      ['Residencial Alta Vista', '47 hectares na BR-401, km 5, Cantá – RR. Logo depois da ponte, do outro lado do Rio Branco.']
+    ];
+    const pins = $$('.lp', stage), name = $('#locName'), text = $('#locText');
+    const z = { s: 1, x: 0, y: 0 };
+    const apply = (anim) => gsap.to(stage, { scale: z.s, x: z.x, y: z.y, duration: anim ? 1.2 : 0, ease: 'power3.inOut', transformOrigin: '0 0' });
+    const clamp = () => {
+      const w = view.clientWidth, h = view.clientHeight;
+      z.x = Math.min(0, Math.max(w - w * z.s, z.x)); z.y = Math.min(0, Math.max(h - h * z.s, z.y));
+    };
+    const focus = (px, py, s) => {         // px/py em %
+      const w = view.clientWidth, h = view.clientHeight;
+      z.s = s; z.x = w / 2 - (px / 100) * w * s; z.y = h / 2 - (py / 100) * h * s; clamp(); apply(true);
+    };
+    const select = (k, zoom) => {
+      pins.forEach((p, i) => p.classList.toggle('is-on', i === k));
+      name.textContent = INFO[k][0]; text.textContent = INFO[k][1];
+      if (zoom) focus(parseFloat(pins[k].style.left), parseFloat(pins[k].style.top), 1.9);
+    };
+    pins.forEach((p, k) => { p.addEventListener('click', () => select(k, true)); p.addEventListener('pointerenter', () => select(k, false)); });
+    select(5, false);
+    $('#locIn').addEventListener('click', () => { const w = view.clientWidth, h = view.clientHeight; const cx = (w / 2 - z.x) / z.s / w * 100, cy = (h / 2 - z.y) / z.s / h * 100; focus(cx, cy, Math.min(3, z.s * 1.4)); });
+    $('#locOut').addEventListener('click', () => { const w = view.clientWidth, h = view.clientHeight; const cx = (w / 2 - z.x) / z.s / w * 100, cy = (h / 2 - z.y) / z.s / h * 100; focus(cx, cy, Math.max(1, z.s / 1.4)); });
+    $('#locReset').addEventListener('click', () => { z.s = 1; z.x = 0; z.y = 0; apply(true); });
+    // arrastar para mover
+    let d = null;
+    view.addEventListener('pointerdown', (e) => { if (e.target.closest('.lp')) return; d = { x: e.clientX, y: e.clientY, ox: z.x, oy: z.y }; view.setPointerCapture(e.pointerId); });
+    view.addEventListener('pointermove', (e) => { if (!d) return; z.x = d.ox + e.clientX - d.x; z.y = d.oy + e.clientY - d.y; clamp(); apply(false); });
+    view.addEventListener('pointerup', () => { d = null; });
+    // o caminho se desenha ao entrar na tela e pelo link do texto
+    const L = route.getTotalLength();
+    route.style.strokeDasharray = L; route.style.strokeDashoffset = L;
+    const draw = () => gsap.fromTo(route, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 3, ease: 'power2.inOut' });
+    ScrollTrigger.create({ trigger: view, start: 'top 70%', once: true, onEnter: () => { draw(); setTimeout(() => select(5, true), 2600); } });
+    $('#locPlay').addEventListener('click', (e) => { e.preventDefault(); go(view); setTimeout(() => { z.s = 1; z.x = 0; z.y = 0; apply(true); draw(); setTimeout(() => select(5, true), 2600); }, 900); });
+    window.addEventListener('resize', () => { clamp(); apply(false); });
   }
 
   /* ---------- animações de rolagem ---------- */
@@ -131,24 +196,14 @@
     gsap.from('.manifesto__sign', { y: 30, opacity: 0, duration: 1.2, scrollTrigger: { trigger: '.manifesto__sign', start: 'top 90%' } });
 
     // cartões de propósito com parallax interno
-    $$('.pcard').forEach((c, i) => {
-      gsap.from(c, { y: 80, opacity: 0, duration: 1.4, ease: 'power3.out', delay: i * 0.1, scrollTrigger: { trigger: c, start: 'top 88%' } });
-      gsap.fromTo($('img', c), { yPercent: -8 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: c, start: 'top bottom', end: 'bottom top', scrub: true } });
-    });
 
     // empreendimento: segunda imagem cobre a primeira ao rolar
 
-    gsap.from('.dif', { y: 50, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.difs', start: 'top 85%' } });
 
 
     // frase-assinatura
     gsap.fromTo('.statement__text', { letterSpacing: '0.06em' }, { letterSpacing: '0.01em', ease: 'none', scrollTrigger: { trigger: '.statement', start: 'top bottom', end: 'bottom top', scrub: true } });
     gsap.from('.facts > div', { y: 30, opacity: 0, stagger: 0.1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.facts', start: 'top 90%' } });
-    $$('.city__photos figure').forEach((f, i) => {
-      gsap.from(f, { y: 60, opacity: 0, duration: 1.4, delay: i * 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.city__photos', start: 'top 88%' } });
-      gsap.fromTo($('img', f), { yPercent: -8 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true } });
-    });
-    gsap.fromTo('.city__map img', { scale: 1.18 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.city__map', start: 'top bottom', end: 'bottom top', scrub: true } });
 
     // Alta Vista
     gsap.fromTo('.av__intro-bg img', { scale: 1.2, yPercent: -6 }, { scale: 1, yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.av__intro', start: 'top bottom', end: 'bottom top', scrub: true } });
@@ -168,10 +223,10 @@
   function patterns() {
     const fine = { fine: true, textured: true, density: 1.4 };
     BR20.animate($('#manifestoPattern'), Object.assign({ color: '#C99073', alpha: 0.42, seed: 44, speed: 0.3, width: 0.7, interactive: true, host: $('#sobre'), force: 28, radius: 120, align: { ax: 1, ay: 0.5, scale: 0.95 } }, fine));
-    BR20.animate($('#valuesPattern'), Object.assign({ color: '#A6533C', alpha: 0.5, seed: 8, speed: 0.3, width: 0.7, interactive: true, host: $('.values-band'), force: 28, align: { ax: 1, ay: 0.3 } }, fine));
     BR20.animate($('#statementPattern'), Object.assign({ color: '#F2EBDD', alpha: 0.38, seed: 12, speed: 0.3, width: 0.7, interactive: true, host: $('.statement'), force: 30, align: { ax: 0.5, ay: 0.5, scale: 1.1 }, fade: { x: 0.5, y: 0.5, r: 0.38, soft: 0.5 } }, fine));
     BR20.animate($('#footerPattern'), Object.assign({ color: '#B6A078', alpha: 0.32, seed: 20, speed: 0.25, width: 0.7, align: { ax: 1, ay: 0.5, scale: 1.1 } }, fine));
     masterplan();
+    locmap();
   }
 
   /* ---------- Alta Vista: planta real com pontos interativos ---------- */
@@ -197,18 +252,16 @@
       if (p3) p3.setActive(k);
     };
     let p3 = null, p3Loading = null;
-    // abas: planta técnica × maquete 3D
-    const view3d = $('#plan3d'), map2d = $('.av__map');
-    $$('.av__tabs button').forEach((tab) => tab.addEventListener('click', () => {
-      const is3d = tab.dataset.view === '3d';
-      $$('.av__tabs button').forEach((t) => { t.classList.toggle('is-on', t === tab); t.setAttribute('aria-selected', t === tab); });
-      view3d.hidden = !is3d; map2d.hidden = is3d;
-      if (is3d && !p3Loading) {
-        p3Loading = window.AVRAPlan3D.init({ canvas: $('#plan3dCanvas'), host: view3d, labels: $('#plan3dLabels'), image: $('#planImg').getAttribute('src'), spots: SPOTS, onSpot: (k) => set(k) })
-          .then((api) => { p3 = api; $('#plan3dLoading').hidden = true; api.resize(); set(+num.textContent - 1); })
-          .catch(() => { $('#plan3dLoading').textContent = 'Não foi possível carregar a maquete 3D neste navegador.'; });
-      } else if (is3d && p3) p3.resize();
-    }));
+    // maquete 3D em bloco próprio, carregada quando chega perto da tela
+    const view3d = $('#plan3d');
+    const io3 = new IntersectionObserver((en) => {
+      if (!en[0].isIntersecting || p3Loading) return;
+      io3.disconnect();
+      p3Loading = window.AVRAPlan3D.init({ canvas: $('#plan3dCanvas'), host: view3d, labels: $('#plan3dLabels'), image: $('#planImg').getAttribute('src'), spots: SPOTS, onSpot: (k) => set(k) })
+        .then((api) => { p3 = api; $('#plan3dLoading').hidden = true; api.resize(); set(+num.textContent - 1); })
+        .catch(() => { $('#plan3dLoading').textContent = 'Não foi possível carregar a maquete 3D neste navegador.'; });
+    }, { rootMargin: '400px' });
+    io3.observe(view3d);
     $('#plan3dTop').addEventListener('click', () => p3 && p3.top());
     SPOTS.forEach((sp, k) => {
       const b = document.createElement('button');
