@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AVRA Incorporadora · Identidade Visual</title>
+<meta name="description" content="Apresentação interativa da identidade visual da AVRA Incorporadora — nome, conceito, assinatura, tipografia, paleta, pattern BR20 e aplicações.">
+<meta name="theme-color" content="#263B32">
+<link rel="preload" href="../assets/fonts/tenor-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="is-loading">
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <svg class="loader__logo" id="loaderLogo" viewBox="30 36 3441 558"><path id="loaderPath" pathLength="1"/></svg>
+  <div class="loader__desc">I N C O R P O R A D O R A</div>
+  <div class="loader__bar"><span id="loaderBar"></span></div>
+</div>
+
+<!-- ============ UI FIXA ============ -->
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><em id="cursorLabel"></em></span></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<header class="topbar" id="topbar">
+  <a href="../" class="topbar__logo" aria-label="AVRA — site institucional"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg></a>
+  <nav class="topbar__nav" aria-label="Capítulos">
+    <a href="#nome">Nome</a><a href="#conceito">Conceito</a><a href="#construcao">Assinatura</a><a href="#tipografia">Tipografia</a><a href="#paleta">Paleta</a><a href="#br20">BR20</a><a href="#estudio">Mockups 3D</a><a href="#aplicacoes">Aplicações</a><a href="../">Site AVRA ↗</a>
+  </nav>
+  <span class="topbar__chapter" id="chapterLabel">Guia de Identidade Visual</span>
+</header>
+
+<main>
+
+<!-- ============ 00 HERO ============ -->
+<section class="hero" id="hero" data-chapter="Guia de Identidade Visual">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="glow glow--a"></div><div class="glow glow--b"></div><div class="glow glow--c"></div>
+    <canvas class="hero__pattern hero__pattern--far" id="heroPatternFar"></canvas>
+    <canvas class="hero__pattern hero__pattern--near" id="heroPatternNear"></canvas>
+  </div>
+  <canvas class="hero__gl" id="heroGL" aria-label="Assinatura AVRA em 3D — arraste para girar"></canvas>
+  <div class="hero__descriptor" id="heroDesc" aria-hidden="true">INCORPORADORA</div>
+  <div class="hero__content">
+    <p class="eyebrow reveal-up">AVRA Incorporadora · Guia de Identidade Visual · v10</p>
+    <h1 class="hero__title"><span class="split">Criar lugares onde</span> <span class="split">a vida respira.</span></h1>
+  </div>
+  <aside class="credit-box" aria-label="Desenvolvido por BRITTO* GROUP">
+    <span class="credit-box__label">Desenvolvido por</span>
+    <img src="../assets/img/britto-group.png" alt="BRITTO* GROUP" class="credit-box__logo" width="852" height="339">
+    <span class="credit-box__text">Identidade visual e experiência digital da AVRA Incorporadora</span>
+  </aside>
+  <div class="hero__foot">
+    <span>Boa Vista · Roraima</span>
+    <span class="hero__scroll"><i></i>Role para sentir a brisa</span>
+    <span>Arraste a marca</span>
+  </div>
+</section>
+
+<!-- ============ ÍNDICE ============ -->
+<section class="index section--ivory" id="indice" data-chapter="A identidade">
+  <div class="wrap">
+    <p class="eyebrow">A identidade</p>
+    <h2 class="display split-lines">Uma essência.<br>Um sistema inteiro.</h2>
+    <ol class="index__list" id="indexList">
+      <li><a href="#nome" data-img="../assets/img/nome.jpg"><b>01</b><span>Nome e essência</span><i>→</i></a></li>
+      <li><a href="#conceito" data-img="../assets/img/essencia.jpg"><b>02</b><span>Conceito da marca</span><i>→</i></a></li>
+      <li><a href="#construcao" data-img="../assets/img/metal.jpg"><b>03</b><span>Assinatura revisada</span><i>→</i></a></li>
+      <li><a href="#tipografia" data-img="../assets/img/mesa.jpg"><b>04</b><span>Tipografia</span><i>→</i></a></li>
+      <li><a href="#paleta" data-img="../assets/mockups/portfolio.jpg"><b>05</b><span>Paleta ampliada</span><i>→</i></a></li>
+      <li><a href="#br20" data-img="../assets/mockups/recepcao.jpg"><b>06</b><span>BR20 — Encontro de Correntes</span><i>→</i></a></li>
+      <li><a href="#aplicacoes" data-img="../assets/mockups/pavilhao.jpg"><b>07</b><span>Aplicações físicas e digitais</span><i>→</i></a></li>
+      <li><a href="#diretrizes" data-img="../assets/img/janela.jpg"><b>08</b><span>Consistência e reprodução</span><i>→</i></a></li>
+    </ol>
+  </div>
+  <div class="index__preview" id="indexPreview" aria-hidden="true"><img alt=""></div>
+</section>
+
+<!-- ============ 01 NOME ============ -->
+<section class="chapter-cover" id="nome" data-chapter="01 · Origem e significado">
+  <div class="chapter-cover__media parallax" data-speed="0.25"><img src="../assets/img/nome.jpg" alt="Pilar de travertino e cortina de linho movida pela brisa" loading="lazy"></div>
+  <div class="chapter-cover__shade"></div>
+  <div class="wrap chapter-cover__inner">
+    <p class="eyebrow">01 / Origem e significado</p>
+    <h2 class="mega split-chars">O nome.</h2>
+  </div>
+</section>
+
+<section class="name section--ivory" data-chapter="01 · Defesa do nome">
+  <div class="wrap name__grid">
+    <div class="name__word">
+      <p class="eyebrow">Defesa do nome</p>
+      <div class="name__greek" id="greek" aria-label="αύρα — AVRA">αύρα</div>
+      <p class="name__phon">/ ˈav.ra / · grego moderno · <em>brisa</em></p>
+    </div>
+    <div class="name__text">
+      <h2 class="display split-lines">AVRA.<br>A presença da brisa.</h2>
+      <p class="lead reveal-up">No grego moderno, <em>αύρα</em> é pronunciado aproximadamente “ávra” e significa brisa: vento suave e fresco.</p>
+      <p class="reveal-up">O nome curto e sonoro oferece uma assinatura compacta. Respiro, tranquilidade e conexão com o lugar são interpretações estratégicas da marca, além do significado literal.</p>
+    </div>
+  </div>
+  <canvas class="name__breeze" id="nameBreeze" aria-hidden="true"></canvas>
+</section>
+
+<section class="split-media section--green" data-chapter="01 · Nome e experiência">
+  <div class="split-media__text wrap-half">
+    <p class="eyebrow">Nome e experiência</p>
+    <h2 class="display split-lines">Um nome que<br>abre espaço.</h2>
+    <p class="lead reveal-up">A brisa é percebida pelo que move.</p>
+    <p class="reveal-up">A marca traduz essa sensação em leveza, fluidez e cuidado com os espaços de viver.</p>
+  </div>
+  <div class="split-media__img tilt-soft">
+    <div class="parallax" data-speed="0.18"><img src="../assets/img/janela.jpg" alt="Janela com cortina de linho e jardim ao fundo" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ============ 02 CONCEITO ============ -->
+<section class="chapter-cover chapter-cover--zoom" id="conceito" data-chapter="02 · Conceito da marca">
+  <div class="chapter-cover__media zoom-on-scroll"><img src="../assets/img/essencia.jpg" alt="Galeria de pilares verdes abrindo para um jardim" loading="lazy"></div>
+  <div class="chapter-cover__shade"></div>
+  <div class="wrap chapter-cover__inner">
+    <p class="eyebrow">02 / Conceito da marca</p>
+    <h2 class="mega split-chars">A essência.</h2>
+  </div>
+</section>
+
+<section class="concept section--green" data-chapter="02 · Defesa do conceito">
+  <div class="wrap">
+    <p class="eyebrow">Defesa do conceito</p>
+    <h2 class="display split-lines">Criar lugares onde<br>a vida respira.</h2>
+    <p class="lead reveal-up concept__lead">A ideia une o planejamento de uma incorporadora à experiência de quem vai viver em seus empreendimentos.</p>
+    <div class="pillars">
+      <article class="pillar tilt" data-tilt>
+        <div class="pillar__icon"><svg viewBox="0 0 100 100"><path d="M10 90 L50 10 L90 90" /><path d="M30 90 V50 M70 90 V50 M20 70 H80"/></svg></div>
+        <span class="pillar__num">I</span>
+        <h3>Estrutura organiza.</h3>
+        <p>Diagonais firmes e planejamento criterioso sustentam cada decisão.</p>
+        <span class="pillar__shine"></span>
+      </article>
+      <article class="pillar tilt" data-tilt>
+        <div class="pillar__icon"><svg viewBox="0 0 100 100"><path d="M50 90 C20 70 20 35 50 10 C80 35 80 70 50 90 Z"/><path d="M50 90 V25"/></svg></div>
+        <span class="pillar__num">II</span>
+        <h3>Natureza qualifica.</h3>
+        <p>Verde, luz natural e materiais reais dão qualidade à experiência de viver.</p>
+        <span class="pillar__shine"></span>
+      </article>
+      <article class="pillar tilt" data-tilt>
+        <div class="pillar__icon"><svg viewBox="0 0 100 100"><path d="M8 40 C30 22 55 22 92 40"/><path d="M8 60 C35 42 60 44 92 60" stroke-dasharray="6 7"/><path d="M8 80 C30 64 60 64 92 80" stroke-dasharray="3 8"/></svg></div>
+        <span class="pillar__num">III</span>
+        <h3>Brisa introduz leveza.</h3>
+        <p>Curvas que conectam, respiro nos espaços e fluidez na comunicação.</p>
+        <span class="pillar__shine"></span>
+      </article>
+    </div>
+    <ul class="values reveal-up">
+      <li>Confiança</li><li>Integridade</li><li>Cuidado</li><li>Sofisticação</li>
+    </ul>
+  </div>
+</section>
+
+<section class="positioning section--clay" data-chapter="02 · Posicionamento">
+  <canvas class="positioning__pattern" id="posPattern" aria-hidden="true"></canvas>
+  <div class="wrap positioning__grid">
+    <div>
+      <p class="eyebrow">Posicionamento</p>
+      <h2 class="display split-lines">Planejamento criterioso.<br>Qualidade de viver.</h2>
+    </div>
+    <div class="positioning__facts">
+      <div class="fact reveal-up"><span class="fact__label">Origem</span><span class="fact__value">Boa Vista · Roraima</span></div>
+      <div class="fact reveal-up"><span class="fact__label">Segmento</span><span class="fact__value">Alto padrão</span></div>
+      <div class="fact reveal-up"><span class="fact__label">Primeiro empreendimento</span><span class="fact__value">Residencial Alta Vista</span><small>Condomínio fechado de lotes</small></div>
+      <p class="reveal-up small">AVRA é a marca institucional. Os empreendimentos terão identidade própria e uma relação de assinatura a definir. As simulações deste guia não representam obras realizadas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 ASSINATURA — CONSTRUÇÃO ============ -->
+<section class="chapter-cover" id="assinatura" data-chapter="03 · Assinatura revisada">
+  <div class="chapter-cover__media parallax" data-speed="0.25"><img src="../assets/img/metal.jpg" alt="Perfil metálico dourado sobre superfície verde" loading="lazy"></div>
+  <div class="chapter-cover__shade chapter-cover__shade--soft"></div>
+  <div class="wrap chapter-cover__inner">
+    <p class="eyebrow">03 / Assinatura revisada</p>
+    <h2 class="mega split-chars">O desenho<br>do nome.</h2>
+  </div>
+</section>
+
+<section class="build" id="construcao" data-chapter="03 · A marca sendo construída">
+  <div class="build__pin">
+    <div class="build__bg" aria-hidden="true"></div>
+    <div class="build__head wrap">
+      <p class="eyebrow">Construção da assinatura</p>
+      <div class="build__steps" id="buildSteps">
+        <div class="build__step is-active"><b>01</b><h3>Grade e proporção</h3><p>Linha de base, altura e eixo comum organizam as quatro letras.</p></div>
+        <div class="build__step"><b>02</b><h3>Estrutura que sustenta</h3><p>As diagonais dão firmeza e direção.</p></div>
+        <div class="build__step"><b>03</b><h3>Curvas que conectam</h3><p>Os arcos suavizam as transições e associam o lettering ao movimento da brisa.</p></div>
+        <div class="build__step"><b>04</b><h3>Abertura óptica</h3><p>A revisão abre a ligação entre o primeiro A e o V. O V ganha uma diagonal própria, sem abandonar o ritmo arquitetônico.</p></div>
+        <div class="build__step"><b>05</b><h3>Continuidade no desenho.<br>Clareza na leitura.</h3><p>Quatro letras. Uma leitura clara.</p></div>
+      </div>
+    </div>
+    <div class="build__stage">
+      <svg class="build__svg" id="buildSvg" viewBox="-580 -140 4120 900" aria-label="Construção da assinatura AVRA">
+        <g class="g-grid" id="bGrid"></g>
+        <g class="g-diag" id="bDiag"></g>
+        <g class="g-arcs" id="bArcs"></g>
+        <path class="b-outline" id="bOutline" pathLength="1"/>
+        <path class="b-fill" id="bFill"/>
+        <g class="g-gap" id="bGap"></g>
+        <g class="g-notes" id="bNotes"></g>
+      </svg>
+      <div class="build__desc" id="buildDesc">INCORPORADORA</div>
+    </div>
+    <div class="build__progress"><span id="buildProgress"></span></div>
+  </div>
+</section>
+
+<!-- ============ 03 VERSÕES / PROTEÇÃO ============ -->
+<section class="versions section--ivory" data-chapter="03 · Contrastes e proteção">
+  <div class="wrap">
+    <div class="versions__head">
+      <div>
+        <p class="eyebrow">Assinatura · contrastes</p>
+        <h2 class="display split-lines">O mesmo desenho.<br>Diferentes presenças.</h2>
+      </div>
+      <div class="versions__controls" role="tablist" aria-label="Versões da assinatura">
+        <button class="chip is-active" data-bg="#263B32" data-fg="#F2EBDD" data-name="Marfim sobre verde profundo">Verde</button>
+        <button class="chip" data-bg="#A6533C" data-fg="#F2EBDD" data-name="Marfim sobre terracota">Terracota</button>
+        <button class="chip" data-bg="#C99073" data-fg="#263B32" data-name="Verde profundo sobre argila">Argila</button>
+        <button class="chip" data-bg="#F2EBDD" data-fg="#A6533C" data-name="Terracota sobre marfim">Marfim</button>
+        <button class="chip" data-bg="#263B32" data-fg="#C99073" data-name="Argila sobre verde — profundidade e acento">Acento</button>
+      </div>
+    </div>
+    <div class="versions__stage tilt-stage" id="versionStage">
+      <div class="versions__card" id="versionCard">
+        <div class="versions__clear" id="clearBox"><span class="cs cs--t">x</span><span class="cs cs--b">x</span><span class="cs cs--l">x</span><span class="cs cs--r">x</span></div>
+        <svg viewBox="30 36 3441 558" class="js-logo versions__logo"><path/></svg>
+        <div class="versions__desc">INCORPORADORA</div>
+        <span class="versions__light"></span>
+      </div>
+    </div>
+    <div class="versions__foot">
+      <p id="versionName">Marfim sobre verde profundo</p>
+      <label class="switch"><input type="checkbox" id="clearToggle"><span></span>Mostrar área de proteção</label>
+    </div>
+    <div class="protect">
+      <div class="reveal-up">
+        <h3 class="title-md">Respiro em todos os lados.</h3>
+        <p>Reservar uma área livre ao redor da assinatura. Referência de trabalho: altura do descritivo “INCORPORADORA”. Não aproximar o pattern, bordas ou textos desse limite.</p>
+      </div>
+      <div class="reveal-up">
+        <h3 class="title-md">Reconhecimento também em redução.</h3>
+        <p>Usar a assinatura completa quando “INCORPORADORA” permanecer legível. Não há símbolo isolado ou assinatura vertical definidos nesta revisão.</p>
+        <div class="scale-demo" id="scaleDemo">
+          <input type="range" min="40" max="420" value="240" id="scaleRange" aria-label="Tamanho da assinatura">
+          <div class="scale-demo__view"><div class="scale-demo__logo" id="scaleLogo"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg><span>INCORPORADORA</span></div></div>
+          <p class="scale-demo__note" id="scaleNote">Descritivo legível</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 TIPOGRAFIA ============ -->
+<section class="chapter-cover" id="tipografia" data-chapter="04 · Tipografia">
+  <div class="chapter-cover__media parallax" data-speed="0.25"><img src="../assets/img/mesa.jpg" alt="Mesa com papéis verdes, régua dourada e caneta" loading="lazy"></div>
+  <div class="chapter-cover__shade chapter-cover__shade--soft"></div>
+  <div class="wrap chapter-cover__inner">
+    <p class="eyebrow">04 / Tipografia</p>
+    <h2 class="mega split-chars">A voz visual.</h2>
+  </div>
+</section>
+
+<section class="type section--ivory" data-chapter="04 · Sistema tipográfico">
+  <div class="wrap">
+    <div class="type__pair">
+      <article class="type__card type__card--tenor">
+        <div class="type__aa" id="tenorAa">Aa</div>
+        <div>
+          <p class="eyebrow">Títulos</p>
+          <h3>Tenor Sans</h3>
+          <p>Regular 400 nos títulos: proporções abertas, desenho sóbrio e presença que acompanha a arquitetura da marca.</p>
+          <p class="glyphs">ÁÀÂÃÉÊÍÓÔÕÚÜÇ áàâãéêíóôõúüç</p>
+        </div>
+      </article>
+      <article class="type__card type__card--manrope">
+        <div class="type__aa type__aa--var" id="manropeAa">Aa</div>
+        <div>
+          <p class="eyebrow">Textos</p>
+          <h3>Manrope</h3>
+          <p>Regular 400 nos textos; Semibold 600 em destaques e informações de apoio. A hierarquia vem de escala, peso e respiro.</p>
+          <label class="weight">Peso <output id="weightOut">400</output><input type="range" min="200" max="800" step="1" value="400" id="weightRange"></label>
+        </div>
+      </article>
+    </div>
+    <div class="type__live">
+      <p class="eyebrow">Experimente — clique e escreva</p>
+      <div class="type__editable" contenteditable="true" spellcheck="false" id="typeLive">Espaço para viver.<br>Precisão para realizar.</div>
+      <p class="type__sub">Planejamento que acolhe.</p>
+      <p class="type__body">Manrope organiza informações comerciais e técnicas com clareza. Frases objetivas, alinhamento à esquerda e entrelinhas confortáveis.</p>
+      <p class="type__nums">0123456789 · R$ 1.250,00 · 450 m²</p>
+    </div>
+    <div class="hierarchy">
+      <div class="hierarchy__row reveal-up"><span>Títulos</span><b class="h-tenor">Tenor Sans 400</b></div>
+      <div class="hierarchy__row reveal-up"><span>Subtítulos</span><b class="h-semi">Manrope 600</b></div>
+      <div class="hierarchy__row reveal-up"><span>Corpo e legendas</span><b class="h-reg">Manrope 400</b></div>
+      <p class="small reveal-up">Evitar negrito ou itálico sintético na Tenor Sans. Fontes com licença OFL. Alternativa operacional: Arial. A assinatura AVRA nunca deve ser substituída por uma fonte.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 PALETA ============ -->
+<section class="chapter-cover" id="paleta" data-chapter="05 · Paleta ampliada">
+  <div class="chapter-cover__media parallax" data-speed="0.25"><img src="../assets/mockups/portfolio.jpg" alt="Portfólio terracota e envelope marfim com a assinatura AVRA" loading="lazy"></div>
+  <div class="chapter-cover__shade chapter-cover__shade--soft"></div>
+  <div class="wrap chapter-cover__inner">
+    <p class="eyebrow">05 / Paleta ampliada</p>
+    <h2 class="mega split-chars">Natureza<br>e matéria.</h2>
+  </div>
+</section>
+
+<section class="palette" data-chapter="05 · Seis cores, um sistema">
+  <div class="palette__intro wrap">
+    <p class="eyebrow">Defesa cromática</p>
+    <h2 class="display split-lines">Verde para ancorar.<br>Terracota para acolher.</h2>
+    <p class="reveal-up">Passe o mouse para abrir cada tom · clique para copiar o HEX.</p>
+  </div>
+  <div class="swatches" id="swatches">
+    <button class="swatch" style="--c:#263B32;--t:#F2EBDD" data-hex="#263B32"><span class="swatch__name">Verde profundo</span><span class="swatch__meta">#263B32<br>RGB 38 / 59 / 50<br>CMYK 36 / 0 / 15 / 77</span><span class="swatch__role">Ancora a comunicação institucional</span></button>
+    <button class="swatch" style="--c:#74785A;--t:#F2EBDD" data-hex="#74785A"><span class="swatch__name">Oliva</span><span class="swatch__meta">#74785A<br>RGB 116 / 120 / 90<br>CMYK 3 / 0 / 25 / 53</span><span class="swatch__role">Complementa o sistema · grafismos</span></button>
+    <button class="swatch" style="--c:#A6533C;--t:#F2EBDD" data-hex="#A6533C"><span class="swatch__name">Terracota</span><span class="swatch__meta">#A6533C<br>RGB 166 / 83 / 60<br>CMYK 0 / 50 / 64 / 35</span><span class="swatch__role">Capas, posts e peças de destaque</span></button>
+    <button class="swatch" style="--c:#C99073;--t:#263B32" data-hex="#C99073"><span class="swatch__name">Argila</span><span class="swatch__meta">#C99073<br>RGB 201 / 144 / 115<br>CMYK 0 / 28 / 43 / 21</span><span class="swatch__role">Amplia superfícies e materiais</span></button>
+    <button class="swatch" style="--c:#F2EBDD;--t:#263B32" data-hex="#F2EBDD"><span class="swatch__name">Marfim</span><span class="swatch__meta">#F2EBDD<br>RGB 242 / 235 / 221<br>CMYK 0 / 3 / 9 / 5</span><span class="swatch__role">Aquece as áreas de leitura</span></button>
+    <button class="swatch swatch--gold" style="--c:#B6A078;--t:#263B32" data-hex="#B6A078"><span class="swatch__name">Dourado suave</span><span class="swatch__meta">#B6A078<br>RGB 182 / 160 / 120<br>CMYK 0 / 12 / 34 / 29</span><span class="swatch__role">Acento pontual e acabamento</span></button>
+  </div>
+  <div class="wrap palette__grid">
+    <div class="combos">
+      <div class="combo tilt" data-tilt style="--bg:#A6533C;--fg:#F2EBDD"><h4>Calor e presença.</h4><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg></div>
+      <div class="combo tilt" data-tilt style="--bg:#F2EBDD;--fg:#263B32"><h4>Clareza e respiro.</h4><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg></div>
+      <div class="combo tilt" data-tilt style="--bg:#C99073;--fg:#263B32"><h4>Matéria e acolhimento.</h4><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg></div>
+      <div class="combo tilt" data-tilt style="--bg:#263B32;--fg:#C99073"><h4>Profundidade e acento.</h4><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg></div>
+    </div>
+    <div class="contrast">
+      <p class="eyebrow">Cor e legibilidade</p>
+      <h3 class="title-md">Contraste para ler.</h3>
+      <ul>
+        <li style="--bg:#263B32;--fg:#F2EBDD"><span>Espaço para viver.</span><b>10.09:1</b><em>Texto normal · AA</em></li>
+        <li style="--bg:#A6533C;--fg:#F2EBDD"><span>Espaço para viver.</span><b>4.51:1</b><em>Texto normal · AA</em></li>
+        <li style="--bg:#C99073;--fg:#263B32"><span>Espaço para viver.</span><b>4.40:1</b><em>Texto grande</em></li>
+        <li style="--bg:#F2EBDD;--fg:#A6533C"><span>Espaço para viver.</span><b>4.51:1</b><em>Texto normal · AA</em></li>
+        <li style="--bg:#74785A;--fg:#263B32"><span>Espaço para viver.</span><b>2.61:1</b><em>Só grafismos</em></li>
+      </ul>
+      <p class="small">Branco puro não integra a paleta. Não é necessário usar as seis cores em cada peça. Valores CMYK matemáticos — converter pelo perfil ICC e conferir prova no substrato.</p>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</section>
+
+<!-- ============ 06 BR20 ============ -->
+<section class="chapter-cover chapter-cover--dark" id="br20" data-chapter="06 · Pattern BR20">
+  <canvas class="br20-cover" id="br20Cover" aria-hidden="true"></canvas>
+  <div class="wrap chapter-cover__inner">
+    <p class="eyebrow">06 / Pattern BR20</p>
+    <h2 class="mega split-chars">Encontro<br>de Correntes.</h2>
+  </div>
+</section>
+
+<section class="pattern section--green" data-chapter="06 · A brisa ganha ritmo">
+  <div class="wrap pattern__grid">
+    <div class="pattern__text">
+      <p class="eyebrow">Defesa do pattern</p>
+      <h2 class="display split-lines">BR20.<br>A brisa ganha ritmo.</h2>
+      <p class="reveal-up">Pequenos traços formam correntes curvas e densas. Os canais de respiro entre elas tornam perceptível o fluxo do ar.</p>
+      <p class="reveal-up small">O desenho preserva a direção dos traços, a concentração das faixas e os vazios sinuosos. Um campo uniforme e disperso de pontos não representa o BR20.</p>
+      <div class="pattern__controls">
+        <p class="eyebrow">Temperatura</p>
+        <div class="chips" id="patternTemps">
+          <button class="chip is-active" data-bg="#263B32" data-fg="#C99073">Verde</button>
+          <button class="chip" data-bg="#F2EBDD" data-fg="#A6533C">Marfim</button>
+          <button class="chip" data-bg="#A6533C" data-fg="#F2EBDD">Terracota</button>
+          <button class="chip" data-bg="#C99073" data-fg="#A6533C">Argila</button>
+        </div>
+        <label class="slider">Ritmo da brisa<input type="range" id="patternSpeed" min="0" max="3" step="0.01" value="1"></label>
+      </div>
+    </div>
+    <div class="pattern__stage" id="patternStage">
+      <canvas id="patternCanvas" aria-label="Pattern BR20 interativo — mova o cursor para soprar a brisa"></canvas>
+      <span class="pattern__hint">Mova o cursor · a brisa desvia</span>
+    </div>
+  </div>
+  <div class="wrap pattern__rules">
+    <div class="rule reveal-up"><b>Preferir</b><p>SVG ou PDF com traços vetoriais. Recortar o campo sem deformar a matriz.</p></div>
+    <div class="rule reveal-up"><b>Preservar</b><p>A espessura e o intervalo dos traços. Não reconstruir como grade genérica de pontos.</p></div>
+    <div class="rule reveal-up"><b>Conduzir</b><p>O pattern acompanha. A informação conduz. Não atravessar a logo com traços.</p></div>
+  </div>
+</section>
+
+<!-- ============ 07 ESTÚDIO 3D ============ -->
+<section class="studio" id="estudio" data-chapter="07 · Mockups em 3D">
+  <div class="studio__head wrap">
+    <div>
+      <p class="eyebrow">07 / Aplicações · estúdio 3D</p>
+      <h2 class="display split-lines">Da marca<br>ao objeto.</h2>
+    </div>
+    <p class="studio__help reveal-up">Arraste para girar a peça · clique para interagir · troque de objeto nas abas.</p>
+  </div>
+  <div class="studio__stage" id="studioStage">
+    <canvas id="studioGL" aria-label="Mockups 3D interativos da marca AVRA"></canvas>
+    <div class="studio__tabs" role="tablist" id="studioTabs">
+      <button class="is-active" data-obj="cracha">Crachá de equipe</button>
+      <button data-obj="kit">Kit de relacionamento</button>
+      <button data-obj="portfolio">Portfólio e papelaria</button>
+      <button data-obj="phone">Story de comunicado</button>
+      <button data-obj="placa">Placa de obra</button>
+    </div>
+    <div class="studio__caption" id="studioCaption"><b>Crachá de equipe</b><span>Clique para balançar · arraste para girar</span></div>
+    <div class="studio__loading" id="studioLoading">Montando o estúdio…</div>
+  </div>
+</section>
+
+<!-- ============ 07 APLICAÇÕES FÍSICAS (HORIZONTAL) ============ -->
+<section class="chapter-cover" id="aplicacoes" data-chapter="07 · Aplicações físicas">
+  <div class="chapter-cover__media parallax" data-speed="0.25"><img src="../assets/mockups/pavilhao.jpg" alt="Pavilhão de vendas AVRA com fachada em terracota" loading="lazy"></div>
+  <div class="chapter-cover__shade"></div>
+  <div class="wrap chapter-cover__inner">
+    <p class="eyebrow">07 / Aplicações físicas e digitais</p>
+    <h2 class="mega split-chars">Da marca<br>ao lugar.</h2>
+  </div>
+</section>
+
+<section class="hgallery" id="hgallery" data-chapter="07 · Aplicações físicas">
+  <div class="hgallery__pin">
+    <div class="hgallery__head">
+      <p class="eyebrow">Aplicações físicas</p>
+      <span class="hgallery__count"><b id="hgCount">01</b> / 12</span>
+    </div>
+    <div class="hgallery__track" id="hgTrack">
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/pavilhao.jpg"><div class="mock__img"><img src="../assets/mockups/pavilhao.jpg" alt="" loading="lazy"></div><figcaption><b>01</b>Pavilhão de vendas</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/tapume.jpg"><div class="mock__img"><img src="../assets/mockups/tapume.jpg" alt="" loading="lazy"></div><figcaption><b>02</b>Tapume de esquina</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/recepcao.jpg"><div class="mock__img"><img src="../assets/mockups/recepcao.jpg" alt="" loading="lazy"></div><figcaption><b>03</b>Recepção institucional</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/frota.jpg"><div class="mock__img"><img src="../assets/mockups/frota.jpg" alt="" loading="lazy"></div><figcaption><b>04</b>Frota de apoio</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/portfolio.jpg"><div class="mock__img"><img src="../assets/mockups/portfolio.jpg" alt="" loading="lazy"></div><figcaption><b>05</b>Portfólio e papelaria</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/textil.jpg"><div class="mock__img"><img src="../assets/mockups/textil.jpg" alt="" loading="lazy"></div><figcaption><b>06</b>Têxtil e uniforme</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/equipe.jpg"><div class="mock__img"><img src="../assets/mockups/equipe.jpg" alt="" loading="lazy"></div><figcaption><b>07</b>Equipe e operação de obra</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/kit.jpg"><div class="mock__img"><img src="../assets/mockups/kit.jpg" alt="" loading="lazy"></div><figcaption><b>08</b>Kit de relacionamento</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/placa.jpg"><div class="mock__img"><img src="../assets/mockups/placa.jpg" alt="" loading="lazy"></div><figcaption><b>09</b>Placa de obra</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/cracha.jpg"><div class="mock__img"><img src="../assets/mockups/cracha.jpg" alt="" loading="lazy"></div><figcaption><b>10</b>Crachá de equipe</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/banner.jpg"><div class="mock__img"><img src="../assets/mockups/banner.jpg" alt="" loading="lazy"></div><figcaption><b>11</b>Banner de obra</figcaption><span class="mock__glare"></span></figure>
+      <figure class="mock tilt" data-tilt data-full="../assets/mockups/flyer.jpg"><div class="mock__img"><img src="../assets/mockups/flyer.jpg" alt="" loading="lazy"></div><figcaption><b>12</b>Flyer institucional</figcaption><span class="mock__glare"></span></figure>
+      <div class="hgallery__end"><p>Simulações visuais de materiais, interfaces e usos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SINALIZAÇÃO (arte-base) ============ -->
+<section class="signage section--ivory" data-chapter="07 · Arte-base de sinalização">
+  <div class="wrap signage__grid">
+    <div>
+      <p class="eyebrow">Arte-base · conteúdo e contraste</p>
+      <h2 class="display split-lines">Sinalização<br>com leitura imediata.</h2>
+      <p class="reveal-up">Estudo da arte de sinalização. Ajustar dimensões e conteúdo ao local. Passe o cursor sobre a placa para ver a luz do dia mudar.</p>
+    </div>
+    <div class="sign tilt" data-tilt id="sign">
+      <svg viewBox="30 36 3441 558" class="js-logo"><path/></svg>
+      <span class="sign__desc">INCORPORADORA</span>
+      <h3>ACESSO<br>À OBRA</h3>
+      <span class="sign__arrow">→</span>
+      <canvas class="sign__pattern" id="signPattern"></canvas>
+      <span class="sign__light"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIGITAL — CARROSSEL 3D ============ -->
+<section class="digital section--terracotta" id="digital" data-chapter="07 · Digital com intenção">
+  <div class="wrap digital__head">
+    <div>
+      <p class="eyebrow">Aplicações digitais</p>
+      <h2 class="display split-lines">Digital com intenção.</h2>
+    </div>
+    <p class="reveal-up">Instagram apresenta a marca e informa. O carrossel organiza conteúdo. Stories comunicam novidades com leitura imediata. WhatsApp apoia o atendimento. LinkedIn apresenta a visão institucional. <small>Perfis, indicadores e mensagens são exemplos ilustrativos.</small></p>
+  </div>
+  <div class="ring" id="ring">
+    <div class="ring__inner" id="ringInner">
+      <figure class="ring__item" data-full="../assets/mockups/ig-perfil.jpg"><img src="../assets/mockups/ig-perfil.jpg" alt="Instagram — perfil institucional" loading="lazy"><figcaption>Instagram · perfil</figcaption></figure>
+      <figure class="ring__item" data-full="../assets/mockups/ig-carrossel.jpg"><img src="../assets/mockups/ig-carrossel.jpg" alt="Instagram — carrossel informativo" loading="lazy"><figcaption>Instagram · carrossel</figcaption></figure>
+      <figure class="ring__item" data-full="../assets/mockups/ig-story.jpg"><img src="../assets/mockups/ig-story.jpg" alt="Instagram — story de comunicado" loading="lazy"><figcaption>Instagram · story</figcaption></figure>
+      <figure class="ring__item" data-full="../assets/mockups/whatsapp.jpg"><img src="../assets/mockups/whatsapp.jpg" alt="WhatsApp — atendimento" loading="lazy"><figcaption>WhatsApp · atendimento</figcaption></figure>
+      <figure class="ring__item" data-full="../assets/mockups/linkedin.jpg"><img src="../assets/mockups/linkedin.jpg" alt="LinkedIn — página da empresa" loading="lazy"><figcaption>LinkedIn · empresa</figcaption></figure>    </div>
+  </div>
+  <p class="ring__hint">Arraste para girar · clique para ampliar</p>
+  <div class="wrap digital__rules">
+    <div class="reveal-up"><h3 class="title-md">Uma ideia por tela.</h3><p>Carrossel: capa objetiva, sequência de pontos e fechamento claro. Story: um título, uma informação principal e um caminho de contato.</p></div>
+    <div class="reveal-up"><p>Manter margens generosas. Usar Manrope nos textos e Tenor Sans nas chamadas. O BR20 ocupa áreas de apoio e não disputa com o conteúdo.</p></div>
+  </div>
+</section>
+
+<!-- ============ 08 DIRETRIZES ============ -->
+<section class="chapter-cover chapter-cover--zoom" id="diretrizes" data-chapter="08 · Diretrizes de aplicação">
+  <div class="chapter-cover__media zoom-on-scroll"><img src="../assets/img/essencia.jpg" alt="" loading="lazy"></div>
+  <div class="chapter-cover__shade"></div>
+  <div class="wrap chapter-cover__inner">
+    <p class="eyebrow">08 / Diretrizes de aplicação</p>
+    <h2 class="mega split-chars">Consistência<br>em cada contato.</h2>
+  </div>
+</section>
+
+<section class="misuse section--ivory" data-chapter="08 · Usos incorretos">
+  <div class="wrap">
+    <div class="misuse__head">
+      <div>
+        <p class="eyebrow">O que preservar</p>
+        <h2 class="display split-lines">Integridade no desenho.<br>Coerência no conjunto.</h2>
+      </div>
+      <p class="reveal-up">Preservar a abertura entre A e V, os arcos e as proporções do lettering. Passe o mouse em cada cartão para ver o erro acontecer — e por que evitá-lo.</p>
+    </div>
+    <div class="misuse__grid">
+      <article class="wrong" data-wrong="flat"><div class="wrong__art"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg><span class="wrong__desc">INCORPORADORA</span></div><p><b>Não achatar</b><span>Proporções preservadas.</span></p></article>
+      <article class="wrong" data-wrong="tilt"><div class="wrong__art"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg><span class="wrong__desc">INCORPORADORA</span></div><p><b>Não inclinar</b><span>Linha de base horizontal.</span></p></article>
+      <article class="wrong" data-wrong="font"><div class="wrong__art"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg><span class="wrong__font">AVRA</span><span class="wrong__desc">INCORPORADORA</span></div><p><b>Não substituir por uma fonte</b><span>A assinatura é desenho, não texto.</span></p></article>
+      <article class="wrong" data-wrong="lines"><div class="wrong__art"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg><span class="wrong__desc">INCORPORADORA</span><i class="wrong__stripes"></i></div><p><b>Não sobrepor grafismos</b><span>Respiro em todos os lados.</span></p></article>
+      <article class="wrong" data-wrong="waves"><div class="wrong__art wrong__art--pattern"><canvas class="wrong__canvas"></canvas><svg class="wrong__waves" viewBox="0 0 400 200" preserveAspectRatio="none"><path d="M0 40 C100 10 200 70 400 30 M0 80 C100 50 200 110 400 70 M0 120 C100 90 200 150 400 110 M0 160 C100 130 200 190 400 150"/></svg></div><p><b>Não transformar em ondas</b><span>A expressão vem dos traços separados.</span></p></article>
+      <article class="wrong" data-wrong="invade"><div class="wrong__art wrong__art--pattern"><canvas class="wrong__canvas"></canvas><svg viewBox="30 36 3441 558" class="js-logo wrong__over"><path/></svg></div><p><b>Não invadir a assinatura</b><span>O campo gráfico respeita a área livre.</span></p></article>
+    </div>
+  </div>
+</section>
+
+<section class="photo section--clay" data-chapter="08 · Direção fotográfica">
+  <div class="wrap photo__grid">
+    <div>
+      <p class="eyebrow">Direção fotográfica</p>
+      <h2 class="display split-lines">Fotografia com lugar<br>e materialidade.</h2>
+      <p class="reveal-up">Luz natural, vegetação, sombras e texturas reais. Arquitetura e pessoas em enquadramentos que transmitam cuidado e qualidade de experiência.</p>
+      <p class="reveal-up small">Usar fotografias de obras e empreendimentos reais quando disponíveis. Simulações e renders devem ser identificados como tais.</p>
+    </div>
+    <div class="photo__stack" id="photoStack">
+      <img src="../assets/img/janela.jpg" alt="" class="ps ps--1" loading="lazy">
+      <img src="../assets/img/nome.jpg" alt="" class="ps ps--2" loading="lazy">
+      <img src="../assets/img/capa.jpg" alt="" class="ps ps--3" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="files section--ivory" data-chapter="08 · Arquivos e produção">
+  <div class="wrap files__grid">
+    <div>
+      <p class="eyebrow">Arquivos e produção</p>
+      <h2 class="display split-lines">Da intenção<br>à reprodução.</h2>
+    </div>
+    <div class="files__list">
+      <details class="acc" open><summary>Logo</summary><p>Referência revisada com abertura A/V. O desenho mestre em curvas e os mínimos precisam de conferência antes da produção.</p></details>
+      <details class="acc"><summary>BR20</summary><p>Matriz vetorial reconstruída a partir da referência visual fornecida.</p></details>
+      <details class="acc"><summary>Produção física</summary><p>Impressão, bordado, corte, pintura e acabamentos exigem prova no material escolhido. Evitar reduções em que os traços se fundam ou o descritivo perca leitura.</p></details>
+      <details class="acc"><summary>Cor também é material</summary><p>Converter as cores pelo perfil ICC do processo e validar prova no substrato. Pantone: definir quando houver necessidade de tinta especial. O dourado digital é cor plana — metalizado, hot stamping e pintura são acabamentos a especificar separadamente.</p></details>
+      <details class="acc"><summary>Referências e status</summary><p>Tenor Sans e Manrope sob licença OFL. Origem de αύρα verificada no Portal da Língua Grega. Mockups são simulações visuais. As referências de logo em SVG são reconstruções da imagem revisada e não substituem a homologação do mestre em curvas.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="final" id="final" data-chapter="AVRA Incorporadora">
+  <canvas class="final__pattern" id="finalPattern" aria-hidden="true"></canvas>
+  <div class="final__glow" aria-hidden="true"></div>
+  <div class="wrap final__inner">
+    <div class="final__logo magnetic" id="finalLogo"><svg viewBox="30 36 3441 558" class="js-logo"><path/></svg><span>INCORPORADORA</span></div>
+    <h2 class="display split-lines">Planejar com precisão.<br>Criar espaço para a vida.</h2>
+    <a href="#hero" class="btn magnetic" id="toTop"><span>Voltar ao início</span><i>↑</i></a>
+  </div>
+</section>
+
+<!-- ============ CRÉDITOS — BRITTO* GROUP ============ -->
+<section class="studio-credit" id="creditos" data-chapter="Desenvolvido por BRITTO* GROUP">
+  <div class="studio-credit__light" aria-hidden="true"></div>
+  <div class="wrap studio-credit__inner">
+    <p class="eyebrow">Desenvolvido por</p>
+    <img src="../assets/img/britto-group.png" alt="BRITTO* GROUP" class="studio-credit__logo" width="852" height="339" loading="lazy">
+    <p class="studio-credit__text">Nome, conceito, assinatura, sistema visual, pattern BR20, guia de identidade e esta experiência digital foram desenvolvidos pela <strong>BRITTO* GROUP</strong> para a AVRA Incorporadora.</p>
+    <ul class="studio-credit__list">
+      <li><span>Cliente</span>AVRA Incorporadora · Boa Vista, RR</li>
+      <li><span>Projeto</span>Guia de Identidade Visual v10</li>
+      <li><span>Criação e desenvolvimento</span>BRITTO* GROUP</li>
+    </ul>
+  </div>
+  <footer class="footer wrap">
+    <span>© AVRA Incorporadora</span>
+    <span>Feito por BRITTO* GROUP</span>
+    <span>Mockups e imagens: simulações visuais</span>
+  </footer>
+</section>
+
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox__close" aria-label="Fechar">×</button>
+  <img alt="">
+</div>
+
+<script src="../assets/vendor/three.min.js"></script>
+<script src="../assets/vendor/gsap.min.js"></script>
+<script src="../assets/vendor/ScrollTrigger.min.js"></script>
+<script src="../assets/vendor/lenis.min.js"></script>
+<script src="../assets/js/logo-data.js"></script>
+<script src="../assets/js/br20.js"></script>
+<script src="../assets/js/brand-canvas.js"></script>
+<script src="../assets/js/hero3d.js"></script>
+<script src="../assets/js/studio3d.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
